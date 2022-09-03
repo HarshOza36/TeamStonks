@@ -15,7 +15,7 @@ public class ballController : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("space")){
-            rb.AddForce (new Vector3 (0f, 500f, 0f));
+            rb.AddForce (new Vector3 (0f, 400f, 0f));
         }
     }
 }
