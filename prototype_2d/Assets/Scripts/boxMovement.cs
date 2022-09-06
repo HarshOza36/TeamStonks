@@ -8,6 +8,8 @@ public class boxMovement : MonoBehaviour
     private Rigidbody2D body;
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
+        body.gravityScale=4;
+        jump=400;
     }
     private void Update() {
         // body.velocity = new Vector2(Input.GetAxis("Horizontal")*speed,Input.GetAxis("Vertical")*speed);
