@@ -3,6 +3,8 @@
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
 /prototype_2d/[Ll]ibrary/
+/prototype_2d/Library/**
+/prototype_2d/Library/
 /prototype_2d/[Tt]emp/
 /prototype_2d/[Oo]bj/
 /prototype_2d/[Bb]uild/
