@@ -8,7 +8,7 @@ public class ballController : MonoBehaviour
     private timer timeRemaining;
     private restart restartGame;
     public bool gameWon = false;
-    public float pushForce = 400f;
+    //public float pushForce = 400f;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +23,9 @@ public class ballController : MonoBehaviour
     {
         if (timeRemaining.timeRemaining != 0 && !gameWon) {
             if (Input.GetKeyDown("space")){
-                rb.AddForce (new Vector3 (0f, pushForce, 0f));
+                //rb.AddForce (new Vector3 (0f, pushForce, 0f));
+                rb.velocity = Vector3.up * 5f;
+                rb.AddForce(Vector3.up, ForceMode.Impulse);
             }
         }
         else {
