@@ -5,17 +5,41 @@ using UnityEngine;
 public class ballController : MonoBehaviour
 {
     private Rigidbody rb;
+    private timer timeRemaining;
+    private restart restartGame;
+    public bool gameWon = false;
     // Start is called before the first frame update
     void Start()
     {
+        //restart = GetComponent<restart>
         rb = GetComponent<Rigidbody>();
+        timeRemaining = GetComponent<timer>();
+        //Debug.Log(timeRemaining.timeRemaining);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space")){
-            rb.AddForce (new Vector3 (0f, 400f, 0f));
+        if (timeRemaining.timeRemaining != 0 && !gameWon) {
+            if (Input.GetKeyDown("space")){
+                rb.AddForce (new Vector3 (0f, 400f, 0f));
+            }
+        }
+        else {
+            rb.useGravity = false;
+            rb.velocity = new Vector3(0,0,0);
+
         }
     }
+
+    void OnCollisionEnter(Collision star)
+    {
+        Debug.Log(star.gameObject.name);
+        if(star.gameObject.name == "RedStar")
+        {
+            gameWon = true;
+            // It is object B
+        }
+    }
+
 }
