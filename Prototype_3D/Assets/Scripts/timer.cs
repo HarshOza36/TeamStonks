@@ -9,7 +9,7 @@ public class timer : MonoBehaviour
     //public Text timerText;
     public GameObject frontObject;
     public TMP_Text timeText;
-    public float timeRemaining = 10;
+    public float timeRemaining = 20;
     public bool timerIsRunning = false;
     public GameObject[] gameOver;
     public ballController ballContr;
