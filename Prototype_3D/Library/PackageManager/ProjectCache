@@ -1,33 +1,208 @@
 m_ProjectFiles:
   m_ManifestFileStatus:
-    m_FilePath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Packages/manifest.json
+    m_FilePath: C:/Users/seanj/OneDrive/CSCI_526/gaming_project/TeamStonks/Prototype_3D/Packages/manifest.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637984599990000000
-    m_Hash: 3567640555
+      ticks: 637989572433629748
+    m_Hash: 2992795409
   m_LockFileStatus:
-    m_FilePath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Packages/packages-lock.json
+    m_FilePath: C:/Users/seanj/OneDrive/CSCI_526/gaming_project/TeamStonks/Prototype_3D/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637984599990000000
-    m_Hash: 3612382943
+      ticks: 637989572433753252
+    m_Hash: 3623463231
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
   m_LocalFileStatus: []
-m_ProjectPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Packages
+m_ProjectPath: C:/Users/seanj/OneDrive/CSCI_526/gaming_project/TeamStonks/Prototype_3D/Packages
 m_EditorVersion: 2021.3.8f1 (b30333d56e81)
 m_ResolvedPackages:
+- packageId: com.unity.2d.animation@7.0.7
+  testable: 0
+  isDirectDependency: 1
+  version: 7.0.7
+  source: 1
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.2d.animation@7.0.7
+  assetPath: Packages/com.unity.2d.animation
+  name: com.unity.2d.animation
+  displayName: 2D Animation
+  author:
+    name: 
+    email: 
+    url: 
+  category: 2D
+  type: 
+  description: 2D Animation provides all the necessary tooling and runtime components
+    for skeletal animation using Sprites.
+  status: 4
+  errors: []
+  versions:
+    all:
+    - 1.0.15-preview.1
+    - 1.0.15-preview.2
+    - 1.0.15-preview.3
+    - 1.0.15-preview.4
+    - 1.0.15-preview.5
+    - 1.0.16-preview
+    - 1.0.16-preview.1
+    - 1.0.16-preview.2
+    - 2.0.0-preview.1
+    - 2.0.0-preview.2
+    - 2.0.0-preview.3
+    - 2.1.0-preview.1
+    - 2.1.0-preview.2
+    - 2.1.0-preview.4
+    - 2.1.0-preview.5
+    - 2.1.0-preview.7
+    - 2.2.0-preview.1
+    - 2.2.0-preview.4
+    - 2.2.0-preview.5
+    - 2.2.1-preview.1
+    - 2.2.1-preview.2
+    - 3.0.2
+    - 3.0.3
+    - 3.0.4
+    - 3.0.5
+    - 3.0.6
+    - 3.0.8
+    - 3.1.0
+    - 3.1.1
+    - 3.2.1
+    - 3.2.2
+    - 3.2.3
+    - 3.2.4
+    - 3.2.5
+    - 3.2.6
+    - 3.2.9
+    - 3.2.10
+    - 3.2.11
+    - 3.2.13
+    - 3.2.14
+    - 3.2.15
+    - 3.2.16
+    - 3.2.17
+    - 3.2.18
+    - 4.0.0
+    - 4.0.1
+    - 4.1.0
+    - 4.1.1
+    - 4.2.1
+    - 4.2.2
+    - 4.2.3
+    - 4.2.4
+    - 4.2.5
+    - 4.2.6
+    - 4.2.8
+    - 5.0.0
+    - 5.0.1
+    - 5.0.2
+    - 5.0.3
+    - 5.0.4
+    - 5.0.5
+    - 5.0.6
+    - 5.0.7
+    - 5.0.8
+    - 5.0.9
+    - 5.0.10
+    - 5.1.0
+    - 5.1.1
+    - 5.2.0
+    - 5.2.1
+    - 5.2.3
+    - 6.0.0-pre.1
+    - 6.0.0-pre.2
+    - 6.0.1
+    - 6.0.3
+    - 6.0.4
+    - 6.0.5
+    - 6.0.7
+    - 7.0.0-pre.2
+    - 7.0.0-pre.3
+    - 7.0.0
+    - 7.0.1
+    - 7.0.2
+    - 7.0.3
+    - 7.0.4
+    - 7.0.5
+    - 7.0.6
+    - 7.0.7
+    - 8.0.0-pre.3
+    - 8.0.0-pre.4
+    - 8.0.0
+    - 8.0.1
+    - 8.0.2
+    - 8.0.3
+    - 9.0.0-pre.1
+    - 9.0.0-pre.3
+    - 9.0.0
+    compatible:
+    - 7.0.6
+    - 7.0.7
+    verified: 7.0.7
+  dependencies:
+  - name: com.unity.2d.common
+    version: 6.0.4
+  - name: com.unity.2d.sprite
+    version: 1.0.0
+  - name: com.unity.modules.animation
+    version: 1.0.0
+  - name: com.unity.modules.uielements
+    version: 1.0.0
+  resolvedDependencies:
+  - name: com.unity.2d.common
+    version: 6.0.4
+  - name: com.unity.2d.sprite
+    version: 1.0.0
+  - name: com.unity.mathematics
+    version: 1.2.6
+  - name: com.unity.modules.uielements
+    version: 1.0.0
+  - name: com.unity.modules.ui
+    version: 1.0.0
+  - name: com.unity.modules.imgui
+    version: 1.0.0
+  - name: com.unity.modules.jsonserialize
+    version: 1.0.0
+  - name: com.unity.modules.uielementsnative
+    version: 1.0.0
+  - name: com.unity.burst
+    version: 1.6.6
+  - name: com.unity.modules.animation
+    version: 1.0.0
+  keywords:
+  - 2d
+  - animation
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+  hideInEditor: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 637958913350000000
+  documentationUrl: 
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.cds.internal.unity3d.com/unity/2d.git
+    revision: 6b783c5dfb5a72d73e2b0a70d1caf4a367c58805
+    path: 
+  unityLifecycle:
+    version: 7.0.6
+    nextVersion: 
 - packageId: com.unity.collab-proxy@1.17.1
   testable: 0
   isDirectDependency: 1
   version: 1.17.1
   source: 1
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.collab-proxy@1.17.1
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.collab-proxy@1.17.1
   assetPath: Packages/com.unity.collab-proxy
   name: com.unity.collab-proxy
   displayName: Version Control
@@ -170,7 +345,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 4.2.3
   source: 1
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.connect.share@4.2.3
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.connect.share@4.2.3
   assetPath: Packages/com.unity.connect.share
   name: com.unity.connect.share
   displayName: WebGL Publisher
@@ -257,7 +432,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.1
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.feature.development@1.0.1
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.feature.development@1.0.1
   assetPath: Packages/com.unity.feature.development
   name: com.unity.feature.development
   displayName: Engineering
@@ -343,7 +518,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 3.0.15
   source: 1
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.ide.rider@3.0.15
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.ide.rider@3.0.15
   assetPath: Packages/com.unity.ide.rider
   name: com.unity.ide.rider
   displayName: JetBrains Rider Editor
@@ -426,7 +601,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 2.0.16
   source: 1
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.ide.visualstudio@2.0.16
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.ide.visualstudio@2.0.16
   assetPath: Packages/com.unity.ide.visualstudio
   name: com.unity.ide.visualstudio
   displayName: Visual Studio Editor
@@ -503,7 +678,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.2.5
   source: 1
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.ide.vscode@1.2.5
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.ide.vscode@1.2.5
   assetPath: Packages/com.unity.ide.vscode
   name: com.unity.ide.vscode
   displayName: Visual Studio Code Editor
@@ -564,7 +739,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 5.0.6
   source: 1
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.probuilder@5.0.6
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.probuilder@5.0.6
   assetPath: Packages/com.unity.probuilder
   name: com.unity.probuilder
   displayName: ProBuilder
@@ -694,7 +869,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.1.31
   source: 1
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.test-framework@1.1.31
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.test-framework@1.1.31
   assetPath: Packages/com.unity.test-framework
   name: com.unity.test-framework
   displayName: Test Framework
@@ -795,7 +970,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 3.0.6
   source: 1
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.textmeshpro@3.0.6
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.textmeshpro@3.0.6
   assetPath: Packages/com.unity.textmeshpro
   name: com.unity.textmeshpro
   displayName: TextMeshPro
@@ -960,7 +1135,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.6.4
   source: 1
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.timeline@1.6.4
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.timeline@1.6.4
   assetPath: Packages/com.unity.timeline
   name: com.unity.timeline
   displayName: Timeline
@@ -1104,7 +1279,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.ugui@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.ugui@1.0.0
   assetPath: Packages/com.unity.ugui
   name: com.unity.ugui
   displayName: Unity UI
@@ -1166,7 +1341,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.7.8
   source: 1
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.visualscripting@1.7.8
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.visualscripting@1.7.8
   assetPath: Packages/com.unity.visualscripting
   name: com.unity.visualscripting
   displayName: Visual Scripting
@@ -1251,7 +1426,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.ai@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.ai@1.0.0
   assetPath: Packages/com.unity.modules.ai
   name: com.unity.modules.ai
   displayName: AI
@@ -1299,7 +1474,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.androidjni@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.androidjni@1.0.0
   assetPath: Packages/com.unity.modules.androidjni
   name: com.unity.modules.androidjni
   displayName: Android JNI
@@ -1346,7 +1521,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.animation@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.animation@1.0.0
   assetPath: Packages/com.unity.modules.animation
   name: com.unity.modules.animation
   displayName: Animation
@@ -1394,7 +1569,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.assetbundle@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.assetbundle@1.0.0
   assetPath: Packages/com.unity.modules.assetbundle
   name: com.unity.modules.assetbundle
   displayName: Asset Bundle
@@ -1442,7 +1617,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.audio@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.audio@1.0.0
   assetPath: Packages/com.unity.modules.audio
   name: com.unity.modules.audio
   displayName: Audio
@@ -1490,7 +1665,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.cloth@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.cloth@1.0.0
   assetPath: Packages/com.unity.modules.cloth
   name: com.unity.modules.cloth
   displayName: Cloth
@@ -1542,7 +1717,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.director@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.director@1.0.0
   assetPath: Packages/com.unity.modules.director
   name: com.unity.modules.director
   displayName: Director
@@ -1598,7 +1773,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.imageconversion@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.imageconversion@1.0.0
   assetPath: Packages/com.unity.modules.imageconversion
   name: com.unity.modules.imageconversion
   displayName: Image Conversion
@@ -1647,7 +1822,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.imgui@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.imgui@1.0.0
   assetPath: Packages/com.unity.modules.imgui
   name: com.unity.modules.imgui
   displayName: IMGUI
@@ -1695,7 +1870,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.jsonserialize@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.jsonserialize@1.0.0
   assetPath: Packages/com.unity.modules.jsonserialize
   name: com.unity.modules.jsonserialize
   displayName: JSONSerialize
@@ -1743,7 +1918,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.particlesystem@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.particlesystem@1.0.0
   assetPath: Packages/com.unity.modules.particlesystem
   name: com.unity.modules.particlesystem
   displayName: Particle System
@@ -1791,7 +1966,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.physics@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.physics@1.0.0
   assetPath: Packages/com.unity.modules.physics
   name: com.unity.modules.physics
   displayName: Physics
@@ -1839,7 +2014,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.physics2d@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.physics2d@1.0.0
   assetPath: Packages/com.unity.modules.physics2d
   name: com.unity.modules.physics2d
   displayName: Physics 2D
@@ -1887,7 +2062,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.screencapture@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.screencapture@1.0.0
   assetPath: Packages/com.unity.modules.screencapture
   name: com.unity.modules.screencapture
   displayName: Screen Capture
@@ -1939,7 +2114,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.terrain@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.terrain@1.0.0
   assetPath: Packages/com.unity.modules.terrain
   name: com.unity.modules.terrain
   displayName: Terrain
@@ -1987,7 +2162,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.terrainphysics@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.terrainphysics@1.0.0
   assetPath: Packages/com.unity.modules.terrainphysics
   name: com.unity.modules.terrainphysics
   displayName: Terrain Physics
@@ -2043,7 +2218,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.tilemap@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.tilemap@1.0.0
   assetPath: Packages/com.unity.modules.tilemap
   name: com.unity.modules.tilemap
   displayName: Tilemap
@@ -2094,7 +2269,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.ui@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.ui@1.0.0
   assetPath: Packages/com.unity.modules.ui
   name: com.unity.modules.ui
   displayName: UI
@@ -2142,7 +2317,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.uielements@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.uielements@1.0.0
   assetPath: Packages/com.unity.modules.uielements
   name: com.unity.modules.uielements
   displayName: UIElements
@@ -2206,7 +2381,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.umbra@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.umbra@1.0.0
   assetPath: Packages/com.unity.modules.umbra
   name: com.unity.modules.umbra
   displayName: Umbra
@@ -2254,7 +2429,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.unityanalytics@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.unityanalytics@1.0.0
   assetPath: Packages/com.unity.modules.unityanalytics
   name: com.unity.modules.unityanalytics
   displayName: Unity Analytics
@@ -2310,7 +2485,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.unitywebrequest@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.unitywebrequest@1.0.0
   assetPath: Packages/com.unity.modules.unitywebrequest
   name: com.unity.modules.unitywebrequest
   displayName: Unity Web Request
@@ -2358,7 +2533,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.unitywebrequestassetbundle@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.unitywebrequestassetbundle@1.0.0
   assetPath: Packages/com.unity.modules.unitywebrequestassetbundle
   name: com.unity.modules.unitywebrequestassetbundle
   displayName: Unity Web Request Asset Bundle
@@ -2414,7 +2589,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.unitywebrequestaudio@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.unitywebrequestaudio@1.0.0
   assetPath: Packages/com.unity.modules.unitywebrequestaudio
   name: com.unity.modules.unitywebrequestaudio
   displayName: Unity Web Request Audio
@@ -2470,7 +2645,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.unitywebrequesttexture@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.unitywebrequesttexture@1.0.0
   assetPath: Packages/com.unity.modules.unitywebrequesttexture
   name: com.unity.modules.unitywebrequesttexture
   displayName: Unity Web Request Texture
@@ -2526,7 +2701,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.unitywebrequestwww@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.unitywebrequestwww@1.0.0
   assetPath: Packages/com.unity.modules.unitywebrequestwww
   name: com.unity.modules.unitywebrequestwww
   displayName: Unity Web Request WWW
@@ -2598,7 +2773,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.vehicles@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.vehicles@1.0.0
   assetPath: Packages/com.unity.modules.vehicles
   name: com.unity.modules.vehicles
   displayName: Vehicles
@@ -2650,7 +2825,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.video@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.video@1.0.0
   assetPath: Packages/com.unity.modules.video
   name: com.unity.modules.video
   displayName: Video
@@ -2710,7 +2885,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.vr@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.vr@1.0.0
   assetPath: Packages/com.unity.modules.vr
   name: com.unity.modules.vr
   displayName: VR
@@ -2772,7 +2947,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.wind@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.wind@1.0.0
   assetPath: Packages/com.unity.modules.wind
   name: com.unity.modules.wind
   displayName: Wind
@@ -2820,7 +2995,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.xr@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.xr@1.0.0
   assetPath: Packages/com.unity.modules.xr
   name: com.unity.modules.xr
   displayName: XR
@@ -2880,7 +3055,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.subsystems@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.subsystems@1.0.0
   assetPath: Packages/com.unity.modules.subsystems
   name: com.unity.modules.subsystems
   displayName: Subsystems
@@ -2932,7 +3107,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.modules.uielementsnative@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.modules.uielementsnative@1.0.0
   assetPath: Packages/com.unity.modules.uielementsnative
   name: com.unity.modules.uielementsnative
   displayName: UIElements Native
@@ -2991,7 +3166,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.0.6
   source: 1
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.ext.nunit@1.0.6
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.ext.nunit@1.0.6
   assetPath: Packages/com.unity.ext.nunit
   name: com.unity.ext.nunit
   displayName: Custom NUnit
@@ -3051,7 +3226,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.0.3
   source: 1
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.settings-manager@1.0.3
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.settings-manager@1.0.3
   assetPath: Packages/com.unity.settings-manager
   name: com.unity.settings-manager
   displayName: Settings Manager
@@ -3108,7 +3283,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.0.0
   source: 1
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.editorcoroutines@1.0.0
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.editorcoroutines@1.0.0
   assetPath: Packages/com.unity.editorcoroutines
   name: com.unity.editorcoroutines
   displayName: Editor Coroutines
@@ -3166,7 +3341,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.1.1
   source: 1
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.performance.profile-analyzer@1.1.1
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.performance.profile-analyzer@1.1.1
   assetPath: Packages/com.unity.performance.profile-analyzer
   name: com.unity.performance.profile-analyzer
   displayName: Profile Analyzer
@@ -3229,7 +3404,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.0.1
   source: 1
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.testtools.codecoverage@1.0.1
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.testtools.codecoverage@1.0.1
   assetPath: Packages/com.unity.testtools.codecoverage
   name: com.unity.testtools.codecoverage
   displayName: Code Coverage
@@ -3332,7 +3507,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.4.2
   source: 1
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.services.core@1.4.2
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.services.core@1.4.2
   assetPath: Packages/com.unity.services.core
   name: com.unity.services.core
   displayName: Services Core
@@ -3405,12 +3580,175 @@ m_ResolvedPackages:
   unityLifecycle:
     version: 1.4.2
     nextVersion: 
+- packageId: com.unity.2d.common@6.0.4
+  testable: 0
+  isDirectDependency: 0
+  version: 6.0.4
+  source: 1
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.2d.common@6.0.4
+  assetPath: Packages/com.unity.2d.common
+  name: com.unity.2d.common
+  displayName: 2D Common
+  author:
+    name: 
+    email: 
+    url: 
+  category: 2D
+  type: 
+  description: 2D Common is a package that contains shared functionalities that are
+    used by most of the other 2D packages.
+  status: 4
+  errors: []
+  versions:
+    all:
+    - 1.0.9-preview.1
+    - 1.0.9-preview.2
+    - 1.0.10-preview
+    - 1.0.11-preview.1
+    - 1.1.0-preview.1
+    - 1.1.0-preview.2
+    - 1.2.0-preview.1
+    - 2.0.1
+    - 2.0.2
+    - 2.1.0
+    - 2.1.1
+    - 2.1.2
+    - 3.0.0
+    - 3.0.1
+    - 4.0.0
+    - 4.0.1
+    - 4.0.2
+    - 4.0.3
+    - 4.0.4
+    - 4.1.0
+    - 4.2.0
+    - 5.0.0-pre.1
+    - 5.0.0-pre.2
+    - 5.0.0
+    - 6.0.0-pre.2
+    - 6.0.0-pre.3
+    - 6.0.0-pre.4
+    - 6.0.0
+    - 6.0.1
+    - 6.0.2
+    - 6.0.3
+    - 6.0.4
+    - 7.0.0-pre.3
+    - 7.0.0-pre.4
+    - 7.0.0
+    - 7.0.1
+    - 8.0.0-pre.1
+    - 8.0.0-pre.2
+    - 8.0.0
+    compatible:
+    - 6.0.3
+    - 6.0.4
+    verified: 6.0.4
+  dependencies:
+  - name: com.unity.2d.sprite
+    version: 1.0.0
+  - name: com.unity.mathematics
+    version: 1.1.0
+  - name: com.unity.modules.uielements
+    version: 1.0.0
+  - name: com.unity.burst
+    version: 1.5.1
+  resolvedDependencies:
+  - name: com.unity.2d.sprite
+    version: 1.0.0
+  - name: com.unity.mathematics
+    version: 1.2.6
+  - name: com.unity.modules.uielements
+    version: 1.0.0
+  - name: com.unity.modules.ui
+    version: 1.0.0
+  - name: com.unity.modules.imgui
+    version: 1.0.0
+  - name: com.unity.modules.jsonserialize
+    version: 1.0.0
+  - name: com.unity.modules.uielementsnative
+    version: 1.0.0
+  - name: com.unity.burst
+    version: 1.6.6
+  keywords:
+  - 2d
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+  hideInEditor: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 637958913310000000
+  documentationUrl: 
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.cds.internal.unity3d.com/unity/2d.git
+    revision: 6b783c5dfb5a72d73e2b0a70d1caf4a367c58805
+    path: 
+  unityLifecycle:
+    version: 6.0.3
+    nextVersion: 
+- packageId: com.unity.2d.sprite@1.0.0
+  testable: 0
+  isDirectDependency: 0
+  version: 1.0.0
+  source: 2
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.2d.sprite@1.0.0
+  assetPath: Packages/com.unity.2d.sprite
+  name: com.unity.2d.sprite
+  displayName: 2D Sprite
+  author:
+    name: 
+    email: 
+    url: 
+  category: 2D
+  type: 
+  description: Use Unity Sprite Editor Window to create and edit Sprite asset properties
+    like pivot, borders and Physics shape
+  status: 4
+  errors: []
+  versions:
+    all:
+    - 1.0.0
+    compatible:
+    - 1.0.0
+    verified: 1.0.0
+  dependencies: []
+  resolvedDependencies: []
+  keywords:
+  - 2d
+  - sprite
+  - sprite editor window
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+  hideInEditor: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 0
+  documentationUrl: 
+  hasRepository: 0
+  repository:
+    type: 
+    url: 
+    revision: 
+    path: 
+  unityLifecycle:
+    version: 1.0.0
+    nextVersion: 
 - packageId: com.unity.nuget.newtonsoft-json@3.0.2
   testable: 0
   isDirectDependency: 0
   version: 3.0.2
   source: 1
-  resolvedPath: /Users/yohan/Desktop/Unity Games/TeamStonks/Prototype_3D/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2
   assetPath: Packages/com.unity.nuget.newtonsoft-json
   name: com.unity.nuget.newtonsoft-json
   displayName: Newtonsoft Json
@@ -3472,4 +3810,244 @@ m_ResolvedPackages:
     path: 
   unityLifecycle:
     version: 3.0.2
+    nextVersion: 
+- packageId: com.unity.mathematics@1.2.6
+  testable: 0
+  isDirectDependency: 0
+  version: 1.2.6
+  source: 1
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.mathematics@1.2.6
+  assetPath: Packages/com.unity.mathematics
+  name: com.unity.mathematics
+  displayName: Mathematics
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: 
+  description: Unity's C# SIMD math library providing vector types and math functions
+    with a shader like syntax.
+  status: 4
+  errors: []
+  versions:
+    all:
+    - 0.0.12-preview.2
+    - 0.0.12-preview.5
+    - 0.0.12-preview.8
+    - 0.0.12-preview.10
+    - 0.0.12-preview.11
+    - 0.0.12-preview.13
+    - 0.0.12-preview.17
+    - 0.0.12-preview.19
+    - 0.0.12-preview.20
+    - 1.0.0-preview.1
+    - 1.0.1
+    - 1.1.0-preview.1
+    - 1.1.0
+    - 1.2.1
+    - 1.2.4
+    - 1.2.5
+    - 1.2.6
+    compatible:
+    - 1.2.6
+    verified: 1.2.6
+  dependencies: []
+  resolvedDependencies: []
+  keywords:
+  - unity
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+  hideInEditor: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 637841876140000000
+  documentationUrl: 
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.com/Unity-Technologies/Unity.Mathematics.git
+    revision: f110c8c230d253654afed153569030a587cc7557
+    path: 
+  unityLifecycle:
+    version: 1.2.6
+    nextVersion: 
+- packageId: com.unity.burst@1.6.6
+  testable: 0
+  isDirectDependency: 0
+  version: 1.6.6
+  source: 1
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.burst@1.6.6
+  assetPath: Packages/com.unity.burst
+  name: com.unity.burst
+  displayName: Burst
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: 
+  description: Burst is a compiler that translates from IL/.NET bytecode to highly
+    optimized native code using LLVM.
+  status: 4
+  errors: []
+  versions:
+    all:
+    - 0.2.4-preview.5
+    - 0.2.4-preview.7
+    - 0.2.4-preview.11
+    - 0.2.4-preview.12
+    - 0.2.4-preview.13
+    - 0.2.4-preview.14
+    - 0.2.4-preview.15
+    - 0.2.4-preview.16
+    - 0.2.4-preview.17
+    - 0.2.4-preview.18
+    - 0.2.4-preview.19
+    - 0.2.4-preview.20
+    - 0.2.4-preview.21
+    - 0.2.4-preview.22
+    - 0.2.4-preview.23
+    - 0.2.4-preview.24
+    - 0.2.4-preview.25
+    - 0.2.4-preview.30
+    - 0.2.4-preview.31
+    - 0.2.4-preview.33
+    - 0.2.4-preview.34
+    - 0.2.4-preview.37
+    - 0.2.4-preview.41
+    - 0.2.4-preview.45
+    - 0.2.4-preview.48
+    - 0.2.4-preview.50
+    - 1.1.0-preview.2
+    - 1.1.0-preview.3
+    - 1.1.0-preview.4
+    - 1.1.1
+    - 1.1.2
+    - 1.1.3-preview.3
+    - 1.2.0-preview.1
+    - 1.2.0-preview.5
+    - 1.2.0-preview.6
+    - 1.2.0-preview.8
+    - 1.2.0-preview.9
+    - 1.2.0-preview.10
+    - 1.2.0-preview.11
+    - 1.2.0-preview.12
+    - 1.2.0
+    - 1.2.1
+    - 1.2.2
+    - 1.2.3
+    - 1.3.0-preview.1
+    - 1.3.0-preview.2
+    - 1.3.0-preview.3
+    - 1.3.0-preview.4
+    - 1.3.0-preview.5
+    - 1.3.0-preview.6
+    - 1.3.0-preview.7
+    - 1.3.0-preview.8
+    - 1.3.0-preview.9
+    - 1.3.0-preview.10
+    - 1.3.0-preview.11
+    - 1.3.0-preview.12
+    - 1.3.0-preview.13
+    - 1.3.0
+    - 1.3.1
+    - 1.3.2
+    - 1.3.3
+    - 1.3.4
+    - 1.3.5
+    - 1.3.6
+    - 1.3.7
+    - 1.3.8
+    - 1.3.9
+    - 1.4.0-pre.1
+    - 1.4.0-preview.1
+    - 1.4.0-preview.2
+    - 1.4.0-preview.3
+    - 1.4.0-preview.4
+    - 1.4.0-preview.5
+    - 1.4.1-pre.1
+    - 1.4.1-pre.2
+    - 1.4.1
+    - 1.4.2
+    - 1.4.3
+    - 1.4.4-preview.1
+    - 1.4.4-preview.2
+    - 1.4.4
+    - 1.4.5
+    - 1.4.6
+    - 1.4.7
+    - 1.4.8
+    - 1.4.9
+    - 1.4.11
+    - 1.5.0-pre.3
+    - 1.5.0-pre.4
+    - 1.5.0-pre.5
+    - 1.5.0
+    - 1.5.1
+    - 1.5.2
+    - 1.5.3
+    - 1.5.4
+    - 1.5.5
+    - 1.5.6-preview.1
+    - 1.5.6
+    - 1.6.0-pre.2
+    - 1.6.0-pre.3
+    - 1.6.0-pre.4
+    - 1.6.0
+    - 1.6.1
+    - 1.6.2
+    - 1.6.3
+    - 1.6.4
+    - 1.6.5
+    - 1.6.6
+    - 1.7.0-pre.1
+    - 1.7.0
+    - 1.7.1
+    - 1.7.2
+    - 1.7.3
+    - 1.7.4
+    - 1.8.0-pre.1
+    - 1.8.0-pre.2
+    compatible:
+    - 1.6.6
+    - 1.7.0-pre.1
+    - 1.7.0
+    - 1.7.1
+    - 1.7.2
+    - 1.7.3
+    - 1.7.4
+    - 1.8.0-pre.1
+    - 1.8.0-pre.2
+    verified: 1.6.6
+  dependencies:
+  - name: com.unity.mathematics
+    version: 1.2.1
+  resolvedDependencies:
+  - name: com.unity.mathematics
+    version: 1.2.6
+  keywords: []
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+  hideInEditor: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 637902875830000000
+  documentationUrl: 
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.cds.internal.unity3d.com/unity/burst.git
+    revision: 21ee3d01c6a374f6b01106f9eb6f1b43e113b1a3
+    path: 
+  unityLifecycle:
+    version: 1.6.6
     nextVersion: 

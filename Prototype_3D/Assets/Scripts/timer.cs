@@ -8,8 +8,8 @@ public class timer : MonoBehaviour
 {
     //public Text timerText;
     public GameObject frontObject;
-    public TMP_Text timeText;
-    public float timeRemaining = 20;
+    public static TMP_Text timeText;
+    public float timeRemaining = 30;
     public bool timerIsRunning = false;
     public GameObject[] gameOver;
     public ballController ballContr;
@@ -65,11 +65,17 @@ public class timer : MonoBehaviour
             }
         }
     }
-    void DisplayTime(float timeToDisplay)
+    public static void DisplayTime(float timeToDisplay)
     {
         timeToDisplay += 1;
         float minutes = Mathf.FloorToInt(timeToDisplay / 60); 
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+
+        if (minutes < 0 || seconds <0){
+            minutes = 0;
+            seconds = 0;
+        } 
+
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }

@@ -34,13 +34,21 @@ public class ballController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision star)
+    void OnCollisionEnter(Collision obj)
     {
-        Debug.Log(star.gameObject.name);
-        if(star.gameObject.name == "RedStar")
+        Debug.Log(obj.gameObject.name);
+        if(obj.gameObject.name == "RedStar")
         {
             gameWon = true;
             // It is object B
+        }
+
+        if(obj.gameObject.name == "spike")
+        {
+            timeRemaining.timeRemaining -= 5;
+            timer.timeText.color = Color.red;
+            timer.DisplayTime(timeRemaining.timeRemaining);
+            //timer.timeText.color = Color.white;
         }
     }
 
