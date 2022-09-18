@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637989572433629748
-    m_Hash: 2992795409
+      ticks: 637990442107496197
+    m_Hash: 3730595462
   m_LockFileStatus:
     m_FilePath: C:/Users/seanj/OneDrive/CSCI_526/gaming_project/TeamStonks/Prototype_3D/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637989572433753252
-    m_Hash: 3623463231
+      ticks: 637990442107596203
+    m_Hash: 1229207957
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -114,6 +114,7 @@ m_ResolvedPackages:
     - 5.2.0
     - 5.2.1
     - 5.2.3
+    - 5.2.4
     - 6.0.0-pre.1
     - 6.0.0-pre.2
     - 6.0.1
@@ -131,6 +132,7 @@ m_ResolvedPackages:
     - 7.0.5
     - 7.0.6
     - 7.0.7
+    - 7.0.8
     - 8.0.0-pre.3
     - 8.0.0-pre.4
     - 8.0.0
@@ -143,7 +145,8 @@ m_ResolvedPackages:
     compatible:
     - 7.0.6
     - 7.0.7
-    verified: 7.0.7
+    - 7.0.8
+    verified: 7.0.8
   dependencies:
   - name: com.unity.2d.common
     version: 6.0.4
@@ -863,6 +866,82 @@ m_ResolvedPackages:
     path: 
   unityLifecycle:
     version: 5.0.3
+    nextVersion: 
+- packageId: com.unity.progrids@3.0.3-preview.6
+  testable: 0
+  isDirectDependency: 1
+  version: 3.0.3-preview.6
+  source: 1
+  resolvedPath: C:\Users\seanj\OneDrive\CSCI_526\gaming_project\TeamStonks\Prototype_3D\Library\PackageCache\com.unity.progrids@3.0.3-preview.6
+  assetPath: Packages/com.unity.progrids
+  name: com.unity.progrids
+  displayName: ProGrids
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: 
+  description: 'Advanced grid and object snapping for the scene view. ProGrids is
+    a dynamically placed grid, available on all 3 axes and at any position in the
+    scene.
+
+
+    ProGrids snaps objects in world space, ensuring consistent placement
+    of objects in your level.
+
+
+    In addition, ProGrids is completely customizable.
+    Change the colors of your grid, the snap sizing, unit of measurement, and more!'
+  status: 4
+  errors: []
+  versions:
+    all:
+    - 3.0.1-preview
+    - 3.0.2-preview
+    - 3.0.3-preview.0
+    - 3.0.3-preview.4
+    - 3.0.3-preview.5
+    - 3.0.3-preview.6
+    compatible:
+    - 3.0.1-preview
+    - 3.0.2-preview
+    - 3.0.3-preview.0
+    - 3.0.3-preview.4
+    - 3.0.3-preview.5
+    - 3.0.3-preview.6
+    verified: 
+  dependencies:
+  - name: com.unity.settings-manager
+    version: 1.0.2
+  resolvedDependencies:
+  - name: com.unity.settings-manager
+    version: 1.0.3
+  keywords:
+  - grid
+  - snap
+  - manipulation
+  - array
+  - align
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+  hideInEditor: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 637209307060000000
+  documentationUrl: 
+  hasRepository: 1
+  repository:
+    type: git
+    url: git+https://github.com/Unity-Technologies/com.unity.progrids.git
+    revision: 381f2b0b5dda11525d53e2c608284a3f68d1beff
+    path: 
+  unityLifecycle:
+    version: 
     nextVersion: 
 - packageId: com.unity.test-framework@1.1.31
   testable: 0
@@ -3622,6 +3701,7 @@ m_ResolvedPackages:
     - 4.0.4
     - 4.1.0
     - 4.2.0
+    - 4.2.1
     - 5.0.0-pre.1
     - 5.0.0-pre.2
     - 5.0.0
@@ -3633,6 +3713,7 @@ m_ResolvedPackages:
     - 6.0.2
     - 6.0.3
     - 6.0.4
+    - 6.0.5
     - 7.0.0-pre.3
     - 7.0.0-pre.4
     - 7.0.0
@@ -3643,7 +3724,8 @@ m_ResolvedPackages:
     compatible:
     - 6.0.3
     - 6.0.4
-    verified: 6.0.4
+    - 6.0.5
+    verified: 6.0.5
   dependencies:
   - name: com.unity.2d.sprite
     version: 1.0.0
