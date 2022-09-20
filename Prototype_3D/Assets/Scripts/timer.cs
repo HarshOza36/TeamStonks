@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+[RequireComponent(typeof(AudioSource))]
 
 public class timer : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class timer : MonoBehaviour
     public bool timerIsRunning = false;
     public GameObject[] gameOver;
     public ballController ballContr;
+    AudioSource timeFinishingAudio;
     // Start is called before the first frame update
     void Start()
     {  
@@ -24,7 +26,9 @@ public class timer : MonoBehaviour
         }
 
         timeText = frontObject.GetComponent<TMP_Text>();
+        timeFinishingAudio = frontObject.GetComponent<AudioSource>();
         Debug.Log(timeText.text);
+        timeFinishingAudio.Play(0);
         //Debug.Log(frontObject.tag);
         //frontObject = GameObject.FindGameObjectWithTag("timer");
         timerIsRunning = true;
@@ -41,8 +45,15 @@ public class timer : MonoBehaviour
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
-                //Debug.Log(timeText.text);
+                Debug.Log(timeRemaining);
                 DisplayTime(timeRemaining);
+                if (timeRemaining > 3f && timeFinishingAudio.isPlaying) {
+                    timeFinishingAudio.Stop();
+                }
+                if (timeRemaining <= 3f && !timeFinishingAudio.isPlaying) {
+                    Debug.Log("3 seconds");
+                    timeFinishingAudio.Play(0);
+                }
                 if (ballContr.gameWon) {
                     timerIsRunning = false;
                     foreach (GameObject obj in gameOver)  {
