@@ -40,7 +40,7 @@ public class ballController : MonoBehaviour
     void OnCollisionEnter(Collision obj)
     {
         audioData.Play(0);
-        Debug.Log(obj.gameObject.name);
+        // Debug.Log(obj.gameObject.name);
         if(obj.gameObject.name == "RedStar")
         {
             gameWon = true;

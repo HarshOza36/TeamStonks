@@ -27,9 +27,9 @@ public class timer : MonoBehaviour
 
         timeText = frontObject.GetComponent<TMP_Text>();
         timeFinishingAudio = frontObject.GetComponent<AudioSource>();
-        Debug.Log(timeText.text);
+        // Debug.Log(timeText.text);
         timeFinishingAudio.Play(0);
-        //Debug.Log(frontObject.tag);
+        // Debug.Log(frontObject.tag);
         //frontObject = GameObject.FindGameObjectWithTag("timer");
         timerIsRunning = true;
     }
@@ -38,20 +38,20 @@ public class timer : MonoBehaviour
     void Update()
     {
 
-        //Debug.Log(timeText);
+        // Debug.Log(timeText);
         //frontObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance;
         if (timerIsRunning)
         {
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
-                Debug.Log(timeRemaining);
+                // Debug.Log(timeRemaining);
                 DisplayTime(timeRemaining);
                 if (timeRemaining > 3f && timeFinishingAudio.isPlaying) {
                     timeFinishingAudio.Stop();
                 }
                 if (timeRemaining <= 3f && !timeFinishingAudio.isPlaying) {
-                    Debug.Log("3 seconds");
+                    // Debug.Log("3 seconds");
                     timeFinishingAudio.Play(0);
                 }
                 if (ballContr.gameWon) {
@@ -66,8 +66,8 @@ public class timer : MonoBehaviour
             }
             else
             {
-                Debug.Log("Time has run out!");
-                Debug.Log(timeText.text);
+                // Debug.Log("Time has run out!");
+                // Debug.Log(timeText.text);
                 timeRemaining = 0;
                 timerIsRunning = false;
                 foreach (GameObject obj in gameOver)  {
