@@ -6,6 +6,7 @@ TagManager:
   tags:
   - timer
   - gameOver
+  - spikes
   layers:
   - Default
   - TransparentFX
