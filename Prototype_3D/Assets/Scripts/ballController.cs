@@ -29,9 +29,9 @@ public class ballController : MonoBehaviour
         //Debug.Log(timeRemaining.timeRemaining);
     }
     IEnumerator Post(string s1){
-        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSc4UIvbJ8V5byuWfF3iPFXURGq4PtwJlSxTwjOYyHQJujeodQ/formResponse";
+        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
         WWWForm form = new WWWForm();
-        form.AddField("entry.488519728", s1);
+        form.AddField("entry.1410873621", s1);
         UnityWebRequest www = UnityWebRequest.Post(URL, form);
 
         yield return www.SendWebRequest();
