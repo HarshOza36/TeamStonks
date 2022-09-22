@@ -2,16 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
 using UnityEngine;
-[RequireComponent(typeof(AudioSource))]
+using UnityEngine.ProBuilder.Shapes;
 
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Rigidbody))]
 public class ballController : MonoBehaviour
 {
     private Rigidbody rb;
     private timer timeRemaining;
     private restart restartGame;
     public bool gameWon = false;
-    public float jump_multiplier = 5f;
+    public float jump_multiplier = 10f;
+    public float groundDistance = 0.5f; //distance to judge whether the ball is on the air
+    public float orbitSpeed = 2.5f;   //the speed that the ball rotates
+    public GameObject Center_Cylinder; //the game obj that the ball rotates around
+    bool canDoubleJump = true;  //the flag to check whether double jump is legal
     AudioSource audioData;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +36,9 @@ public class ballController : MonoBehaviour
         //Debug.Log(timeRemaining.timeRemaining);
     }
     IEnumerator Post(string s1){
-        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSc4UIvbJ8V5byuWfF3iPFXURGq4PtwJlSxTwjOYyHQJujeodQ/formResponse";
+        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
         WWWForm form = new WWWForm();
-        form.AddField("entry.488519728", s1);
+        form.AddField("entry.1410873621", s1);
         UnityWebRequest www = UnityWebRequest.Post(URL, form);
 
         yield return www.SendWebRequest();
@@ -41,16 +48,62 @@ public class ballController : MonoBehaviour
     void Update()
     {
         if (timeRemaining.timeRemaining != 0 && !gameWon) {
-            if (Input.GetKeyDown("space")){
-                rb.velocity = Vector3.up * jump_multiplier;
-                rb.AddForce(Vector3.up, ForceMode.Impulse);
+            if (canDoubleJump || IsGrounded())
+            {   //If the ball is able to jump: red
+                GetComponent<Renderer>().material.color = Color.red;
             }
-        }
-        else {
+            else
+            {   //If the ball is not able to jump: white
+                GetComponent<Renderer>().material.color = Color.white;
+            }
+       
+            if (Input.GetKeyDown("space")){              
+                if (IsGrounded())
+                {
+                    rb.velocity = Vector3.up * jump_multiplier;
+                    rb.AddForce(Vector3.up, ForceMode.Impulse);
+                    canDoubleJump = true;
+                }else if (canDoubleJump)
+                {
+                    rb.velocity = Vector3.up * jump_multiplier;
+                    rb.AddForce(Vector3.up, ForceMode.Impulse);
+                    canDoubleJump = false;
+                } 
+            }
+
+            if (Input.GetButton("Horizontal"))
+            {             
+                OrbitLeft(true);
+            }else if (Input.GetButton("Vertical"))
+            {
+                OrbitLeft(false);
+            }    
+        }else {
             rb.useGravity = false;
             rb.velocity = new Vector3(0,0,0);
-
         }
+
+        
+    }
+
+    //Orbit movement
+    void OrbitLeft(bool left)
+    {
+        if (left == true)
+        {
+            transform.RotateAround(Center_Cylinder.transform.position, Vector3.up, orbitSpeed);
+        }
+        else
+        {
+            transform.RotateAround(Center_Cylinder.transform.position, Vector3.down, orbitSpeed);
+        }
+        
+    }
+    
+    //Check whether the ball is on a platform or not
+    bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, groundDistance);
     }
 
     void OnCollisionEnter(Collision obj)
@@ -63,13 +116,22 @@ public class ballController : MonoBehaviour
             // It is object B
         }
 
-        if(obj.gameObject.name == "spike")
+        if(obj.gameObject.name == "spike" && !gameWon)
         {
-            timeRemaining.timeRemaining -= 5;
-            timer.timeText.color = Color.red;
-            timer.DisplayTime(timeRemaining.timeRemaining);
-            //timer.timeText.color = Color.white;
+            if (timeRemaining.timeRemaining > 5)
+            {
+                Destroy(obj.gameObject);
+                timeRemaining.timeRemaining -= 5;        
+            }
+            else
+            {
+                timeRemaining.timeRemaining = 0;
+                gameWon = false;
+            }
+            
         }
+
+
     }
 
 }
