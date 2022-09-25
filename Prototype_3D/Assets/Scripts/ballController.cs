@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
+using TMPro;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(Rigidbody))]
@@ -17,6 +19,7 @@ public class ballController : MonoBehaviour
     public float orbitSpeed = 2.5f;   //the speed that the ball rotates
     public GameObject Center_Cylinder; //the game obj that the ball rotates around
     bool canDoubleJump = true;  //the flag to check whether double jump is legal
+    
     AudioSource audioData;
 
     // Start is called before the first frame update
@@ -33,7 +36,6 @@ public class ballController : MonoBehaviour
         //restart = GetComponent<restart>
         rb = GetComponent<Rigidbody>();
         timeRemaining = GetComponent<timer>();
-        //Debug.Log(timeRemaining.timeRemaining);
     }
     IEnumerator Post(string s1){
         string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
@@ -121,6 +123,7 @@ public class ballController : MonoBehaviour
             if (timeRemaining.timeRemaining > 5)
             {
                 Destroy(obj.gameObject);
+                //TODO: display -5
                 timeRemaining.timeRemaining -= 5;        
             }
             else
@@ -133,5 +136,8 @@ public class ballController : MonoBehaviour
 
 
     }
+
+        
+
 
 }
