@@ -67,6 +67,15 @@ public class ballController : MonoBehaviour
         yield return www.SendWebRequest();
     }
 
+    IEnumerator PostEnd(string s1){
+        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
+        WWWForm form = new WWWForm();
+        form.AddField("entry.1924280004", s1);
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+
+        yield return www.SendWebRequest();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -136,6 +145,8 @@ public class ballController : MonoBehaviour
         if(obj.gameObject.name == "RedStar")
         {
             gameWon = true;
+            var val = 1;
+            StartCoroutine(PostEnd(val.ToString()));
             // It is object B
         }
 
