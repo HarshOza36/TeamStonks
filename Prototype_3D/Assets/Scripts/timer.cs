@@ -40,38 +40,43 @@ public class timer : MonoBehaviour
 
         // Debug.Log(timeText);
         //frontObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance;
-        if (timerIsRunning)
-        {
-            if (timeRemaining > 0)
+        if(ballContr.gameStartBool){
+            if (timerIsRunning)
             {
-                timeRemaining -= Time.deltaTime;
-                // Debug.Log(timeRemaining);
-                DisplayTime(timeRemaining);
-                if (timeRemaining > 3f && timeFinishingAudio.isPlaying) {
-                    timeFinishingAudio.Stop();
-                }
-                if (timeRemaining <= 3f && !timeFinishingAudio.isPlaying) {
-                    // Debug.Log("3 seconds");
-                    timeFinishingAudio.Play(0);
-                }
-                if (ballContr.gameWon) {
-                    timerIsRunning = false;
-                    foreach (GameObject obj in gameOver)  {
-                        if(obj.name == "GameOverText") {
-                            obj.GetComponent<TMP_Text>().text = "Game Won!";
+                if (timeRemaining > 0)
+                {
+                    timeRemaining -= Time.deltaTime;
+                    // Debug.Log(timeRemaining);
+                    DisplayTime(timeRemaining);
+                    if ((timeRemaining > 3f || ballContr.gameWon == true) && timeFinishingAudio.isPlaying) {
+                        timeFinishingAudio.Stop();
+                    }
+                    if (timeRemaining <= 3f && !timeFinishingAudio.isPlaying && !ballContr.gameWon) {
+                        // Debug.Log("3 seconds");
+                        timeFinishingAudio.Play();
+                    }
+                    if (ballContr.gameWon) {
+                        timerIsRunning = false;
+                        foreach (GameObject obj in gameOver)  {
+                            if(obj.name == "GameOverText") {
+                                obj.GetComponent<TMP_Text>().text = "Game Won!";
+                            }
+                            obj.SetActive(true);
                         }
-                        obj.SetActive(true);
                     }
                 }
-            }
-            else
-            {
-                // Debug.Log("Time has run out!");
-                // Debug.Log(timeText.text);
-                timeRemaining = 0;
-                timerIsRunning = false;
-                foreach (GameObject obj in gameOver)  {
-                    obj.SetActive(true);
+                else
+                {
+                    if (timeFinishingAudio.isPlaying) {
+                        timeFinishingAudio.Stop();
+                    }
+                    // Debug.Log("Time has run out!");
+                    // Debug.Log(timeText.text);
+                    timeRemaining = 0;
+                    timerIsRunning = false;
+                    foreach (GameObject obj in gameOver)  {
+                        obj.SetActive(true);
+                    }
                 }
             }
         }

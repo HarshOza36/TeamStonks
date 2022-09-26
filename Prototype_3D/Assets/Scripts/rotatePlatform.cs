@@ -18,8 +18,10 @@ public class rotatePlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(timeRemaining.timeRemaining != 0 && !ballContr.gameWon) {
-            transform.Rotate(new Vector3(0, 0, 50f) * Time.deltaTime, Space.Self);
+        if (ballContr.gameStartBool) {
+            if(timeRemaining.timeRemaining != 0 && !ballContr.gameWon) {
+                transform.Rotate(new Vector3(0, 0, 50f) * Time.deltaTime, Space.Self);
+            }
         }
     }
 }
