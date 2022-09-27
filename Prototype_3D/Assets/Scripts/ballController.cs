@@ -19,13 +19,17 @@ public class ballController : MonoBehaviour
     public float orbitSpeed = 2.5f;   //the speed that the ball rotates
     public GameObject Center_Cylinder; //the game obj that the ball rotates around
     bool canDoubleJump = true;  //the flag to check whether double jump is legal
+    public static TMP_Text gameStart;
+    public bool gameStartBool = false;
     
     AudioSource audioData;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameStart = GameObject.Find("GameStart").GetComponent<TMP_Text>();
+        StartCoroutine(CountdownCoroutine());
+        Debug.Log(gameStartBool);
 
         var val = 1;
         StartCoroutine(Post(val.ToString()));
@@ -37,6 +41,23 @@ public class ballController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         timeRemaining = GetComponent<timer>();
     }
+
+     IEnumerator CountdownCoroutine() {
+        Debug.Log("Game Start Countdown");
+        gameStart.text = "3";
+        yield return new WaitForSeconds(1.0f);
+        gameStart.text = "2";
+        yield return new WaitForSeconds(1.0f);
+        gameStart.text = "1";
+        yield return new WaitForSeconds(1.0f);
+        gameStart.text = "Go!";
+        // start the game here
+        yield return new WaitForSeconds(1.0f);
+        gameStart.text = "";
+        gameStartBool = true;
+        yield return null;
+    }
+
     IEnumerator Post(string s1){
         string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
         WWWForm form = new WWWForm();
@@ -46,46 +67,64 @@ public class ballController : MonoBehaviour
         yield return www.SendWebRequest();
     }
 
+    IEnumerator PostEnd(string s1){
+        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
+        WWWForm form = new WWWForm();
+        form.AddField("entry.1924280004", s1);
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+
+        yield return www.SendWebRequest();
+    }
+
+    IEnumerator PostEndTime(string s1){
+        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
+        WWWForm form = new WWWForm();
+        form.AddField("entry.1546907951", s1);
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+
+        yield return www.SendWebRequest();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (timeRemaining.timeRemaining != 0 && !gameWon) {
-            if (canDoubleJump || IsGrounded())
-            {   //If the ball is able to jump: red
-                GetComponent<Renderer>().material.color = Color.red;
-            }
-            else
-            {   //If the ball is not able to jump: white
-                GetComponent<Renderer>().material.color = Color.white;
-            }
-       
-            if (Input.GetKeyDown("space")){              
-                if (IsGrounded())
-                {
-                    rb.velocity = Vector3.up * jump_multiplier;
-                    rb.AddForce(Vector3.up, ForceMode.Impulse);
-                    canDoubleJump = true;
-                }else if (canDoubleJump)
-                {
-                    rb.velocity = Vector3.up * jump_multiplier;
-                    rb.AddForce(Vector3.up, ForceMode.Impulse);
-                    canDoubleJump = false;
-                } 
-            }
-
-            if (Input.GetButton("Horizontal"))
-            {             
-                OrbitLeft(true);
-            }else if (Input.GetButton("Vertical"))
-            {
-                OrbitLeft(false);
-            }    
-        }else {
-            rb.useGravity = false;
-            rb.velocity = new Vector3(0,0,0);
-        }
-
+        if(gameStartBool){
+            if (timeRemaining.timeRemaining != 0 && !gameWon) {
+                if (canDoubleJump || IsGrounded())
+                {   //If the ball is able to jump: red
+                    GetComponent<Renderer>().material.color = Color.red;
+                }
+                else
+                {   //If the ball is not able to jump: white
+                    GetComponent<Renderer>().material.color = Color.white;
+                }
         
+                if (Input.GetKeyDown("space")){              
+                    if (IsGrounded())
+                    {
+                        rb.velocity = Vector3.up * jump_multiplier;
+                        rb.AddForce(Vector3.up, ForceMode.Impulse);
+                        canDoubleJump = true;
+                    }else if (canDoubleJump)
+                    {
+                        rb.velocity = Vector3.up * jump_multiplier;
+                        rb.AddForce(Vector3.up, ForceMode.Impulse);
+                        canDoubleJump = false;
+                    } 
+                }
+
+                if (Input.GetButton("Horizontal"))
+                {             
+                    OrbitLeft(true);
+                }else if (Input.GetButton("Vertical"))
+                {
+                    OrbitLeft(false);
+                }    
+            }else {
+                rb.useGravity = false;
+                rb.velocity = new Vector3(0,0,0);
+            }
+        }   
     }
 
     //Orbit movement
@@ -115,6 +154,9 @@ public class ballController : MonoBehaviour
         if(obj.gameObject.name == "RedStar")
         {
             gameWon = true;
+            var val = 1;
+            StartCoroutine(PostEnd(val.ToString()));
+            StartCoroutine(PostEndTime(timeRemaining.timeRemaining.ToString()));
             // It is object B
         }
 

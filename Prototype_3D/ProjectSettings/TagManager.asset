@@ -7,6 +7,7 @@ TagManager:
   - timer
   - gameOver
   - spikes
+  - GameStartCountdown
   layers:
   - Default
   - TransparentFX
