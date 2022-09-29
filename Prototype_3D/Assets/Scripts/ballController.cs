@@ -21,7 +21,10 @@ public class ballController : MonoBehaviour
     bool canDoubleJump = true;  //the flag to check whether double jump is legal
     public static TMP_Text gameStart;
     public bool gameStartBool = false;
-    
+    public float Super_Jump = 10f;
+    public float poison_time = 0f;
+    public float poison_multiplier = 5f;
+
     AudioSource audioData;
 
     // Start is called before the first frame update
@@ -33,16 +36,16 @@ public class ballController : MonoBehaviour
 
         var val = 1;
         StartCoroutine(Post(val.ToString()));
-        
 
-    
+
+
         audioData = GetComponent<AudioSource>();
         //restart = GetComponent<restart>
         rb = GetComponent<Rigidbody>();
         timeRemaining = GetComponent<timer>();
     }
 
-     IEnumerator CountdownCoroutine() {
+    IEnumerator CountdownCoroutine() {
         Debug.Log("Game Start Countdown");
         gameStart.text = "3";
         yield return new WaitForSeconds(1.0f);
@@ -58,7 +61,7 @@ public class ballController : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator Post(string s1){
+    IEnumerator Post(string s1) {
         string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
         WWWForm form = new WWWForm();
         form.AddField("entry.1410873621", s1);
@@ -67,7 +70,7 @@ public class ballController : MonoBehaviour
         yield return www.SendWebRequest();
     }
 
-    IEnumerator PostEnd(string s1){
+    IEnumerator PostEnd(string s1) {
         string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
         WWWForm form = new WWWForm();
         form.AddField("entry.1924280004", s1);
@@ -76,7 +79,7 @@ public class ballController : MonoBehaviour
         yield return www.SendWebRequest();
     }
 
-    IEnumerator PostEndTime(string s1){
+    IEnumerator PostEndTime(string s1) {
         string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
         WWWForm form = new WWWForm();
         form.AddField("entry.1546907951", s1);
@@ -88,43 +91,75 @@ public class ballController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameStartBool){
+        if (gameStartBool) {
             if (timeRemaining.timeRemaining != 0 && !gameWon) {
+
+                if (poison_time > 0)
+                {               
+                    poison_time -= Time.deltaTime;
+                    Debug.Log("poison_time = " + poison_time.ToString());
+                }
+
                 if (canDoubleJump || IsGrounded())
                 {   //If the ball is able to jump: red
-                    GetComponent<Renderer>().material.color = Color.red;
+                    if (poison_time <= 0)
+                    {
+                        GetComponent<Renderer>().material.color = Color.red;
+                    }
+                    else
+                    {
+                        GetComponent<Renderer>().material.color = Color.black;
+                    }
                 }
                 else
                 {   //If the ball is not able to jump: white
                     GetComponent<Renderer>().material.color = Color.white;
                 }
-        
-                if (Input.GetKeyDown("space")){              
+
+                if (Input.GetKeyDown("space")) {
+                    
+
                     if (IsGrounded())
                     {
-                        rb.velocity = Vector3.up * jump_multiplier;
+                        if (poison_time > 0)
+                        {
+                            rb.velocity = Vector3.up * poison_multiplier;
+                        }
+                        else
+                        {
+                            rb.velocity = Vector3.up * jump_multiplier;
+                        }
                         rb.AddForce(Vector3.up, ForceMode.Impulse);
                         canDoubleJump = true;
-                    }else if (canDoubleJump)
+
+                    } else if (canDoubleJump)
+                    
                     {
-                        rb.velocity = Vector3.up * jump_multiplier;
+                        if (poison_time > 0)
+                        {
+                            rb.velocity = Vector3.up * poison_multiplier;
+                        }
+                        else
+                        {
+                            rb.velocity = Vector3.up * jump_multiplier;
+                        }
                         rb.AddForce(Vector3.up, ForceMode.Impulse);
                         canDoubleJump = false;
-                    } 
+                    }
                 }
 
                 if (Input.GetButton("Horizontal"))
-                {             
+                {
                     OrbitLeft(true);
-                }else if (Input.GetButton("Vertical"))
+                } else if (Input.GetButton("Vertical"))
                 {
                     OrbitLeft(false);
-                }    
-            }else {
+                }
+            } else {
                 rb.useGravity = false;
-                rb.velocity = new Vector3(0,0,0);
+                rb.velocity = new Vector3(0, 0, 0);
             }
-        }   
+        }
     }
 
     //Orbit movement
@@ -138,9 +173,9 @@ public class ballController : MonoBehaviour
         {
             transform.RotateAround(Center_Cylinder.transform.position, Vector3.down, orbitSpeed);
         }
-        
+
     }
-    
+
     //Check whether the ball is on a platform or not
     bool IsGrounded()
     {
@@ -151,7 +186,7 @@ public class ballController : MonoBehaviour
     {
         audioData.Play(0);
         // Debug.Log(obj.gameObject.name);
-        if(obj.gameObject.name == "RedStar")
+        if (obj.gameObject.name == "RedStar")
         {
             gameWon = true;
             var val = 1;
@@ -160,26 +195,37 @@ public class ballController : MonoBehaviour
             // It is object B
         }
 
-        if(obj.gameObject.name == "spike" && !gameWon)
+        if (obj.gameObject.name == "spike" && !gameWon)
         {
             if (timeRemaining.timeRemaining > 5)
             {
                 Destroy(obj.gameObject);
                 //TODO: display -5
-                timeRemaining.timeRemaining -= 5;        
+                timeRemaining.timeRemaining -= 5;
             }
             else
             {
                 timeRemaining.timeRemaining = 0;
                 gameWon = false;
             }
-            
+
+        }
+
+        if (obj.gameObject.name == "Power_Up" && !gameWon)
+        {
+            obj.gameObject.SetActive(false);
+            rb.velocity = new Vector3(0, Super_Jump * 2, 0);
+            obj.gameObject.SetActive(true);
+        }
+
+        if (obj.gameObject.name == "Power_Down" && !gameWon)
+        {
+            Destroy(obj.gameObject);
+            poison_time += 5f;
+            Debug.Log("poison_time = " + poison_time.ToString());
         }
 
 
     }
-
-        
-
 
 }
