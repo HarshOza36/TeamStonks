@@ -7,13 +7,13 @@ using TMPro;
 
 public class timer : MonoBehaviour
 {
-    //public Text timerText;
-    public GameObject frontObject;
+    private Text timerText;
+    private GameObject frontObject;
     public static TMP_Text timeText;
     public float timeRemaining = 100;
     public bool timerIsRunning = false;
     public GameObject[] gameOver;
-    public ballController ballContr;
+    private ballController ballContr;
     AudioSource timeFinishingAudio;
     // Start is called before the first frame update
     void Start()
