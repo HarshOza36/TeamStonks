@@ -16,6 +16,6 @@ public class restart : MonoBehaviour
     }
     public void MainMenu() {
         Debug.Log("Inside nextLevelFunc");
-        SceneManager.LoadScene("Tutorial"); // loads current scene
+        SceneManager.LoadScene("Menu"); // loads current scene
     }
 }
