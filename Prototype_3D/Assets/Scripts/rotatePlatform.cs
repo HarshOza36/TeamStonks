@@ -6,12 +6,12 @@ public class rotatePlatform : MonoBehaviour
 {
     public GameObject ball;
     public timer timeRemaining;
-    public ballController ballContr;
+    private ballController ballContr;
     public float rotating_speed = 50f;
     // Start is called before the first frame update
     void Start()
     {
-        ball = GameObject.Find("Player_Ball");
+        //ball = GameObject.Find("Player_Ball");
         timeRemaining = ball.GetComponent<timer>();
         ballContr = ball.GetComponent<ballController>();
     }
