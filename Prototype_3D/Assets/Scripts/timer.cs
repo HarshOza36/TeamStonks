@@ -13,6 +13,7 @@ public class timer : MonoBehaviour
     public float timeRemaining = 100;
     public bool timerIsRunning = false;
     public GameObject[] gameOver;
+    public GameObject[] gameWon;
     public ballController ballContr;
     AudioSource timeFinishingAudio;
     // Start is called before the first frame update
@@ -20,8 +21,12 @@ public class timer : MonoBehaviour
     {  
         ballContr = GetComponent<ballController>();
         gameOver =  GameObject.FindGameObjectsWithTag("gameOver");
+        gameWon = GameObject.FindGameObjectsWithTag("gameWon");
         frontObject = GameObject.Find("Timer");
         foreach (GameObject obj in gameOver)  {
+            obj.SetActive(false);
+        }
+        foreach (GameObject obj in gameWon)  {
             obj.SetActive(false);
         }
 
@@ -57,10 +62,7 @@ public class timer : MonoBehaviour
                     }
                     if (ballContr.gameWon) {
                         timerIsRunning = false;
-                        foreach (GameObject obj in gameOver)  {
-                            if(obj.name == "GameOverText") {
-                                obj.GetComponent<TMP_Text>().text = "Game Won!";
-                            }
+                        foreach (GameObject obj in gameWon)  {
                             obj.SetActive(true);
                         }
                     }

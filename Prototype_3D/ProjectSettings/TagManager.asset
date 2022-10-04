@@ -8,6 +8,7 @@ TagManager:
   - gameOver
   - spikes
   - GameStartCountdown
+  - gameWon
   layers:
   - Default
   - TransparentFX
