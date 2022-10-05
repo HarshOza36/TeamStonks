@@ -107,13 +107,15 @@ public class ballController : MonoBehaviour
                if(isTwoPuzzle == true){
 	if(Input.GetKeyDown(KeyCode.M)){
 		if(twoPuzzlePos == false){
-			gameObject.transform.position = transform.position +  new Vector3(8.5f,0f,0.25f);
+            // 8.5f,0f,0.25f
+			gameObject.transform.position = transform.position +  new Vector3(7.75f,0f,-0.09f);
 			Center_Cylinder = GameObject.Find("Center_CylinderB");
 			twoPuzzlePos = true;
 		}
 		else
 		{
-			gameObject.transform.position = transform.position +  new Vector3(-8.5f,0f,-0.25f);
+            // -8.5f,0f,-0.25f
+			gameObject.transform.position = transform.position +  new Vector3(-7.75f,0f,0.09f);
 			Center_Cylinder = GameObject.Find("Center_Cylinder");
 			twoPuzzlePos = false;
 		}
