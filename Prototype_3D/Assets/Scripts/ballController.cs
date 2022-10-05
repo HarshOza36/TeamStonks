@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(Rigidbody))]
@@ -24,12 +25,22 @@ public class ballController : MonoBehaviour
     public float Super_Jump = 10f;
     public float poison_time = 0f;
     public float poison_multiplier = 5f;
+    public bool isTwoPuzzle = false;
+    public bool twoPuzzlePos = false;
 
     AudioSource audioData;
 
     // Start is called before the first frame update
     void Start()
     {
+         // Create a temporary reference to the current scene.
+         Scene currentScene = SceneManager.GetActiveScene ();
+         // Retrieve the name of this scene.
+         string sceneName = currentScene.name;
+         if(sceneName == "TwoPuzzle"){
+	isTwoPuzzle = true;
+         }
+
         gameStart = GameObject.Find("GameStart").GetComponent<TMP_Text>();
         StartCoroutine(CountdownCoroutine());
         Debug.Log(gameStartBool);
@@ -93,6 +104,21 @@ public class ballController : MonoBehaviour
     {
         if (gameStartBool) {
             if (timeRemaining.timeRemaining != 0 && !gameWon) {
+               if(isTwoPuzzle == true){
+	if(Input.GetKeyDown(KeyCode.M)){
+		if(twoPuzzlePos == false){
+			gameObject.transform.position = transform.position +  new Vector3(8.5f,0f,0.25f);
+			Center_Cylinder = GameObject.Find("Center_CylinderB");
+			twoPuzzlePos = true;
+		}
+		else
+		{
+			gameObject.transform.position = transform.position +  new Vector3(-8.5f,0f,-0.25f);
+			Center_Cylinder = GameObject.Find("Center_Cylinder");
+			twoPuzzlePos = false;
+		}
+                         }
+                }
 
                 if (poison_time > 0)
                 {               
@@ -115,7 +141,7 @@ public class ballController : MonoBehaviour
                 {   //If the ball is not able to jump: white
                     GetComponent<Renderer>().material.color = Color.white;
                 }
-
+                
                 if (Input.GetKeyDown("space")) {
                     
 
@@ -186,7 +212,7 @@ public class ballController : MonoBehaviour
     {
         audioData.Play(0);
         // Debug.Log(obj.gameObject.name);
-        if (obj.gameObject.name == "RedStar")
+        if (obj.gameObject.name == "RedStar" || obj.gameObject.name == "RedStarB")
         {
             gameWon = true;
             var val = 1;
