@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(Rigidbody))]
@@ -24,12 +25,17 @@ public class ballController : MonoBehaviour
     public float Super_Jump = 10f;
     public float poison_time = 0f;
     public float poison_multiplier = 5f;
+    private Vector3 vec;
 
     AudioSource audioData;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (SceneManager.GetActiveScene().name == "LevelReverse") {
+            Physics.gravity = new Vector3(0,7,0);
+        }
+        Debug.Log(Physics.gravity);
         gameStart = GameObject.Find("GameStart").GetComponent<TMP_Text>();
         StartCoroutine(CountdownCoroutine());
         Debug.Log(gameStartBool);
@@ -91,6 +97,7 @@ public class ballController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //rb.AddForce(-1*Physics.gravity, ForceMode.Force);
         if (gameStartBool) {
             if (timeRemaining.timeRemaining != 0 && !gameWon) {
 
@@ -117,19 +124,24 @@ public class ballController : MonoBehaviour
                 }
 
                 if (Input.GetKeyDown("space")) {
-                    
+                    if (SceneManager.GetActiveScene().name == "LevelReverse") {
+                        vec = Vector3.down;
+                    }
+                    else {
+                        vec = Vector3.up;
+                    }
 
                     if (IsGrounded())
                     {
                         if (poison_time > 0)
                         {
-                            rb.velocity = Vector3.up * poison_multiplier;
+                            rb.velocity = vec * poison_multiplier;
                         }
                         else
                         {
-                            rb.velocity = Vector3.up * jump_multiplier;
+                            rb.velocity = vec * jump_multiplier;
                         }
-                        rb.AddForce(Vector3.up, ForceMode.Impulse);
+                        rb.AddForce(vec, ForceMode.Impulse);
                         canDoubleJump = true;
 
                     } else if (canDoubleJump)
@@ -137,13 +149,13 @@ public class ballController : MonoBehaviour
                     {
                         if (poison_time > 0)
                         {
-                            rb.velocity = Vector3.up * poison_multiplier;
+                            rb.velocity = vec * poison_multiplier;
                         }
                         else
                         {
-                            rb.velocity = Vector3.up * jump_multiplier;
+                            rb.velocity = vec * jump_multiplier;
                         }
-                        rb.AddForce(Vector3.up, ForceMode.Impulse);
+                        rb.AddForce(vec, ForceMode.Impulse);
                         canDoubleJump = false;
                     }
                 }
@@ -179,7 +191,12 @@ public class ballController : MonoBehaviour
     //Check whether the ball is on a platform or not
     bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, groundDistance);
+        if (SceneManager.GetActiveScene().name == "LevelReverse") {
+        return Physics.Raycast(transform.position, Vector3.up, groundDistance);
+        }
+        else {
+            return Physics.Raycast(transform.position, Vector3.down, groundDistance);
+        }
     }
 
     void OnCollisionEnter(Collision obj)
