@@ -10,7 +10,7 @@ public class playerCamera : MonoBehaviour
 
     void Start()
     {
-        offset = transform.position - 4*ball.position;
+        offset = transform.position - 5*ball.position;
     }
 
     // Update is called once per frame
