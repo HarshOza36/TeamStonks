@@ -6,6 +6,7 @@ using UnityEngine.ProBuilder.Shapes;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(Rigidbody))]
@@ -26,8 +27,14 @@ public class ballController : MonoBehaviour
     public float poison_time = 0f;
     public float poison_multiplier = 5f;
     private Vector3 vec;
+    private bool IsGround = true;
 
     AudioSource audioData;
+
+    public float acceleration;
+    public float distancemoved= 0f;
+    public float lastdistancemoved=0f;
+    public float last;
 
     // Start is called before the first frame update
     void Start()
@@ -35,10 +42,10 @@ public class ballController : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "LevelReverse") {
             Physics.gravity = new Vector3(0,7,0);
         }
-        Debug.Log(Physics.gravity);
+        //Debug.Log(Physics.gravity);
         gameStart = GameObject.Find("GameStart").GetComponent<TMP_Text>();
         StartCoroutine(CountdownCoroutine());
-        Debug.Log(gameStartBool);
+        //.Log(gameStartBool);
 
         var val = 1;
         StartCoroutine(Post(val.ToString()));
@@ -49,10 +56,12 @@ public class ballController : MonoBehaviour
         //restart = GetComponent<restart>
         rb = GetComponent<Rigidbody>();
         timeRemaining = GetComponent<timer>();
+
+        last = transform.position[1];
     }
 
     IEnumerator CountdownCoroutine() {
-        Debug.Log("Game Start Countdown");
+        //Debug.Log("Game Start Countdown");
         gameStart.text = "3";
         yield return new WaitForSeconds(1.0f);
         gameStart.text = "2";
@@ -104,10 +113,10 @@ public class ballController : MonoBehaviour
                 if (poison_time > 0)
                 {               
                     poison_time -= Time.deltaTime;
-                    Debug.Log("poison_time = " + poison_time.ToString());
+                    //Debug.Log("poison_time = " + poison_time.ToString());
                 }
 
-                if (canDoubleJump || IsGrounded())
+                if (canDoubleJump || IsGround)
                 {   //If the ball is able to jump: red
                     if (poison_time <= 0)
                     {
@@ -131,7 +140,7 @@ public class ballController : MonoBehaviour
                         vec = Vector3.up;
                     }
 
-                    if (IsGrounded())
+                    if (IsGround)
                     {
                         if (poison_time > 0)
                         {
@@ -192,7 +201,7 @@ public class ballController : MonoBehaviour
     bool IsGrounded()
     {
         if (SceneManager.GetActiveScene().name == "LevelReverse") {
-        return Physics.Raycast(transform.position, Vector3.up, groundDistance);
+            return Physics.Raycast(transform.position, Vector3.up, groundDistance);
         }
         else {
             return Physics.Raycast(transform.position, Vector3.down, groundDistance);
@@ -239,9 +248,24 @@ public class ballController : MonoBehaviour
         {
             Destroy(obj.gameObject);
             poison_time += 5f;
-            Debug.Log("poison_time = " + poison_time.ToString());
+            //Debug.Log("poison_time = " + poison_time.ToString());
         }
 
+        if (obj.gameObject.tag== "Platform" && obj.transform.position.z<transform.position.y && !gameWon) 
+        {
+            Debug.Log("On platform " + IsGround);
+            IsGround = true;
+        }
+
+
+    }
+
+    private void OnCollisionExit(Collision obj) {
+        if (obj.gameObject.tag == "Platform" && obj.transform.position.z<transform.position.y && !gameWon) 
+        {
+            Debug.Log("Left Platform " + IsGround);
+            IsGround = false;
+        }
 
     }
 
