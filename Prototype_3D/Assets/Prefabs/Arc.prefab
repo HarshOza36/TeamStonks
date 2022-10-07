@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4600851333744610010}
   - component: {fileID: 609774288751674751}
   - component: {fileID: 3427992712885121461}
-  - component: {fileID: 2841388716296429770}
   m_Layer: 0
   m_Name: Arc
   m_TagString: Untagged
@@ -84,19 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2841388716296429770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3788179597637095520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 396d0a638ece0e541997e7b96e4e061b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ball: {fileID: 0}
-  timeRemaining: {fileID: 0}
-  ballContr: {fileID: 0}
-  rotating_speed: 50

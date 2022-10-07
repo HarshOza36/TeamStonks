@@ -211,6 +211,21 @@ public class ballController : MonoBehaviour
 
         }
 
+        //-----------------------------------------for dangerous platforms
+        if (obj.gameObject.tag == "danger")
+        {
+            //Debug.Log("platform status: "+obj.gameObject.tag);
+            //Debug.Log("ball height: " + rb.transform.position.y);
+            //Debug.Log("dangerous platform height: " + obj.transform.position.y);
+            float ballHeight = rb.transform.position.y;
+            float dangerPlatformHeight = obj.transform.position.y;
+            if(ballHeight > dangerPlatformHeight)
+            {
+                Destroy(obj.gameObject);
+            }
+
+        }
+
         if (obj.gameObject.name == "Power_Up" && !gameWon)
         {
             obj.gameObject.SetActive(false);
@@ -224,6 +239,7 @@ public class ballController : MonoBehaviour
             poison_time += 5f;
             Debug.Log("poison_time = " + poison_time.ToString());
         }
+
 
 
     }

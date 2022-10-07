@@ -9,6 +9,8 @@ TagManager:
   - spikes
   - GameStartCountdown
   - gameWon
+  - danger
+  - magic
   layers:
   - Default
   - TransparentFX
