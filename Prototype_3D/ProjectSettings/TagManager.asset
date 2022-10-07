@@ -11,6 +11,7 @@ TagManager:
   - gameWon
   - danger
   - magic
+  - elevatePlatform
   layers:
   - Default
   - TransparentFX
