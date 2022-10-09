@@ -116,7 +116,7 @@ public class ballController : MonoBehaviour
                     //Debug.Log("poison_time = " + poison_time.ToString());
                 }
 
-                if (canDoubleJump || IsGround)
+                if (canDoubleJump || IsGrounded())
                 {   //If the ball is able to jump: red
                     if (poison_time <= 0)
                     {
@@ -140,7 +140,7 @@ public class ballController : MonoBehaviour
                         vec = Vector3.up;
                     }
 
-                    if (IsGround)
+                    if (IsGrounded())
                     {
                         if (poison_time > 0)
                         {
@@ -201,7 +201,7 @@ public class ballController : MonoBehaviour
     bool IsGrounded()
     {
         if (SceneManager.GetActiveScene().name == "LevelReverse") {
-            return Physics.Raycast(transform.position, Vector3.up, groundDistance);
+            return Physics.Raycast(transform.position, Vector3.up, GetComponent<SphereCollider>().radius);
         }
         else {
             return Physics.Raycast(transform.position, Vector3.down, groundDistance);
@@ -251,22 +251,7 @@ public class ballController : MonoBehaviour
             //Debug.Log("poison_time = " + poison_time.ToString());
         }
 
-        if (obj.gameObject.tag== "Platform" && obj.transform.position.z<transform.position.y && !gameWon) 
-        {
-            Debug.Log("On platform " + IsGround);
-            IsGround = true;
-        }
-
-
     }
 
-    private void OnCollisionExit(Collision obj) {
-        if (obj.gameObject.tag == "Platform" && obj.transform.position.z<transform.position.y && !gameWon) 
-        {
-            Debug.Log("Left Platform " + IsGround);
-            IsGround = false;
-        }
-
-    }
 
 }
