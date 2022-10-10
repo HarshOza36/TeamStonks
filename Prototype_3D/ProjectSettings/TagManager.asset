@@ -12,6 +12,7 @@ TagManager:
   - danger
   - magic
   - elevatePlatform
+  - VanishArc
   layers:
   - Default
   - TransparentFX
