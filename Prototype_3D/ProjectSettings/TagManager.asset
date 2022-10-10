@@ -9,6 +9,7 @@ TagManager:
   - spikes
   - GameStartCountdown
   - gameWon
+  - Platform
   layers:
   - Default
   - TransparentFX
