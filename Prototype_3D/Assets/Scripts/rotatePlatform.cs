@@ -11,7 +11,7 @@ public class rotatePlatform : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //ball = GameObject.Find("Player_Ball");
+        ball = GameObject.Find("Player_Ball");
         timeRemaining = ball.GetComponent<timer>();
         ballContr = ball.GetComponent<ballController>();
     }

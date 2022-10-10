@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 
+
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(Rigidbody))]
 public class ballController : MonoBehaviour
@@ -26,6 +27,8 @@ public class ballController : MonoBehaviour
     public float Super_Jump = 10f;
     public float poison_time = 0f;
     public float poison_multiplier = 5f;
+    public bool isTwoPuzzle = false;
+    public bool twoPuzzlePos = false;
     private Vector3 vec;
     private bool IsGround = true;
 
@@ -39,10 +42,19 @@ public class ballController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+         // Create a temporary reference to the current scene.
+         Scene currentScene = SceneManager.GetActiveScene ();
+         // Retrieve the name of this scene.
+         string sceneName = currentScene.name;
+         if(sceneName == "TwoPuzzle"){
+	          isTwoPuzzle = true;
+         }
+
         if (SceneManager.GetActiveScene().name == "LevelReverse") {
             Physics.gravity = new Vector3(0,7,0);
         }
         //Debug.Log(Physics.gravity);
+
         gameStart = GameObject.Find("GameStart").GetComponent<TMP_Text>();
         StartCoroutine(CountdownCoroutine());
         //.Log(gameStartBool);
@@ -109,6 +121,23 @@ public class ballController : MonoBehaviour
         //rb.AddForce(-1*Physics.gravity, ForceMode.Force);
         if (gameStartBool) {
             if (timeRemaining.timeRemaining != 0 && !gameWon) {
+               if(isTwoPuzzle == true){
+	if(Input.GetKeyDown(KeyCode.M)){
+		if(twoPuzzlePos == false){
+            // 8.5f,0f,0.25f
+			gameObject.transform.position = transform.position +  new Vector3(7.75f,0f,-0.09f);
+			Center_Cylinder = GameObject.Find("Center_CylinderB");
+			twoPuzzlePos = true;
+		}
+		else
+		{
+            // -8.5f,0f,-0.25f
+			gameObject.transform.position = transform.position +  new Vector3(-7.75f,0f,0.09f);
+			Center_Cylinder = GameObject.Find("Center_Cylinder");
+			twoPuzzlePos = false;
+		}
+                         }
+                }
 
                 if (poison_time > 0)
                 {               
@@ -131,7 +160,7 @@ public class ballController : MonoBehaviour
                 {   //If the ball is not able to jump: white
                     GetComponent<Renderer>().material.color = Color.white;
                 }
-
+                
                 if (Input.GetKeyDown("space")) {
                     if (SceneManager.GetActiveScene().name == "LevelReverse") {
                         vec = Vector3.down;
@@ -212,7 +241,7 @@ public class ballController : MonoBehaviour
     {
         audioData.Play(0);
         // Debug.Log(obj.gameObject.name);
-        if (obj.gameObject.name == "RedStar")
+        if (obj.gameObject.name == "RedStar" || obj.gameObject.name == "RedStarB")
         {
             gameWon = true;
             var val = 1;
