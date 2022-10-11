@@ -17,7 +17,7 @@ public class playerCamera : MonoBehaviour
             offset = new Vector3(0.0f,-1.0f,-10.0f);
         }
         else {
-            offset = transform.position - 5* ball.position;
+            offset = transform.position - 6* ball.position;
         }
 
     }
