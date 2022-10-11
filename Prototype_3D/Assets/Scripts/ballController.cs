@@ -44,6 +44,7 @@ public class ballController : MonoBehaviour
     private GameObject Star;
 
     private float ball_start_pos;
+private TMP_Text minus;
     
 
     // Start is called before the first frame update
@@ -54,7 +55,8 @@ public class ballController : MonoBehaviour
         // Retrieve the name of this scene.
         string sceneName = currentScene.name;
         Star = GameObject.Find("RedStar");
-
+        minus = GameObject.Find("minus").GetComponent<TMP_Text>();
+        minus.text = "";
         ball_start_pos = this.transform.position.y;
         if (sceneName == "TwoPuzzle")
         {
@@ -402,7 +404,10 @@ public class ballController : MonoBehaviour
             {
                 Destroy(obj.gameObject);
                 //TODO: display -5
+                
                 timeRemaining.timeRemaining -= 5;
+                StartCoroutine(HealthCouroutine());
+                
             }
             else
             {
@@ -430,5 +435,19 @@ public class ballController : MonoBehaviour
             //Debug.Log("poison_time = " + poison_time.ToString());
         }
 
+    }
+    IEnumerator HealthCouroutine()
+    {
+        minus.text = "-5";
+        yield return new WaitForSeconds(1.0f);
+        minus.text = "";
+        yield return null;
+    }
+
+    void onCollisionExit(Collision obj){
+ if (obj.gameObject.name == "spike" && !gameWon){
+    minus.text = "";
+ }
+        
     }
 }
