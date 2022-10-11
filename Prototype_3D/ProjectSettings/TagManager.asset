@@ -13,6 +13,7 @@ TagManager:
   - magic
   - elevatePlatform
   - VanishArc
+  - MovingArc
   layers:
   - Default
   - TransparentFX

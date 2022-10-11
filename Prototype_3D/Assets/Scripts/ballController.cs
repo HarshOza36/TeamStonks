@@ -240,8 +240,19 @@ public class ballController : MonoBehaviour
             Debug.Log("poison_time = " + poison_time.ToString());
         }
 
-
+	    if(obj.gameObject.tag == "MovingArc")
+	    {
+	        transform.parent  = obj.transform.parent.transform.Find("Empty_parent").transform;
+	    }
 
     }
 
+    void OnCollisionExit(Collision obj)
+    {
+	    if(obj.gameObject.tag == "MovingArc")
+	    {
+	        transform.parent = null;
+	    }
+    }	
+	
 }
