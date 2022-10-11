@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TwoPuzzleTutorial.unity
     guid: 0ffdb758f919d324da9fb4199889cffa
   - enabled: 1
+    path: Assets/Scenes/LevelReverse.unity
+    guid: a3d885f9d71444c3199bf770a1c2774f
+  - enabled: 1
     path: Assets/Scenes/TwoPuzzle.unity
     guid: 8924aa55a933ce84bad7bcc06e783c11
   m_configObjects: {}
