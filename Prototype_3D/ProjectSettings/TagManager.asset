@@ -10,6 +10,11 @@ TagManager:
   - GameStartCountdown
   - gameWon
   - Platform
+  - danger
+  - magic
+  - elevatePlatform
+  - VanishArc
+  - MovingArc
   layers:
   - Default
   - TransparentFX

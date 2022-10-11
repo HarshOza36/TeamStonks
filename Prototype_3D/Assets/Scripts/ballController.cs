@@ -417,6 +417,21 @@ private TMP_Text minus;
 
         }
 
+        //-----------------------------------------for dangerous platforms
+        if (obj.gameObject.tag == "danger")
+        {
+            //Debug.Log("platform status: "+obj.gameObject.tag);
+            //Debug.Log("ball height: " + rb.transform.position.y);
+            //Debug.Log("dangerous platform height: " + obj.transform.position.y);
+            float ballHeight = rb.transform.position.y;
+            float dangerPlatformHeight = obj.transform.position.y;
+            if(ballHeight > dangerPlatformHeight)
+            {
+                Destroy(obj.gameObject);
+            }
+
+        }
+
         if (obj.gameObject.name == "Power_Up" && !gameWon)
         {
             //obj.gameObject.SetActive(false);
@@ -434,9 +449,14 @@ private TMP_Text minus;
             poison_time += 5f;
             //Debug.Log("poison_time = " + poison_time.ToString());
         }
+        if(obj.gameObject.tag == "MovingArc")
+	    {
+	        transform.parent  = obj.transform.parent.transform.Find("Empty_parent").transform;
+	    }
 
     }
-    IEnumerator HealthCouroutine()
+   
+ IEnumerator HealthCouroutine()
     {
         minus.text = "-5";
         yield return new WaitForSeconds(1.0f);
@@ -444,10 +464,13 @@ private TMP_Text minus;
         yield return null;
     }
 
-    void onCollisionExit(Collision obj){
- if (obj.gameObject.name == "spike" && !gameWon){
-    minus.text = "";
- }
-        
+    void OnCollisionExit(Collision obj)
+    {
+	    if(obj.gameObject.tag == "MovingArc")
+	    {
+	        transform.parent = null;
+	    }
     }
+	
+	
 }
