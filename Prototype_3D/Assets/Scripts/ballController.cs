@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System;
+
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(Rigidbody))]
@@ -24,15 +27,39 @@ public class ballController : MonoBehaviour
     public float Super_Jump = 10f;
     public float poison_time = 0f;
     public float poison_multiplier = 5f;
+    public bool isTwoPuzzle = false;
+    public bool twoPuzzlePos = false;
+    private Vector3 vec;
+    private bool IsGround = true;
 
     AudioSource audioData;
+
+    public float acceleration;
+    public float distancemoved = 0f;
+    public float lastdistancemoved = 0f;
+    public float last;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Create a temporary reference to the current scene.
+        Scene currentScene = SceneManager.GetActiveScene();
+        // Retrieve the name of this scene.
+        string sceneName = currentScene.name;
+        if (sceneName == "TwoPuzzle")
+        {
+            isTwoPuzzle = true;
+        }
+
+        if (SceneManager.GetActiveScene().name == "LevelReverse")
+        {
+            Physics.gravity = new Vector3(0, 7, 0);
+        }
+        //Debug.Log(Physics.gravity);
+
         gameStart = GameObject.Find("GameStart").GetComponent<TMP_Text>();
         StartCoroutine(CountdownCoroutine());
-        Debug.Log(gameStartBool);
+        //.Log(gameStartBool);
 
         var val = 1;
         StartCoroutine(Post(val.ToString()));
@@ -43,10 +70,13 @@ public class ballController : MonoBehaviour
         //restart = GetComponent<restart>
         rb = GetComponent<Rigidbody>();
         timeRemaining = GetComponent<timer>();
+
+        last = transform.position[1];
     }
 
-    IEnumerator CountdownCoroutine() {
-        Debug.Log("Game Start Countdown");
+    IEnumerator CountdownCoroutine()
+    {
+        //Debug.Log("Game Start Countdown");
         gameStart.text = "3";
         yield return new WaitForSeconds(1.0f);
         gameStart.text = "2";
@@ -61,7 +91,8 @@ public class ballController : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator Post(string s1) {
+    IEnumerator Post(string s1)
+    {
         string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
         WWWForm form = new WWWForm();
         form.AddField("entry.1410873621", s1);
@@ -70,7 +101,8 @@ public class ballController : MonoBehaviour
         yield return www.SendWebRequest();
     }
 
-    IEnumerator PostEnd(string s1) {
+    IEnumerator PostEnd(string s1)
+    {
         string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
         WWWForm form = new WWWForm();
         form.AddField("entry.1924280004", s1);
@@ -79,7 +111,8 @@ public class ballController : MonoBehaviour
         yield return www.SendWebRequest();
     }
 
-    IEnumerator PostEndTime(string s1) {
+    IEnumerator PostEndTime(string s1)
+    {
         string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
         WWWForm form = new WWWForm();
         form.AddField("entry.1546907951", s1);
@@ -91,13 +124,36 @@ public class ballController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameStartBool) {
-            if (timeRemaining.timeRemaining != 0 && !gameWon) {
+        //rb.AddForce(-1*Physics.gravity, ForceMode.Force);
+        if (gameStartBool)
+        {
+            if (timeRemaining.timeRemaining != 0 && !gameWon)
+            {
+                if (isTwoPuzzle == true)
+                {
+                    if (Input.GetKeyDown(KeyCode.M))
+                    {
+                        if (twoPuzzlePos == false)
+                        {
+                            // 8.5f,0f,0.25f
+                            gameObject.transform.position = transform.position + new Vector3(7.75f, 0f, -0.09f);
+                            Center_Cylinder = GameObject.Find("Center_CylinderB");
+                            twoPuzzlePos = true;
+                        }
+                        else
+                        {
+                            // -8.5f,0f,-0.25f
+                            gameObject.transform.position = transform.position + new Vector3(-7.75f, 0f, 0.09f);
+                            Center_Cylinder = GameObject.Find("Center_Cylinder");
+                            twoPuzzlePos = false;
+                        }
+                    }
+                }
 
                 if (poison_time > 0)
-                {               
+                {
                     poison_time -= Time.deltaTime;
-                    Debug.Log("poison_time = " + poison_time.ToString());
+                    //Debug.Log("poison_time = " + poison_time.ToString());
                 }
 
                 if (canDoubleJump || IsGrounded())
@@ -116,46 +172,64 @@ public class ballController : MonoBehaviour
                     GetComponent<Renderer>().material.color = Color.white;
                 }
 
-                if (Input.GetKeyDown("space")) {
-                    
+                if (Input.GetKeyDown("space"))
+                {
+                    if (SceneManager.GetActiveScene().name == "LevelReverse")
+                    {
+                        vec = Vector3.down;
+                    }
+                    else
+                    {
+                        vec = Vector3.up;
+                    }
 
                     if (IsGrounded())
                     {
                         if (poison_time > 0)
                         {
-                            rb.velocity = Vector3.up * poison_multiplier;
+                            rb.velocity = vec * poison_multiplier;
                         }
                         else
                         {
-                            rb.velocity = Vector3.up * jump_multiplier;
+                            rb.velocity = vec * jump_multiplier;
                         }
-                        rb.AddForce(Vector3.up, ForceMode.Impulse);
-                        canDoubleJump = true;
+                        rb.AddForce(vec, ForceMode.Impulse);
+                        if (SceneManager.GetActiveScene().name != "LevelReverse")
+                        {
+                            canDoubleJump = true;
+                        }
 
-                    } else if (canDoubleJump)
-                    
+                    }
+                    else if (canDoubleJump)
+
                     {
                         if (poison_time > 0)
                         {
-                            rb.velocity = Vector3.up * poison_multiplier;
+                            rb.velocity = vec * poison_multiplier;
                         }
                         else
                         {
-                            rb.velocity = Vector3.up * jump_multiplier;
+                            rb.velocity = vec * jump_multiplier;
                         }
-                        rb.AddForce(Vector3.up, ForceMode.Impulse);
-                        canDoubleJump = false;
+                        rb.AddForce(vec, ForceMode.Impulse);
+                        if (SceneManager.GetActiveScene().name != "LevelReverse")
+                        {
+                            canDoubleJump = false;
+                        }
                     }
                 }
 
                 if (Input.GetButton("Horizontal"))
                 {
                     OrbitLeft(true);
-                } else if (Input.GetButton("Vertical"))
+                }
+                else if (Input.GetButton("Vertical"))
                 {
                     OrbitLeft(false);
                 }
-            } else {
+            }
+            else
+            {
                 rb.useGravity = false;
                 rb.velocity = new Vector3(0, 0, 0);
             }
@@ -179,14 +253,21 @@ public class ballController : MonoBehaviour
     //Check whether the ball is on a platform or not
     bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, groundDistance);
+        if (SceneManager.GetActiveScene().name == "LevelReverse")
+        {
+            return Physics.Raycast(transform.position, Vector3.up, GetComponent<SphereCollider>().radius);
+        }
+        else
+        {
+            return Physics.Raycast(transform.position, Vector3.down, groundDistance);
+        }
     }
 
     void OnCollisionEnter(Collision obj)
     {
         audioData.Play(0);
         // Debug.Log(obj.gameObject.name);
-        if (obj.gameObject.name == "RedStar")
+        if (obj.gameObject.name == "RedStar" || obj.gameObject.name == "RedStarB")
         {
             gameWon = true;
             var val = 1;
@@ -222,10 +303,10 @@ public class ballController : MonoBehaviour
         {
             Destroy(obj.gameObject);
             poison_time += 5f;
-            Debug.Log("poison_time = " + poison_time.ToString());
+            //Debug.Log("poison_time = " + poison_time.ToString());
         }
 
-
     }
+
 
 }
