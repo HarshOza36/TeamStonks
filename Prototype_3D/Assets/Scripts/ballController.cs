@@ -39,6 +39,13 @@ public class ballController : MonoBehaviour
     public float lastdistancemoved = 0f;
     public float last;
 
+    private bool percentage_event_submitted = false;
+
+    private GameObject Star;
+
+    private float ball_start_pos;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +53,9 @@ public class ballController : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         // Retrieve the name of this scene.
         string sceneName = currentScene.name;
+        Star = GameObject.Find("RedStar");
+
+        ball_start_pos = this.transform.position.y;
         if (sceneName == "TwoPuzzle")
         {
             isTwoPuzzle = true;
@@ -61,8 +71,8 @@ public class ballController : MonoBehaviour
         StartCoroutine(CountdownCoroutine());
         //.Log(gameStartBool);
 
-        var val = 1;
-        StartCoroutine(Post(val.ToString()));
+        
+        StartCoroutine(Post(sceneName));
 
 
 
@@ -121,10 +131,91 @@ public class ballController : MonoBehaviour
         yield return www.SendWebRequest();
     }
 
+    IEnumerator PostSpacePress(string s1)
+    {
+        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
+        WWWForm form = new WWWForm();
+        form.AddField("entry.1352511414", s1);
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+
+        yield return www.SendWebRequest();
+    }
+
+    IEnumerator PostAPress(string s1)
+    {
+        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
+        WWWForm form = new WWWForm();
+        form.AddField("entry.156529221", s1);
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+
+        yield return www.SendWebRequest();
+    }
+
+    IEnumerator PostDPress(string s1)
+    {
+        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
+        WWWForm form = new WWWForm();
+        form.AddField("entry.1560130765", s1);
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+
+        yield return www.SendWebRequest();
+    }
+
+    IEnumerator PostMPress(string s1)
+    {
+        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
+        WWWForm form = new WWWForm();
+        form.AddField("entry.1524196135", s1);
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+
+        yield return www.SendWebRequest();
+    }
+
+    IEnumerator PostPercentageCompleted(string s1)
+    {
+        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
+        WWWForm form = new WWWForm();
+        form.AddField("entry.1348635493", s1);
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+        
+        yield return www.SendWebRequest();
+    }
+
+    IEnumerator PostBoosterCollected(string s1)
+    {
+        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
+        WWWForm form = new WWWForm();
+        form.AddField("entry.1828337754", s1);
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+        
+        yield return www.SendWebRequest();
+    }
+
+    IEnumerator PostPoisonCollected(string s1)
+    {
+        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
+        WWWForm form = new WWWForm();
+        form.AddField("entry.1824796752", s1);
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+        
+        yield return www.SendWebRequest();
+    }
+    
+    IEnumerator PostSpikeTouched(string s1)
+    {
+        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
+        WWWForm form = new WWWForm();
+        form.AddField("entry.1345590531", s1);
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+        
+        yield return www.SendWebRequest();
+    }
+
     // Update is called once per frame
     void Update()
     {
         //rb.AddForce(-1*Physics.gravity, ForceMode.Force);
+        Scene currentScene = SceneManager.GetActiveScene();
         if (gameStartBool)
         {
             if (timeRemaining.timeRemaining != 0 && !gameWon)
@@ -133,6 +224,7 @@ public class ballController : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.M))
                     {
+                        StartCoroutine(PostMPress(currentScene.name));
                         if (twoPuzzlePos == false)
                         {
                             // 8.5f,0f,0.25f
@@ -174,7 +266,7 @@ public class ballController : MonoBehaviour
 
                 if (Input.GetKeyDown("space"))
                 {
-                    if (SceneManager.GetActiveScene().name == "LevelReverse")
+                    if (currentScene.name == "LevelReverse")
                     {
                         vec = Vector3.down;
                     }
@@ -194,6 +286,7 @@ public class ballController : MonoBehaviour
                             rb.velocity = vec * jump_multiplier;
                         }
                         rb.AddForce(vec, ForceMode.Impulse);
+                        StartCoroutine(PostSpacePress(currentScene.name));
                         if (SceneManager.GetActiveScene().name != "LevelReverse")
                         {
                             canDoubleJump = true;
@@ -212,11 +305,21 @@ public class ballController : MonoBehaviour
                             rb.velocity = vec * jump_multiplier;
                         }
                         rb.AddForce(vec, ForceMode.Impulse);
+                        StartCoroutine(PostSpacePress(currentScene.name));
                         if (SceneManager.GetActiveScene().name != "LevelReverse")
                         {
                             canDoubleJump = false;
                         }
                     }
+                }
+
+                if(Input.GetKeyDown(KeyCode.A)){
+                    StartCoroutine(PostAPress(currentScene.name));
+                }
+
+                if(Input.GetKeyDown(KeyCode.D)){
+                    StartCoroutine(PostDPress(currentScene.name));
+                    
                 }
 
                 if (Input.GetButton("Horizontal"))
@@ -230,6 +333,21 @@ public class ballController : MonoBehaviour
             }
             else
             {
+                if(!percentage_event_submitted){
+
+                    float st = Star.transform.position.y - ball_start_pos;
+                    float bl = this.transform.position.y - ball_start_pos;
+
+                    Debug.Log("Game End Positions:::: " + st.ToString() + "  " +bl.ToString());
+
+                    if(st<bl){
+                        StartCoroutine(PostPercentageCompleted(currentScene.name + "_" + "1"));
+                    }else{
+                        StartCoroutine(PostPercentageCompleted(currentScene.name + "_" + (bl/st).ToString()));
+                    }
+                    percentage_event_submitted = true;
+                }
+
                 rb.useGravity = false;
                 rb.velocity = new Vector3(0, 0, 0);
             }
@@ -266,18 +384,20 @@ public class ballController : MonoBehaviour
     void OnCollisionEnter(Collision obj)
     {
         audioData.Play(0);
+        Scene currentScene = SceneManager.GetActiveScene();
         // Debug.Log(obj.gameObject.name);
         if (obj.gameObject.name == "RedStar" || obj.gameObject.name == "RedStarB")
         {
             gameWon = true;
-            var val = 1;
-            StartCoroutine(PostEnd(val.ToString()));
-            StartCoroutine(PostEndTime(timeRemaining.timeRemaining.ToString()));
+            StartCoroutine(PostEnd(currentScene.name));
+            StartCoroutine(PostEndTime(currentScene.name+ "_" + timeRemaining.timeRemaining.ToString()));
             // It is object B
         }
 
         if (obj.gameObject.name == "spike" && !gameWon)
         {
+            
+            StartCoroutine(PostSpikeTouched(currentScene.name));
             if (timeRemaining.timeRemaining > 5)
             {
                 Destroy(obj.gameObject);
@@ -294,19 +414,21 @@ public class ballController : MonoBehaviour
 
         if (obj.gameObject.name == "Power_Up" && !gameWon)
         {
-            obj.gameObject.SetActive(false);
+            //obj.gameObject.SetActive(false);
+            StartCoroutine(PostBoosterCollected(currentScene.name));
+            //Vector3 pos = this.transform.position;
+
             rb.velocity = new Vector3(0, Super_Jump * 2, 0);
-            obj.gameObject.SetActive(true);
+            //obj.gameObject.SetActive(true);
         }
 
         if (obj.gameObject.name == "Power_Down" && !gameWon)
         {
+            StartCoroutine(PostPoisonCollected(currentScene.name));
             Destroy(obj.gameObject);
             poison_time += 5f;
             //Debug.Log("poison_time = " + poison_time.ToString());
         }
 
     }
-
-
 }
