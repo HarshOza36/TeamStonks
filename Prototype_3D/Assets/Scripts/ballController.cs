@@ -58,9 +58,11 @@ private TMP_Text minus;
         minus = GameObject.Find("minus").GetComponent<TMP_Text>();
         minus.text = "";
         ball_start_pos = this.transform.position.y;
-        if (sceneName == "TwoPuzzle")
+        if (sceneName == "TwoPuzzle" || sceneName == "Level4")
         {
             isTwoPuzzle = true;
+        }else{	
+            isTwoPuzzle = false;
         }
 
         if (SceneManager.GetActiveScene().name == "LevelReverse")
