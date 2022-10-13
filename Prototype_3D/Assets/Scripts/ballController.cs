@@ -451,11 +451,11 @@ private TMP_Text minus;
         if (ddlJmp.hasDoodleJump)
         {
             Debug.Log("doodle collision on arc"+obj.collider.name);
-            if(rb.position.y < obj.collider.transform.position.y)
+            if (rb.position.y < obj.collider.transform.position.y && obj.gameObject.tag != "CenterCylinder")
             {
                 obj.collider.enabled = false;
             }
-            
+
         }
 
 
@@ -502,6 +502,7 @@ private TMP_Text minus;
         {
             Debug.Log("exit doodle collision on arc");
             obj.collider.enabled = true;
+            
         }
 
     }

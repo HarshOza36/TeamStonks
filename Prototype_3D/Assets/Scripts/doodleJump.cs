@@ -8,20 +8,23 @@ public class doodleJump : MonoBehaviour
     public GameObject player_ball;
     public float speed;
     public bool hasDoodleJump;
+    public float movingRange;
     private Vector3 targetPosition;
 
     // Start is called before the first frame update
     void Start()
     {
         hasDoodleJump = false;
-        targetPosition = new Vector3(player_ball.transform.position.x, 15, player_ball.transform.position.z);
-        //transform.Translate(0, 13, 0);
+        targetPosition = new Vector3(transform.position.x,
+            transform.position.y+ movingRange,
+            transform.position.z);
+        Debug.Log("target Pos=" + targetPosition);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("ball poisiotn: " + player_ball.transform.position);
+        Debug.Log("ball position: " + player_ball.transform.position);
         if (hasDoodleJump == true)
         {
             Debug.Log("inside update()");
@@ -30,12 +33,19 @@ public class doodleJump : MonoBehaviour
                 targetPosition,
                 speed * Time.deltaTime
             );
-            //hasDoodleJump = false;
-            //Destroy(gameObject);
 
-            if (Mathf.Abs(targetPosition.y - player_ball.transform.position.y) < 5)
+            if(player_ball.transform.position.y - targetPosition.y < 0.5 &&
+                player_ball.transform.position.y - targetPosition.y > 0)
             {
+                player_ball.transform.position = new Vector3(targetPosition.x,
+                    player_ball.transform.position.y,
+                    targetPosition.z
+                    );
+
+
                 hasDoodleJump = false;
+                Destroy(gameObject);
+
             }
         }
     }
@@ -52,14 +62,6 @@ public class doodleJump : MonoBehaviour
         }
         
     }
-
-    //private void OnCollisionExit(Collision collision)
-    //{
-    //    if (collision.gameObject.name == "Player_Ball")
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
 
 
 
