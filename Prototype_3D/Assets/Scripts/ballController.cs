@@ -30,7 +30,7 @@ public class ballController : MonoBehaviour
     public bool isTwoPuzzle = false;
     public bool twoPuzzlePos = false;
     private Vector3 vec;
-    private bool IsGround = true;
+    //private bool IsGround = true;
 
     AudioSource audioData;
 
@@ -68,6 +68,10 @@ private TMP_Text minus;
         if (SceneManager.GetActiveScene().name == "LevelReverse")
         {
             Physics.gravity = new Vector3(0, 7, 0);
+        }
+        else
+        {
+            Physics.gravity = new Vector3(0, -9.8f, 0);
         }
         //Debug.Log(Physics.gravity);
 
