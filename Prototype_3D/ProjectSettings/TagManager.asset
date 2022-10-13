@@ -17,6 +17,7 @@ TagManager:
   - MovingArc
   - MovingArc
   - SafeArc
+  - CenterCylinder
   layers:
   - Default
   - TransparentFX
