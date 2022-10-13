@@ -21,7 +21,7 @@ public class ballController : MonoBehaviour
     public float groundDistance = 0.5f; //distance to judge whether the ball is on the air
     public float orbitSpeed = 2.5f;   //the speed that the ball rotates
     public GameObject Center_Cylinder; //the game obj that the ball rotates around
-    bool canDoubleJump = true;  //the flag to check whether double jump is legal
+    bool canDoubleJump = false;  //the flag to check whether double jump is legal
     public static TMP_Text gameStart;
     public bool gameStartBool = false;
     public float Super_Jump = 10f;
@@ -30,6 +30,7 @@ public class ballController : MonoBehaviour
     public bool isTwoPuzzle = false;
     public bool twoPuzzlePos = false;
     private Vector3 vec;
+    public bool Inverse_Flag = false;
 
     //doodle jump
     public GameObject dooleJump;
@@ -58,6 +59,7 @@ private TMP_Text minus;
     {
         // Create a temporary reference to the current scene.
         Scene currentScene = SceneManager.GetActiveScene();
+        Physics.gravity = new Vector3(0, -9.8f, 0);
         // Retrieve the name of this scene.
         string sceneName = currentScene.name;
         Star = GameObject.Find("RedStar");
@@ -72,14 +74,6 @@ private TMP_Text minus;
             isTwoPuzzle = false;
         }
 
-        if (SceneManager.GetActiveScene().name == "LevelReverse")
-        {
-            Physics.gravity = new Vector3(0, 7, 0);
-        }
-        else
-        {
-            Physics.gravity = new Vector3(0, -9.8f, 0);
-        }
         //Debug.Log(Physics.gravity);
 
         gameStart = GameObject.Find("GameStart").GetComponent<TMP_Text>();
@@ -281,7 +275,7 @@ private TMP_Text minus;
 
                 if (Input.GetKeyDown("space"))
                 {
-                    if (currentScene.name == "LevelReverse")
+                    if (Inverse_Flag)
                     {
                         vec = Vector3.down;
                     }
@@ -301,8 +295,8 @@ private TMP_Text minus;
                             rb.velocity = vec * jump_multiplier;
                         }
                         rb.AddForce(vec, ForceMode.Impulse);
-                        //StartCoroutine(PostSpacePress(currentScene.name));
-                        if (SceneManager.GetActiveScene().name != "LevelReverse")
+                        StartCoroutine(PostSpacePress(currentScene.name));
+                        if (!Inverse_Flag)
                         {
                             canDoubleJump = true;
                         }
@@ -311,6 +305,7 @@ private TMP_Text minus;
                     else if (canDoubleJump)
 
                     {
+                        Debug.Log("Double Jump");
                         if (poison_time > 0)
                         {
                             rb.velocity = vec * poison_multiplier;
@@ -320,8 +315,8 @@ private TMP_Text minus;
                             rb.velocity = vec * jump_multiplier;
                         }
                         rb.AddForce(vec, ForceMode.Impulse);
-                        //StartCoroutine(PostSpacePress(currentScene.name));
-                        if (SceneManager.GetActiveScene().name != "LevelReverse")
+                        StartCoroutine(PostSpacePress(currentScene.name));
+                        if (!Inverse_Flag)
                         {
                             canDoubleJump = false;
                         }
@@ -348,6 +343,7 @@ private TMP_Text minus;
                 {
                     OrbitLeft(false);
                 }
+                
             }
             else
             {
@@ -389,7 +385,7 @@ private TMP_Text minus;
     //Check whether the ball is on a platform or not
     bool IsGrounded()
     {
-        if (SceneManager.GetActiveScene().name == "LevelReverse")
+        if (Inverse_Flag)
         {
             return Physics.Raycast(transform.position, Vector3.up, GetComponent<SphereCollider>().radius);
         }
@@ -401,6 +397,7 @@ private TMP_Text minus;
 
     void OnCollisionEnter(Collision obj)
     {
+        Debug.Log(obj.gameObject.name);
         audioData.Play(0);
         Scene currentScene = SceneManager.GetActiveScene();
         // Debug.Log(obj.gameObject.name);
@@ -480,6 +477,24 @@ private TMP_Text minus;
 	    {
 	        transform.parent  = obj.transform.parent.transform.Find("Empty_parent").transform;
 	    }
+
+        // For Inversion
+        if (obj.gameObject.name == "Inverse" && !gameWon)
+        {
+            if (!Inverse_Flag) 
+            {
+                Physics.gravity = new Vector3(0, 7, 0);
+                Inverse_Flag = !Inverse_Flag;
+                canDoubleJump = false;
+                Destroy(obj.gameObject);
+            }   
+            else
+            {   
+                Physics.gravity = new Vector3(0, -9.8f, 0);
+                Inverse_Flag = !Inverse_Flag;
+                Destroy(obj.gameObject);
+            }
+        }
 
     }
    
