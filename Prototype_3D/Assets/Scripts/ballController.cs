@@ -492,6 +492,7 @@ private TMP_Text minus;
             {   
                 Physics.gravity = new Vector3(0, -9.8f, 0);
                 Inverse_Flag = !Inverse_Flag;
+		canDoubleJump = true;
                 Destroy(obj.gameObject);
             }
         }
