@@ -30,6 +30,12 @@ public class ballController : MonoBehaviour
     public bool isTwoPuzzle = false;
     public bool twoPuzzlePos = false;
     private Vector3 vec;
+
+    //doodle jump
+    public GameObject dooleJump;
+    private doodleJump ddlJmp;
+
+
     //private bool IsGround = true;
 
     AudioSource audioData;
@@ -58,6 +64,7 @@ private TMP_Text minus;
         minus = GameObject.Find("minus").GetComponent<TMP_Text>();
         minus.text = "";
         ball_start_pos = this.transform.position.y;
+        ddlJmp = dooleJump.GetComponent<doodleJump>();
         if (sceneName == "TwoPuzzle" || sceneName == "Level4")
         {
             isTwoPuzzle = true;
@@ -77,10 +84,10 @@ private TMP_Text minus;
 
         gameStart = GameObject.Find("GameStart").GetComponent<TMP_Text>();
         StartCoroutine(CountdownCoroutine());
-        //.Log(gameStartBool);
+        //.Log(gameStartBool)
 
         
-        StartCoroutine(Post(sceneName));
+        //StartCoroutine(Post(sceneName));
 
 
 
@@ -232,7 +239,7 @@ private TMP_Text minus;
                 {
                     if (Input.GetKeyDown(KeyCode.M))
                     {
-                        StartCoroutine(PostMPress(currentScene.name));
+                        //StartCoroutine(PostMPress(currentScene.name));
                         if (twoPuzzlePos == false)
                         {
                             // 8.5f,0f,0.25f
@@ -294,7 +301,7 @@ private TMP_Text minus;
                             rb.velocity = vec * jump_multiplier;
                         }
                         rb.AddForce(vec, ForceMode.Impulse);
-                        StartCoroutine(PostSpacePress(currentScene.name));
+                        //StartCoroutine(PostSpacePress(currentScene.name));
                         if (SceneManager.GetActiveScene().name != "LevelReverse")
                         {
                             canDoubleJump = true;
@@ -313,20 +320,23 @@ private TMP_Text minus;
                             rb.velocity = vec * jump_multiplier;
                         }
                         rb.AddForce(vec, ForceMode.Impulse);
-                        StartCoroutine(PostSpacePress(currentScene.name));
+                        //StartCoroutine(PostSpacePress(currentScene.name));
                         if (SceneManager.GetActiveScene().name != "LevelReverse")
                         {
                             canDoubleJump = false;
                         }
                     }
+
                 }
 
+                
+
                 if(Input.GetKeyDown(KeyCode.A)){
-                    StartCoroutine(PostAPress(currentScene.name));
+                    //StartCoroutine(PostAPress(currentScene.name));
                 }
 
                 if(Input.GetKeyDown(KeyCode.D)){
-                    StartCoroutine(PostDPress(currentScene.name));
+                    //StartCoroutine(PostDPress(currentScene.name));
                     
                 }
 
@@ -349,9 +359,9 @@ private TMP_Text minus;
                     Debug.Log("Game End Positions:::: " + st.ToString() + "  " +bl.ToString());
 
                     if(st<bl){
-                        StartCoroutine(PostPercentageCompleted(currentScene.name + "_" + "1"));
+                        //StartCoroutine(PostPercentageCompleted(currentScene.name + "_" + "1"));
                     }else{
-                        StartCoroutine(PostPercentageCompleted(currentScene.name + "_" + (bl/st).ToString()));
+                        //StartCoroutine(PostPercentageCompleted(currentScene.name + "_" + (bl / st).ToString()));
                     }
                     percentage_event_submitted = true;
                 }
@@ -397,22 +407,21 @@ private TMP_Text minus;
         if (obj.gameObject.name == "RedStar" || obj.gameObject.name == "RedStarB")
         {
             gameWon = true;
-            StartCoroutine(PostEnd(currentScene.name));
-            StartCoroutine(PostEndTime(currentScene.name+ "_" + timeRemaining.timeRemaining.ToString()));
+            //StartCoroutine(PostEnd(currentScene.name));
+            //StartCoroutine(PostEndTime(currentScene.name + "_" + timeRemaining.timeRemaining.ToString()));
             // It is object B
         }
 
         if (obj.gameObject.name == "spike" && !gameWon)
         {
-            
-            StartCoroutine(PostSpikeTouched(currentScene.name));
+
+            //StartCoroutine(PostSpikeTouched(currentScene.name));
             if (timeRemaining.timeRemaining > 5)
             {
                 Destroy(obj.gameObject);
-                //TODO: display -5
                 
                 timeRemaining.timeRemaining -= 5;
-                StartCoroutine(HealthCouroutine());
+                //StartCoroutine(HealthCouroutine());
                 
             }
             else
@@ -438,10 +447,22 @@ private TMP_Text minus;
 
         }
 
+        //--------------------------------------------------------for doodle jump
+        if (ddlJmp.hasDoodleJump)
+        {
+            Debug.Log("doodle collision on arc"+obj.collider.name);
+            if(rb.position.y < obj.collider.transform.position.y)
+            {
+                obj.collider.enabled = false;
+            }
+            
+        }
+
+
         if (obj.gameObject.name == "Power_Up" && !gameWon)
         {
             //obj.gameObject.SetActive(false);
-            StartCoroutine(PostBoosterCollected(currentScene.name));
+            //StartCoroutine(PostBoosterCollected(currentScene.name));
             //Vector3 pos = this.transform.position;
 
             rb.velocity = new Vector3(0, Super_Jump * 2, 0);
@@ -450,7 +471,7 @@ private TMP_Text minus;
 
         if (obj.gameObject.name == "Power_Down" && !gameWon)
         {
-            StartCoroutine(PostPoisonCollected(currentScene.name));
+            //StartCoroutine(PostPoisonCollected(currentScene.name));
             Destroy(obj.gameObject);
             poison_time += 5f;
             //Debug.Log("poison_time = " + poison_time.ToString());
@@ -476,6 +497,13 @@ private TMP_Text minus;
 	    {
 	        transform.parent = null;
 	    }
+
+        if (ddlJmp.hasDoodleJump)
+        {
+            Debug.Log("exit doodle collision on arc");
+            obj.collider.enabled = true;
+        }
+
     }
 	
 	
