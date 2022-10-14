@@ -66,19 +66,13 @@ private TMP_Text minus;
         minus = GameObject.Find("minus").GetComponent<TMP_Text>();
         minus.text = "";
         ball_start_pos = this.transform.position.y;
-        //ddlJmp = dooleJump.GetComponent<doodleJump>();
-        
-        /* We can use the two puzzle variable in the inspector to set it to true easily rather that having
-            to write if conditions for each scene name. By default the TwoPuzzle varialbe is set to false.
-        */
-
-
-        // if (sceneName == "TwoPuzzle" || sceneName == "Level4")
-        // {
-        //     isTwoPuzzle = true;
-        // }else{	
-        //     isTwoPuzzle = false;
-        // }
+        ddlJmp = dooleJump.GetComponent<doodleJump>();
+        if (sceneName == "TwoPuzzle" || sceneName == "Level4")
+        {
+            isTwoPuzzle = true;
+        }else{	
+            isTwoPuzzle = false;
+        }
 
         //Debug.Log(Physics.gravity);
 
@@ -301,7 +295,7 @@ private TMP_Text minus;
                             rb.velocity = vec * jump_multiplier;
                         }
                         rb.AddForce(vec, ForceMode.Impulse);
-                        /// StartCoroutine(PostSpacePress(currentScene.name));
+                        StartCoroutine(PostSpacePress(currentScene.name));
                         if (!Inverse_Flag)
                         {
                             canDoubleJump = true;
@@ -321,7 +315,7 @@ private TMP_Text minus;
                             rb.velocity = vec * jump_multiplier;
                         }
                         rb.AddForce(vec, ForceMode.Impulse);
-                        /// StartCoroutine(PostSpacePress(currentScene.name));
+                        StartCoroutine(PostSpacePress(currentScene.name));
                         if (!Inverse_Flag)
                         {
                             canDoubleJump = false;
@@ -451,15 +445,15 @@ private TMP_Text minus;
         }
 
         //--------------------------------------------------------for doodle jump
-        // if (ddlJmp.hasDoodleJump)
-        // {
-        //     Debug.Log("doodle collision on arc"+obj.collider.name);
-        //     if (rb.position.y < obj.collider.transform.position.y && obj.gameObject.tag != "CenterCylinder")
-        //     {
-        //         obj.collider.enabled = false;
-        //     }
+        if (ddlJmp.hasDoodleJump)
+        {
+            Debug.Log("doodle collision on arc"+obj.collider.name);
+            if (rb.position.y < obj.collider.transform.position.y && obj.gameObject.tag != "CenterCylinder")
+            {
+                obj.collider.enabled = false;
+            }
 
-        // }
+        }
 
 
         if (obj.gameObject.name == "Power_Up" && !gameWon)
@@ -520,12 +514,12 @@ private TMP_Text minus;
 	        transform.parent = null;
 	    }
 
-        // if (ddlJmp.hasDoodleJump)
-        // {
-        //     Debug.Log("exit doodle collision on arc");
-        //     obj.collider.enabled = true;
+        if (ddlJmp.hasDoodleJump)
+        {
+            Debug.Log("exit doodle collision on arc");
+            obj.collider.enabled = true;
             
-        // }
+        }
 
     }
 	
