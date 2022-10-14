@@ -33,8 +33,10 @@ public class ballController : MonoBehaviour
     public bool Inverse_Flag = false;
 
     //doodle jump
-    public GameObject dooleJump;
-    private doodleJump ddlJmp;
+    public GameObject doodleJumpA;
+    private doodleJump ddlJmpA;
+    public GameObject doodleJumpB;
+    private doodleJump ddlJmpB;
 
 
     //private bool IsGround = true;
@@ -66,12 +68,16 @@ private TMP_Text minus;
         minus = GameObject.Find("minus").GetComponent<TMP_Text>();
         minus.text = "";
         ball_start_pos = this.transform.position.y;
-        ddlJmp = dooleJump.GetComponent<doodleJump>();
+        // ddlJmp = doodleJump.GetComponent<doodleJump>();
         if (sceneName == "TwoPuzzle" || sceneName == "Level4")
         {
             isTwoPuzzle = true;
         }else{	
             isTwoPuzzle = false;
+        }
+        if(sceneName == "Level4"){
+            ddlJmpA = doodleJumpA.GetComponent<doodleJump>();
+            ddlJmpB = doodleJumpB.GetComponent<doodleJump>();
         }
 
         //Debug.Log(Physics.gravity);
@@ -445,12 +451,13 @@ private TMP_Text minus;
         }
 
         //--------------------------------------------------------for doodle jump
-        if (ddlJmp.hasDoodleJump)
+        if (ddlJmpA.hasDoodleJump || ddlJmpB.hasDoodleJump)
         {
             Debug.Log("doodle collision on arc"+obj.collider.name);
             if (rb.position.y < obj.collider.transform.position.y && obj.gameObject.tag != "CenterCylinder")
             {
                 obj.collider.enabled = false;
+                transform.parent=obj.transform.parent.transform.Find("Untagged").transform;
             }
 
         }
@@ -513,8 +520,12 @@ private TMP_Text minus;
 	    {
 	        transform.parent = null;
 	    }
+        if(obj.gameObject.tag == "Untagged")
+	    {
+	        transform.parent = null;
+	    }
 
-        if (ddlJmp.hasDoodleJump)
+        if (ddlJmpA.hasDoodleJump || ddlJmpB.hasDoodleJump)
         {
             Debug.Log("exit doodle collision on arc");
             obj.collider.enabled = true;
