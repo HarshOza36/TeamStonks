@@ -424,7 +424,7 @@ private TMP_Text minus;
                 Destroy(obj.gameObject);
                 
                 timeRemaining.timeRemaining -= 5;
-                //StartCoroutine(HealthCouroutine());
+                StartCoroutine(HealthCouroutine());
                 
             }
             else
