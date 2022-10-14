@@ -449,7 +449,7 @@ private TMP_Text minus;
             }
 
         }
-        if(sceneName == "Level4"){
+        if(currentScene.name == "Level4"){
             //--------------------------------------------------------for doodle jump
             if (ddlJmpA.hasDoodleJump || ddlJmpB.hasDoodleJump)
             {
@@ -517,11 +517,12 @@ private TMP_Text minus;
 
     void OnCollisionExit(Collision obj)
     {
+        Scene currentScene = SceneManager.GetActiveScene();
 	    if(obj.gameObject.tag == "MovingArc")
 	    {
 	        transform.parent = null;
 	    }
-        if(sceneName == "Level4"){
+        if(currentScene.name == "Level4"){
             if(obj.gameObject.tag == "Untagged")
             {
                 transform.parent = null;
