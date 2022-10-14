@@ -69,7 +69,7 @@ private TMP_Text minus;
         minus.text = "";
         ball_start_pos = this.transform.position.y;
         // ddlJmp = doodleJump.GetComponent<doodleJump>();
-        if (sceneName == "TwoPuzzle" || sceneName == "Level4")
+        if (sceneName == "Level2" || sceneName == "Level4")
         {
             isTwoPuzzle = true;
         }else{	
