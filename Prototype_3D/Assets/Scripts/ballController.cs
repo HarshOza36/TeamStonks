@@ -449,17 +449,18 @@ private TMP_Text minus;
             }
 
         }
-
-        //--------------------------------------------------------for doodle jump
-        if (ddlJmpA.hasDoodleJump || ddlJmpB.hasDoodleJump)
-        {
-            Debug.Log("doodle collision on arc"+obj.collider.name);
-            if (rb.position.y < obj.collider.transform.position.y && obj.gameObject.tag != "CenterCylinder")
+        if(sceneName == "Level4"){
+            //--------------------------------------------------------for doodle jump
+            if (ddlJmpA.hasDoodleJump || ddlJmpB.hasDoodleJump)
             {
-                obj.collider.enabled = false;
-                transform.parent=obj.transform.parent.transform.Find("Untagged").transform;
-            }
+                Debug.Log("doodle collision on arc"+obj.collider.name);
+                if (rb.position.y < obj.collider.transform.position.y && obj.gameObject.tag != "CenterCylinder")
+                {
+                    obj.collider.enabled = false;
+                    transform.parent=obj.transform.parent.transform.Find("Untagged").transform;
+                }
 
+            }
         }
 
 
@@ -520,16 +521,18 @@ private TMP_Text minus;
 	    {
 	        transform.parent = null;
 	    }
-        if(obj.gameObject.tag == "Untagged")
-	    {
-	        transform.parent = null;
-	    }
+        if(sceneName == "Level4"){
+            if(obj.gameObject.tag == "Untagged")
+            {
+                transform.parent = null;
+            }
 
-        if (ddlJmpA.hasDoodleJump || ddlJmpB.hasDoodleJump)
-        {
-            Debug.Log("exit doodle collision on arc");
-            obj.collider.enabled = true;
-            
+            if (ddlJmpA.hasDoodleJump || ddlJmpB.hasDoodleJump)
+            {
+                Debug.Log("exit doodle collision on arc");
+                obj.collider.enabled = true;
+                
+            }
         }
 
     }
