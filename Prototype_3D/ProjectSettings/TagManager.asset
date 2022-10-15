@@ -18,6 +18,7 @@ TagManager:
   - MovingArc
   - SafeArc
   - CenterCylinder
+  - PauseGame
   layers:
   - Default
   - TransparentFX

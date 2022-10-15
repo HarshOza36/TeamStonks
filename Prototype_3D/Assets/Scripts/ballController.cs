@@ -31,6 +31,7 @@ public class ballController : MonoBehaviour
     public bool twoPuzzlePos = false;
     private Vector3 vec;
     public bool Inverse_Flag = false;
+    private pauseMenu pm;
 
     //doodle jump
     public GameObject doodleJumpA;
@@ -97,6 +98,8 @@ private TMP_Text minus;
         timeRemaining = GetComponent<timer>();
 
         last = transform.position[1];
+
+        pm = GetComponent<pauseMenu>();
     }
 
     IEnumerator CountdownCoroutine()
@@ -229,149 +232,151 @@ private TMP_Text minus;
     // Update is called once per frame
     void Update()
     {
-        //rb.AddForce(-1*Physics.gravity, ForceMode.Force);
-        Scene currentScene = SceneManager.GetActiveScene();
-        if (gameStartBool)
-        {
-            if (timeRemaining.timeRemaining != 0 && !gameWon)
+        if(!pm.gamePauseBool){
+            //rb.AddForce(-1*Physics.gravity, ForceMode.Force);
+            Scene currentScene = SceneManager.GetActiveScene();
+            if (gameStartBool)
             {
-                if (isTwoPuzzle == true)
+                if (timeRemaining.timeRemaining != 0 && !gameWon)
                 {
-                    if (Input.GetKeyDown(KeyCode.M))
+                    if (isTwoPuzzle == true)
                     {
-                        //StartCoroutine(PostMPress(currentScene.name));
-                        if (twoPuzzlePos == false)
+                        if (Input.GetKeyDown(KeyCode.M))
                         {
-                            // 8.5f,0f,0.25f
-                            gameObject.transform.position = transform.position + new Vector3(7.75f, 0f, -0.09f);
-                            Center_Cylinder = GameObject.Find("Center_CylinderB");
-                            twoPuzzlePos = true;
+                            //StartCoroutine(PostMPress(currentScene.name));
+                            if (twoPuzzlePos == false)
+                            {
+                                // 8.5f,0f,0.25f
+                                gameObject.transform.position = transform.position + new Vector3(7.75f, 0f, -0.09f);
+                                Center_Cylinder = GameObject.Find("Center_CylinderB");
+                                twoPuzzlePos = true;
+                            }
+                            else
+                            {
+                                // -8.5f,0f,-0.25f
+                                gameObject.transform.position = transform.position + new Vector3(-7.75f, 0f, 0.09f);
+                                Center_Cylinder = GameObject.Find("Center_Cylinder");
+                                twoPuzzlePos = false;
+                            }
+                        }
+                    }
+
+                    if (poison_time > 0)
+                    {
+                        poison_time -= Time.deltaTime;
+                        //Debug.Log("poison_time = " + poison_time.ToString());
+                    }
+
+                    if (canDoubleJump || IsGrounded())
+                    {   //If the ball is able to jump: red
+                        if (poison_time <= 0)
+                        {
+                            GetComponent<Renderer>().material.color = Color.red;
                         }
                         else
                         {
-                            // -8.5f,0f,-0.25f
-                            gameObject.transform.position = transform.position + new Vector3(-7.75f, 0f, 0.09f);
-                            Center_Cylinder = GameObject.Find("Center_Cylinder");
-                            twoPuzzlePos = false;
+                            GetComponent<Renderer>().material.color = Color.black;
                         }
-                    }
-                }
-
-                if (poison_time > 0)
-                {
-                    poison_time -= Time.deltaTime;
-                    //Debug.Log("poison_time = " + poison_time.ToString());
-                }
-
-                if (canDoubleJump || IsGrounded())
-                {   //If the ball is able to jump: red
-                    if (poison_time <= 0)
-                    {
-                        GetComponent<Renderer>().material.color = Color.red;
                     }
                     else
-                    {
-                        GetComponent<Renderer>().material.color = Color.black;
-                    }
-                }
-                else
-                {   //If the ball is not able to jump: white
-                    GetComponent<Renderer>().material.color = Color.white;
-                }
-
-                if (Input.GetKeyDown("space"))
-                {
-                    if (Inverse_Flag)
-                    {
-                        vec = Vector3.down;
-                    }
-                    else
-                    {
-                        vec = Vector3.up;
+                    {   //If the ball is not able to jump: white
+                        GetComponent<Renderer>().material.color = Color.white;
                     }
 
-                    if (IsGrounded())
+                    if (Input.GetKeyDown("space"))
                     {
-                        if (poison_time > 0)
+                        if (Inverse_Flag)
                         {
-                            rb.velocity = vec * poison_multiplier;
+                            vec = Vector3.down;
                         }
                         else
                         {
-                            rb.velocity = vec * jump_multiplier;
+                            vec = Vector3.up;
                         }
-                        rb.AddForce(vec, ForceMode.Impulse);
-                        StartCoroutine(PostSpacePress(currentScene.name));
-                        if (!Inverse_Flag)
+
+                        if (IsGrounded())
                         {
-                            canDoubleJump = true;
+                            if (poison_time > 0)
+                            {
+                                rb.velocity = vec * poison_multiplier;
+                            }
+                            else
+                            {
+                                rb.velocity = vec * jump_multiplier;
+                            }
+                            rb.AddForce(vec, ForceMode.Impulse);
+                            StartCoroutine(PostSpacePress(currentScene.name));
+                            if (!Inverse_Flag)
+                            {
+                                canDoubleJump = true;
+                            }
+
+                        }
+                        else if (canDoubleJump)
+
+                        {
+                            Debug.Log("Double Jump");
+                            if (poison_time > 0)
+                            {
+                                rb.velocity = vec * poison_multiplier;
+                            }
+                            else
+                            {
+                                rb.velocity = vec * jump_multiplier;
+                            }
+                            rb.AddForce(vec, ForceMode.Impulse);
+                            StartCoroutine(PostSpacePress(currentScene.name));
+                            if (!Inverse_Flag)
+                            {
+                                canDoubleJump = false;
+                            }
                         }
 
                     }
-                    else if (canDoubleJump)
 
+                    
+
+                    if(Input.GetKeyDown(KeyCode.A)){
+                        //StartCoroutine(PostAPress(currentScene.name));
+                    }
+
+                    if(Input.GetKeyDown(KeyCode.D)){
+                        //StartCoroutine(PostDPress(currentScene.name));
+                        
+                    }
+
+                    if (Input.GetButton("Horizontal"))
                     {
-                        Debug.Log("Double Jump");
-                        if (poison_time > 0)
-                        {
-                            rb.velocity = vec * poison_multiplier;
-                        }
-                        else
-                        {
-                            rb.velocity = vec * jump_multiplier;
-                        }
-                        rb.AddForce(vec, ForceMode.Impulse);
-                        StartCoroutine(PostSpacePress(currentScene.name));
-                        if (!Inverse_Flag)
-                        {
-                            canDoubleJump = false;
-                        }
+                        OrbitLeft(true);
                     }
-
-                }
-
-                
-
-                if(Input.GetKeyDown(KeyCode.A)){
-                    //StartCoroutine(PostAPress(currentScene.name));
-                }
-
-                if(Input.GetKeyDown(KeyCode.D)){
-                    //StartCoroutine(PostDPress(currentScene.name));
+                    else if (Input.GetButton("Vertical"))
+                    {
+                        OrbitLeft(false);
+                    }
                     
                 }
-
-                if (Input.GetButton("Horizontal"))
+                else
                 {
-                    OrbitLeft(true);
-                }
-                else if (Input.GetButton("Vertical"))
-                {
-                    OrbitLeft(false);
-                }
-                
-            }
-            else
-            {
-                if(!percentage_event_submitted){
+                    if(!percentage_event_submitted){
 
-                    float st = Star.transform.position.y - ball_start_pos;
-                    float bl = this.transform.position.y - ball_start_pos;
+                        float st = Star.transform.position.y - ball_start_pos;
+                        float bl = this.transform.position.y - ball_start_pos;
 
-                    Debug.Log("Game End Positions:::: " + st.ToString() + "  " +bl.ToString());
+                        Debug.Log("Game End Positions:::: " + st.ToString() + "  " +bl.ToString());
 
-                    if(st<bl){
-                        //StartCoroutine(PostPercentageCompleted(currentScene.name + "_" + "1"));
-                    }else{
-                        //StartCoroutine(PostPercentageCompleted(currentScene.name + "_" + (bl / st).ToString()));
+                        if(st<bl){
+                            //StartCoroutine(PostPercentageCompleted(currentScene.name + "_" + "1"));
+                        }else{
+                            //StartCoroutine(PostPercentageCompleted(currentScene.name + "_" + (bl / st).ToString()));
+                        }
+                        percentage_event_submitted = true;
                     }
-                    percentage_event_submitted = true;
-                }
 
-                rb.useGravity = false;
-                rb.velocity = new Vector3(0, 0, 0);
+                    rb.useGravity = false;
+                    rb.velocity = new Vector3(0, 0, 0);
+                }
             }
-        }
+        } 
     }
 
     //Orbit movement
