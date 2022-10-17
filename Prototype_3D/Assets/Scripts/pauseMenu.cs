@@ -2,14 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 
 public class pauseMenu : MonoBehaviour
 {
+
     public bool gamePauseBool = false;
     public GameObject[] gamePause;
     public AudioSource[] allAudioSource;
     public AudioSource audio;
+
+    IEnumerator PostPausePress(string scene)
+    {
+        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
+        WWWForm form = new WWWForm();
+        form.AddField("entry.648485061", scene);
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+        yield return www.SendWebRequest();
+    }
+
+    IEnumerator PostResumePress(string scene)
+    {
+        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
+        WWWForm form = new WWWForm();
+        form.AddField("entry.495179311", scene);
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+        yield return www.SendWebRequest();
+    }
+
+    IEnumerator PostQuitPress(string scene)
+    {
+        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
+        WWWForm form = new WWWForm();
+        form.AddField("entry.1732825903", scene);
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+        yield return www.SendWebRequest();
+    }
+
+    IEnumerator PostRestartPress(string scene)
+    {
+        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
+        WWWForm form = new WWWForm();
+        form.AddField("entry.2075030863", scene);
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+        yield return www.SendWebRequest();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,27 +77,38 @@ public class pauseMenu : MonoBehaviour
         gamePauseBool = false;
     }
 
+    //pause btn
     public void pauseGame()
     {
+        StartCoroutine(PostPausePress(SceneManager.GetActiveScene().name));
         foreach(AudioSource obj in allAudioSource) {
              obj.Pause();
         }
         SetActive();
     }
+
+    //resume btn
     public void resumeGame()
     {
+        StartCoroutine(PostResumePress(SceneManager.GetActiveScene().name));
         foreach(AudioSource obj in allAudioSource) {
             obj.UnPause();
         }
         SetDeactive();
     }
+
+    //quit btn
     public void MainMenu()
     {
+        StartCoroutine(PostQuitPress(SceneManager.GetActiveScene().name));
         SetDeactive();
         SceneManager.LoadScene("Menu");
     }
+
+    //restart btn
     public void RestartGame()
     {
+        StartCoroutine(PostRestartPress(SceneManager.GetActiveScene().name));
         SetDeactive();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
     }

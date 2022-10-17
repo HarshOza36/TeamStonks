@@ -54,7 +54,7 @@ public class ballController : MonoBehaviour
     private GameObject Star;
 
     private float ball_start_pos;
-private TMP_Text minus;
+    private TMP_Text minus;
     
 
     // Start is called before the first frame update
