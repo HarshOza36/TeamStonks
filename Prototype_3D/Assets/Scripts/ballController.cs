@@ -420,25 +420,25 @@ private TMP_Text minus;
             // It is object B
         }
 
-        if (obj.gameObject.name == "spike" && !gameWon)
-        {
+        // if (obj.gameObject.name == "spike" && !gameWon)
+        // {
 
-            //StartCoroutine(PostSpikeTouched(currentScene.name));
-            if (timeRemaining.timeRemaining > 5)
-            {
-                Destroy(obj.gameObject);
+        //     //StartCoroutine(PostSpikeTouched(currentScene.name));
+        //     if (timeRemaining.timeRemaining > 5)
+        //     {
+        //         Destroy(obj.gameObject);
                 
-                timeRemaining.timeRemaining -= 5;
-                StartCoroutine(HealthCouroutine());
+        //         timeRemaining.timeRemaining -= 5;
+        //         StartCoroutine(HealthCouroutine());
                 
-            }
-            else
-            {
-                timeRemaining.timeRemaining = 0;
-                gameWon = false;
-            }
+        //     }
+        //     else
+        //     {
+        //         timeRemaining.timeRemaining = 0;
+        //         gameWon = false;
+        //     }
 
-        }
+        // }
 
         //-----------------------------------------for dangerous platforms
         if (obj.gameObject.tag == "danger")
@@ -469,46 +469,46 @@ private TMP_Text minus;
         }
 
 
-        if (obj.gameObject.name == "Power_Up" && !gameWon)
-        {
-            //obj.gameObject.SetActive(false);
-            //StartCoroutine(PostBoosterCollected(currentScene.name));
-            //Vector3 pos = this.transform.position;
+        // if (obj.gameObject.name == "Power_Up" && !gameWon)
+        // {
+        //     //obj.gameObject.SetActive(false);
+        //     //StartCoroutine(PostBoosterCollected(currentScene.name));
+        //     //Vector3 pos = this.transform.position;
 
-            rb.velocity = new Vector3(0, Super_Jump * 2, 0);
-            //obj.gameObject.SetActive(true);
-        }
+        //     rb.velocity = new Vector3(0, Super_Jump * 2, 0);
+        //     //obj.gameObject.SetActive(true);
+        // }
 
-        if (obj.gameObject.name == "Power_Down" && !gameWon)
-        {
-            //StartCoroutine(PostPoisonCollected(currentScene.name));
-            Destroy(obj.gameObject);
-            poison_time += 5f;
-            //Debug.Log("poison_time = " + poison_time.ToString());
-        }
+        // if (obj.gameObject.name == "Power_Down" && !gameWon)
+        // {
+        //     //StartCoroutine(PostPoisonCollected(currentScene.name));
+        //     Destroy(obj.gameObject);
+        //     poison_time += 5f;
+        //     //Debug.Log("poison_time = " + poison_time.ToString());
+        // }
         if(obj.gameObject.tag == "MovingArc")
 	    {
 	        transform.parent  = obj.transform.parent.transform.Find("Empty_parent").transform;
 	    }
 
         // For Inversion
-        if (obj.gameObject.name == "Inverse" && !gameWon)
-        {
-            if (!Inverse_Flag) 
-            {
-                Physics.gravity = new Vector3(0, 7, 0);
-                Inverse_Flag = !Inverse_Flag;
-                canDoubleJump = false;
-                Destroy(obj.gameObject);
-            }   
-            else
-            {   
-                Physics.gravity = new Vector3(0, -9.8f, 0);
-                Inverse_Flag = !Inverse_Flag;
-		canDoubleJump = true;
-                Destroy(obj.gameObject);
-            }
-        }
+        // if (obj.gameObject.name == "Inverse" && !gameWon)
+        // {
+        //     if (!Inverse_Flag) 
+        //     {
+        //         Physics.gravity = new Vector3(0, 7, 0);
+        //         Inverse_Flag = !Inverse_Flag;
+        //         canDoubleJump = false;
+        //         Destroy(obj.gameObject);
+        //     }   
+        //     else
+        //     {   
+        //         Physics.gravity = new Vector3(0, -9.8f, 0);
+        //         Inverse_Flag = !Inverse_Flag;
+		// canDoubleJump = true;
+        //         Destroy(obj.gameObject);
+        //     }
+        // }
 
     }
    
@@ -541,6 +541,66 @@ private TMP_Text minus;
             }
         }
 
+    }
+
+    private void OnTriggerEnter(Collider obj)
+    {
+        if (obj.gameObject.name == "Power_Up" && !gameWon)
+        {
+            Debug.Log("In here");
+            //obj.gameObject.SetActive(false);
+            //StartCoroutine(PostBoosterCollected(currentScene.name));
+            //Vector3 pos = this.transform.position;
+
+            rb.velocity = new Vector3(0, Super_Jump * 2, 0);
+            //obj.gameObject.SetActive(true);
+        }
+
+        if (obj.gameObject.name == "Power_Down" && !gameWon)
+        {
+            //StartCoroutine(PostPoisonCollected(currentScene.name));
+            Destroy(obj.gameObject);
+            poison_time += 5f;
+            //Debug.Log("poison_time = " + poison_time.ToString());
+        }
+
+        if (obj.gameObject.name == "spike" && !gameWon)
+        {
+
+            //StartCoroutine(PostSpikeTouched(currentScene.name));
+            if (timeRemaining.timeRemaining > 5)
+            {
+                Destroy(obj.gameObject);
+                
+                timeRemaining.timeRemaining -= 5;
+                StartCoroutine(HealthCouroutine());
+                
+            }
+            else
+            {
+                timeRemaining.timeRemaining = 0;
+                gameWon = false;
+            }
+
+        }
+
+        if (obj.gameObject.name == "Inverse" && !gameWon)
+        {
+            if (!Inverse_Flag) 
+            {
+                Physics.gravity = new Vector3(0, 7, 0);
+                Inverse_Flag = !Inverse_Flag;
+                canDoubleJump = false;
+                Destroy(obj.gameObject);
+            }   
+            else
+            {   
+                Physics.gravity = new Vector3(0, -9.8f, 0);
+                Inverse_Flag = !Inverse_Flag;
+		        canDoubleJump = true;
+                Destroy(obj.gameObject);
+            }
+        }
     }
 	
 	
