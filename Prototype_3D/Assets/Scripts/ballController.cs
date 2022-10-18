@@ -21,7 +21,7 @@ public class ballController : MonoBehaviour
     public float groundDistance = 0.5f; //distance to judge whether the ball is on the air
     public float orbitSpeed = 2.5f;   //the speed that the ball rotates
     public GameObject Center_Cylinder; //the game obj that the ball rotates around
-    bool canDoubleJump = true;  //the flag to check whether double jump is legal
+    bool canDoubleJump = false;  //the flag to check whether double jump is legal
     public static TMP_Text gameStart;
     public bool gameStartBool = false;
     public float Super_Jump = 10f;
@@ -30,7 +30,17 @@ public class ballController : MonoBehaviour
     public bool isTwoPuzzle = false;
     public bool twoPuzzlePos = false;
     private Vector3 vec;
-    private bool IsGround = true;
+    public bool Inverse_Flag = false;
+    private pauseMenu pm;
+
+    //doodle jump
+    public GameObject doodleJumpA;
+    private doodleJump ddlJmpA;
+    public GameObject doodleJumpB;
+    private doodleJump ddlJmpB;
+
+
+    //private bool IsGround = true;
 
     AudioSource audioData;
 
@@ -44,7 +54,7 @@ public class ballController : MonoBehaviour
     private GameObject Star;
 
     private float ball_start_pos;
-private TMP_Text minus;
+    private TMP_Text minus;
     
 
     // Start is called before the first frame update
@@ -52,29 +62,33 @@ private TMP_Text minus;
     {
         // Create a temporary reference to the current scene.
         Scene currentScene = SceneManager.GetActiveScene();
+        Physics.gravity = new Vector3(0, -9.8f, 0);
         // Retrieve the name of this scene.
         string sceneName = currentScene.name;
         Star = GameObject.Find("RedStar");
         minus = GameObject.Find("minus").GetComponent<TMP_Text>();
         minus.text = "";
         ball_start_pos = this.transform.position.y;
-        if (sceneName == "TwoPuzzle")
+        // ddlJmp = doodleJump.GetComponent<doodleJump>();
+        if (sceneName == "Level2" || sceneName == "Level4")
         {
             isTwoPuzzle = true;
+        }else{	
+            isTwoPuzzle = false;
+        }
+        if(sceneName == "Level4"){
+            ddlJmpA = doodleJumpA.GetComponent<doodleJump>();
+            ddlJmpB = doodleJumpB.GetComponent<doodleJump>();
         }
 
-        if (SceneManager.GetActiveScene().name == "LevelReverse")
-        {
-            Physics.gravity = new Vector3(0, 7, 0);
-        }
         //Debug.Log(Physics.gravity);
 
         gameStart = GameObject.Find("GameStart").GetComponent<TMP_Text>();
         StartCoroutine(CountdownCoroutine());
-        //.Log(gameStartBool);
+        //.Log(gameStartBool)
 
         
-        StartCoroutine(Post(sceneName));
+        //StartCoroutine(Post(sceneName));
 
 
 
@@ -84,6 +98,8 @@ private TMP_Text minus;
         timeRemaining = GetComponent<timer>();
 
         last = transform.position[1];
+
+        pm = GetComponent<pauseMenu>();
     }
 
     IEnumerator CountdownCoroutine()
@@ -216,144 +232,151 @@ private TMP_Text minus;
     // Update is called once per frame
     void Update()
     {
-        //rb.AddForce(-1*Physics.gravity, ForceMode.Force);
-        Scene currentScene = SceneManager.GetActiveScene();
-        if (gameStartBool)
-        {
-            if (timeRemaining.timeRemaining != 0 && !gameWon)
+        if(!pm.gamePauseBool){
+            //rb.AddForce(-1*Physics.gravity, ForceMode.Force);
+            Scene currentScene = SceneManager.GetActiveScene();
+            if (gameStartBool)
             {
-                if (isTwoPuzzle == true)
+                if (timeRemaining.timeRemaining != 0 && !gameWon)
                 {
-                    if (Input.GetKeyDown(KeyCode.M))
+                    if (isTwoPuzzle == true)
                     {
-                        StartCoroutine(PostMPress(currentScene.name));
-                        if (twoPuzzlePos == false)
+                        if (Input.GetKeyDown(KeyCode.M))
                         {
-                            // 8.5f,0f,0.25f
-                            gameObject.transform.position = transform.position + new Vector3(7.75f, 0f, -0.09f);
-                            Center_Cylinder = GameObject.Find("Center_CylinderB");
-                            twoPuzzlePos = true;
+                            //StartCoroutine(PostMPress(currentScene.name));
+                            if (twoPuzzlePos == false)
+                            {
+                                // 8.5f,0f,0.25f
+                                gameObject.transform.position = transform.position + new Vector3(7.75f, 0f, -0.09f);
+                                Center_Cylinder = GameObject.Find("Center_CylinderB");
+                                twoPuzzlePos = true;
+                            }
+                            else
+                            {
+                                // -8.5f,0f,-0.25f
+                                gameObject.transform.position = transform.position + new Vector3(-7.75f, 0f, 0.09f);
+                                Center_Cylinder = GameObject.Find("Center_Cylinder");
+                                twoPuzzlePos = false;
+                            }
+                        }
+                    }
+
+                    if (poison_time > 0)
+                    {
+                        poison_time -= Time.deltaTime;
+                        //Debug.Log("poison_time = " + poison_time.ToString());
+                    }
+
+                    if (canDoubleJump || IsGrounded())
+                    {   //If the ball is able to jump: red
+                        if (poison_time <= 0)
+                        {
+                            GetComponent<Renderer>().material.color = Color.red;
                         }
                         else
                         {
-                            // -8.5f,0f,-0.25f
-                            gameObject.transform.position = transform.position + new Vector3(-7.75f, 0f, 0.09f);
-                            Center_Cylinder = GameObject.Find("Center_Cylinder");
-                            twoPuzzlePos = false;
+                            GetComponent<Renderer>().material.color = Color.black;
                         }
-                    }
-                }
-
-                if (poison_time > 0)
-                {
-                    poison_time -= Time.deltaTime;
-                    //Debug.Log("poison_time = " + poison_time.ToString());
-                }
-
-                if (canDoubleJump || IsGrounded())
-                {   //If the ball is able to jump: red
-                    if (poison_time <= 0)
-                    {
-                        GetComponent<Renderer>().material.color = Color.red;
                     }
                     else
-                    {
-                        GetComponent<Renderer>().material.color = Color.black;
-                    }
-                }
-                else
-                {   //If the ball is not able to jump: white
-                    GetComponent<Renderer>().material.color = Color.white;
-                }
-
-                if (Input.GetKeyDown("space"))
-                {
-                    if (currentScene.name == "LevelReverse")
-                    {
-                        vec = Vector3.down;
-                    }
-                    else
-                    {
-                        vec = Vector3.up;
+                    {   //If the ball is not able to jump: white
+                        GetComponent<Renderer>().material.color = Color.white;
                     }
 
-                    if (IsGrounded())
+                    if (Input.GetKeyDown("space"))
                     {
-                        if (poison_time > 0)
+                        if (Inverse_Flag)
                         {
-                            rb.velocity = vec * poison_multiplier;
+                            vec = Vector3.down;
                         }
                         else
                         {
-                            rb.velocity = vec * jump_multiplier;
+                            vec = Vector3.up;
                         }
-                        rb.AddForce(vec, ForceMode.Impulse);
-                        StartCoroutine(PostSpacePress(currentScene.name));
-                        if (SceneManager.GetActiveScene().name != "LevelReverse")
+
+                        if (IsGrounded())
                         {
-                            canDoubleJump = true;
+                            if (poison_time > 0)
+                            {
+                                rb.velocity = vec * poison_multiplier;
+                            }
+                            else
+                            {
+                                rb.velocity = vec * jump_multiplier;
+                            }
+                            rb.AddForce(vec, ForceMode.Impulse);
+                            StartCoroutine(PostSpacePress(currentScene.name));
+                            if (!Inverse_Flag)
+                            {
+                                canDoubleJump = true;
+                            }
+
+                        }
+                        else if (canDoubleJump)
+
+                        {
+                            Debug.Log("Double Jump");
+                            if (poison_time > 0)
+                            {
+                                rb.velocity = vec * poison_multiplier;
+                            }
+                            else
+                            {
+                                rb.velocity = vec * jump_multiplier;
+                            }
+                            rb.AddForce(vec, ForceMode.Impulse);
+                            StartCoroutine(PostSpacePress(currentScene.name));
+                            if (!Inverse_Flag)
+                            {
+                                canDoubleJump = false;
+                            }
                         }
 
                     }
-                    else if (canDoubleJump)
 
+                    
+
+                    if(Input.GetKeyDown(KeyCode.A)){
+                        //StartCoroutine(PostAPress(currentScene.name));
+                    }
+
+                    if(Input.GetKeyDown(KeyCode.D)){
+                        //StartCoroutine(PostDPress(currentScene.name));
+                        
+                    }
+
+                    if (Input.GetButton("Horizontal"))
                     {
-                        if (poison_time > 0)
-                        {
-                            rb.velocity = vec * poison_multiplier;
-                        }
-                        else
-                        {
-                            rb.velocity = vec * jump_multiplier;
-                        }
-                        rb.AddForce(vec, ForceMode.Impulse);
-                        StartCoroutine(PostSpacePress(currentScene.name));
-                        if (SceneManager.GetActiveScene().name != "LevelReverse")
-                        {
-                            canDoubleJump = false;
-                        }
+                        OrbitLeft(true);
                     }
-                }
-
-                if(Input.GetKeyDown(KeyCode.A)){
-                    StartCoroutine(PostAPress(currentScene.name));
-                }
-
-                if(Input.GetKeyDown(KeyCode.D)){
-                    StartCoroutine(PostDPress(currentScene.name));
+                    else if (Input.GetButton("Vertical"))
+                    {
+                        OrbitLeft(false);
+                    }
                     
                 }
-
-                if (Input.GetButton("Horizontal"))
+                else
                 {
-                    OrbitLeft(true);
-                }
-                else if (Input.GetButton("Vertical"))
-                {
-                    OrbitLeft(false);
-                }
-            }
-            else
-            {
-                if(!percentage_event_submitted){
+                    if(!percentage_event_submitted){
 
-                    float st = Star.transform.position.y - ball_start_pos;
-                    float bl = this.transform.position.y - ball_start_pos;
+                        float st = Star.transform.position.y - ball_start_pos;
+                        float bl = this.transform.position.y - ball_start_pos;
 
-                    Debug.Log("Game End Positions:::: " + st.ToString() + "  " +bl.ToString());
+                        Debug.Log("Game End Positions:::: " + st.ToString() + "  " +bl.ToString());
 
-                    if(st<bl){
-                        StartCoroutine(PostPercentageCompleted(currentScene.name + "_" + "1"));
-                    }else{
-                        StartCoroutine(PostPercentageCompleted(currentScene.name + "_" + (bl/st).ToString()));
+                        if(st<bl){
+                            //StartCoroutine(PostPercentageCompleted(currentScene.name + "_" + "1"));
+                        }else{
+                            //StartCoroutine(PostPercentageCompleted(currentScene.name + "_" + (bl / st).ToString()));
+                        }
+                        percentage_event_submitted = true;
                     }
-                    percentage_event_submitted = true;
-                }
 
-                rb.useGravity = false;
-                rb.velocity = new Vector3(0, 0, 0);
+                    rb.useGravity = false;
+                    rb.velocity = new Vector3(0, 0, 0);
+                }
             }
-        }
+        } 
     }
 
     //Orbit movement
@@ -373,7 +396,7 @@ private TMP_Text minus;
     //Check whether the ball is on a platform or not
     bool IsGrounded()
     {
-        if (SceneManager.GetActiveScene().name == "LevelReverse")
+        if (Inverse_Flag)
         {
             return Physics.Raycast(transform.position, Vector3.up, GetComponent<SphereCollider>().radius);
         }
@@ -385,25 +408,169 @@ private TMP_Text minus;
 
     void OnCollisionEnter(Collision obj)
     {
+        Debug.Log(obj.gameObject.name);
         audioData.Play(0);
         Scene currentScene = SceneManager.GetActiveScene();
         // Debug.Log(obj.gameObject.name);
         if (obj.gameObject.name == "RedStar" || obj.gameObject.name == "RedStarB")
         {
             gameWon = true;
-            StartCoroutine(PostEnd(currentScene.name));
-            StartCoroutine(PostEndTime(currentScene.name+ "_" + timeRemaining.timeRemaining.ToString()));
+            //StartCoroutine(PostEnd(currentScene.name));
+            //StartCoroutine(PostEndTime(currentScene.name + "_" + timeRemaining.timeRemaining.ToString()));
             // It is object B
+        }
+
+        // if (obj.gameObject.name == "spike" && !gameWon)
+        // {
+
+        //     //StartCoroutine(PostSpikeTouched(currentScene.name));
+        //     if (timeRemaining.timeRemaining > 5)
+        //     {
+        //         Destroy(obj.gameObject);
+                
+        //         timeRemaining.timeRemaining -= 5;
+        //         StartCoroutine(HealthCouroutine());
+                
+        //     }
+        //     else
+        //     {
+        //         timeRemaining.timeRemaining = 0;
+        //         gameWon = false;
+        //     }
+
+        // }
+
+        //-----------------------------------------for dangerous platforms
+        if (obj.gameObject.tag == "danger")
+        {
+            //Debug.Log("platform status: "+obj.gameObject.tag);
+            //Debug.Log("ball height: " + rb.transform.position.y);
+            //Debug.Log("dangerous platform height: " + obj.transform.position.y);
+            float ballHeight = rb.transform.position.y;
+            float dangerPlatformHeight = obj.transform.position.y;
+            if(ballHeight > dangerPlatformHeight)
+            {
+                Destroy(obj.gameObject);
+            }
+
+        }
+        if(currentScene.name == "Level4"){
+            //--------------------------------------------------------for doodle jump
+            if (ddlJmpA.hasDoodleJump || ddlJmpB.hasDoodleJump)
+            {
+                Debug.Log("doodle collision on arc"+obj.collider.name);
+                if (rb.position.y < obj.collider.transform.position.y && obj.gameObject.tag != "CenterCylinder")
+                {
+                    obj.collider.enabled = false;
+                    transform.parent=obj.transform.parent.transform.Find("Untagged").transform;
+                }
+
+            }
+        }
+
+
+        // if (obj.gameObject.name == "Power_Up" && !gameWon)
+        // {
+        //     //obj.gameObject.SetActive(false);
+        //     //StartCoroutine(PostBoosterCollected(currentScene.name));
+        //     //Vector3 pos = this.transform.position;
+
+        //     rb.velocity = new Vector3(0, Super_Jump * 2, 0);
+        //     //obj.gameObject.SetActive(true);
+        // }
+
+        // if (obj.gameObject.name == "Power_Down" && !gameWon)
+        // {
+        //     //StartCoroutine(PostPoisonCollected(currentScene.name));
+        //     Destroy(obj.gameObject);
+        //     poison_time += 5f;
+        //     //Debug.Log("poison_time = " + poison_time.ToString());
+        // }
+        if(obj.gameObject.tag == "MovingArc")
+	    {
+	        transform.parent  = obj.transform.parent.transform.Find("Empty_parent").transform;
+	    }
+
+        // For Inversion
+        // if (obj.gameObject.name == "Inverse" && !gameWon)
+        // {
+        //     if (!Inverse_Flag) 
+        //     {
+        //         Physics.gravity = new Vector3(0, 7, 0);
+        //         Inverse_Flag = !Inverse_Flag;
+        //         canDoubleJump = false;
+        //         Destroy(obj.gameObject);
+        //     }   
+        //     else
+        //     {   
+        //         Physics.gravity = new Vector3(0, -9.8f, 0);
+        //         Inverse_Flag = !Inverse_Flag;
+		// canDoubleJump = true;
+        //         Destroy(obj.gameObject);
+        //     }
+        // }
+
+    }
+   
+ IEnumerator HealthCouroutine()
+    {
+        minus.text = "-5";
+        yield return new WaitForSeconds(1.0f);
+        minus.text = "";
+        yield return null;
+    }
+
+    void OnCollisionExit(Collision obj)
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+	    if(obj.gameObject.tag == "MovingArc")
+	    {
+	        transform.parent = null;
+	    }
+        if(currentScene.name == "Level4"){
+            if(obj.gameObject.tag == "Untagged")
+            {
+                transform.parent = null;
+            }
+
+            if (ddlJmpA.hasDoodleJump || ddlJmpB.hasDoodleJump)
+            {
+                Debug.Log("exit doodle collision on arc");
+                obj.collider.enabled = true;
+                
+            }
+        }
+
+    }
+
+    private void OnTriggerEnter(Collider obj)
+    {
+        if (obj.gameObject.name == "Power_Up" && !gameWon)
+        {
+            Debug.Log("In here");
+            //obj.gameObject.SetActive(false);
+            //StartCoroutine(PostBoosterCollected(currentScene.name));
+            //Vector3 pos = this.transform.position;
+
+            rb.velocity = new Vector3(0, Super_Jump * 2, 0);
+            //obj.gameObject.SetActive(true);
+        }
+
+        if (obj.gameObject.name == "Power_Down" && !gameWon)
+        {
+            //StartCoroutine(PostPoisonCollected(currentScene.name));
+            Destroy(obj.gameObject);
+            poison_time += 5f;
+            //Debug.Log("poison_time = " + poison_time.ToString());
         }
 
         if (obj.gameObject.name == "spike" && !gameWon)
         {
-            
-            StartCoroutine(PostSpikeTouched(currentScene.name));
+
+            //StartCoroutine(PostSpikeTouched(currentScene.name));
             if (timeRemaining.timeRemaining > 5)
             {
                 Destroy(obj.gameObject);
-                //TODO: display -5
                 
                 timeRemaining.timeRemaining -= 5;
                 StartCoroutine(HealthCouroutine());
@@ -417,37 +584,24 @@ private TMP_Text minus;
 
         }
 
-        if (obj.gameObject.name == "Power_Up" && !gameWon)
+        if (obj.gameObject.name == "Inverse" && !gameWon)
         {
-            //obj.gameObject.SetActive(false);
-            StartCoroutine(PostBoosterCollected(currentScene.name));
-            //Vector3 pos = this.transform.position;
-
-            rb.velocity = new Vector3(0, Super_Jump * 2, 0);
-            //obj.gameObject.SetActive(true);
+            if (!Inverse_Flag) 
+            {
+                Physics.gravity = new Vector3(0, 7, 0);
+                Inverse_Flag = !Inverse_Flag;
+                canDoubleJump = false;
+                Destroy(obj.gameObject);
+            }   
+            else
+            {   
+                Physics.gravity = new Vector3(0, -9.8f, 0);
+                Inverse_Flag = !Inverse_Flag;
+		        canDoubleJump = true;
+                Destroy(obj.gameObject);
+            }
         }
-
-        if (obj.gameObject.name == "Power_Down" && !gameWon)
-        {
-            StartCoroutine(PostPoisonCollected(currentScene.name));
-            Destroy(obj.gameObject);
-            poison_time += 5f;
-            //Debug.Log("poison_time = " + poison_time.ToString());
-        }
-
     }
-    IEnumerator HealthCouroutine()
-    {
-        minus.text = "-5";
-        yield return new WaitForSeconds(1.0f);
-        minus.text = "";
-        yield return null;
-    }
-
-    void onCollisionExit(Collision obj){
- if (obj.gameObject.name == "spike" && !gameWon){
-    minus.text = "";
- }
-        
-    }
+	
+	
 }
