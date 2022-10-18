@@ -62,6 +62,7 @@ public class timer : MonoBehaviour
                     }
                     if (ballContr.gameWon) {
                         timerIsRunning = false;
+                        GameObject.Find("PauseGame").SetActive(false);
                         foreach (GameObject obj in gameWon)  {
                             obj.SetActive(true);
                         }
@@ -79,6 +80,7 @@ public class timer : MonoBehaviour
                     foreach (GameObject obj in gameOver)  {
                         obj.SetActive(true);
                     }
+                    GameObject.Find("PauseGame").SetActive(false);
                 }
             }
         }
