@@ -85,12 +85,8 @@ public class ballController : MonoBehaviour
 
         gameStart = GameObject.Find("GameStart").GetComponent<TMP_Text>();
         StartCoroutine(CountdownCoroutine());
-        //.Log(gameStartBool)
-
         
-        //StartCoroutine(Post(sceneName));
-
-
+        StartCoroutine(Post(sceneName));
 
         audioData = GetComponent<AudioSource>();
         //restart = GetComponent<restart>
@@ -229,6 +225,17 @@ public class ballController : MonoBehaviour
         yield return www.SendWebRequest();
     }
 
+    IEnumerator PostInversionCollected(string s1)
+    {
+        string URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfBJSg2NgGPIug2J2KGqGy-j4rRFrmqX-EXD9gmhO4Up2oP3A/formResponse";
+        WWWForm form = new WWWForm();
+        form.AddField("entry.1120736174", s1);
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+        
+        yield return www.SendWebRequest();
+    }
+
+
     // Update is called once per frame
     void Update()
     {
@@ -243,7 +250,7 @@ public class ballController : MonoBehaviour
                     {
                         if (Input.GetKeyDown(KeyCode.M))
                         {
-                            //StartCoroutine(PostMPress(currentScene.name));
+                            StartCoroutine(PostMPress(currentScene.name));
                             if (twoPuzzlePos == false)
                             {
                                 // 8.5f,0f,0.25f
@@ -337,11 +344,11 @@ public class ballController : MonoBehaviour
                     
 
                     if(Input.GetKeyDown(KeyCode.A)){
-                        //StartCoroutine(PostAPress(currentScene.name));
+                        StartCoroutine(PostAPress(currentScene.name));
                     }
 
                     if(Input.GetKeyDown(KeyCode.D)){
-                        //StartCoroutine(PostDPress(currentScene.name));
+                        StartCoroutine(PostDPress(currentScene.name));
                         
                     }
 
@@ -365,9 +372,9 @@ public class ballController : MonoBehaviour
                         Debug.Log("Game End Positions:::: " + st.ToString() + "  " +bl.ToString());
 
                         if(st<bl){
-                            //StartCoroutine(PostPercentageCompleted(currentScene.name + "_" + "1"));
+                            StartCoroutine(PostPercentageCompleted(currentScene.name + "_" + "1"));
                         }else{
-                            //StartCoroutine(PostPercentageCompleted(currentScene.name + "_" + (bl / st).ToString()));
+                            StartCoroutine(PostPercentageCompleted(currentScene.name + "_" + (bl / st).ToString()));
                         }
                         percentage_event_submitted = true;
                     }
@@ -415,8 +422,8 @@ public class ballController : MonoBehaviour
         if (obj.gameObject.name == "RedStar" || obj.gameObject.name == "RedStarB")
         {
             gameWon = true;
-            //StartCoroutine(PostEnd(currentScene.name));
-            //StartCoroutine(PostEndTime(currentScene.name + "_" + timeRemaining.timeRemaining.ToString()));
+            StartCoroutine(PostEnd(currentScene.name));
+            StartCoroutine(PostEndTime(currentScene.name + "_" + timeRemaining.timeRemaining.ToString()));
             // It is object B
         }
 
@@ -512,7 +519,7 @@ public class ballController : MonoBehaviour
 
     }
    
- IEnumerator HealthCouroutine()
+    IEnumerator HealthCouroutine()
     {
         minus.text = "-5";
         yield return new WaitForSeconds(1.0f);
@@ -545,11 +552,12 @@ public class ballController : MonoBehaviour
 
     private void OnTriggerEnter(Collider obj)
     {
+        Scene currentScene = SceneManager.GetActiveScene();
         if (obj.gameObject.name == "Power_Up" && !gameWon)
         {
             Debug.Log("In here");
             //obj.gameObject.SetActive(false);
-            //StartCoroutine(PostBoosterCollected(currentScene.name));
+            StartCoroutine(PostBoosterCollected(currentScene.name));
             //Vector3 pos = this.transform.position;
 
             rb.velocity = new Vector3(0, Super_Jump * 2, 0);
@@ -558,7 +566,7 @@ public class ballController : MonoBehaviour
 
         if (obj.gameObject.name == "Power_Down" && !gameWon)
         {
-            //StartCoroutine(PostPoisonCollected(currentScene.name));
+            StartCoroutine(PostPoisonCollected(currentScene.name));
             Destroy(obj.gameObject);
             poison_time += 5f;
             //Debug.Log("poison_time = " + poison_time.ToString());
@@ -567,14 +575,12 @@ public class ballController : MonoBehaviour
         if (obj.gameObject.name == "spike" && !gameWon)
         {
 
-            //StartCoroutine(PostSpikeTouched(currentScene.name));
+            StartCoroutine(PostSpikeTouched(currentScene.name));
             if (timeRemaining.timeRemaining > 5)
             {
                 Destroy(obj.gameObject);
-                
                 timeRemaining.timeRemaining -= 5;
                 StartCoroutine(HealthCouroutine());
-                
             }
             else
             {
@@ -586,6 +592,7 @@ public class ballController : MonoBehaviour
 
         if (obj.gameObject.name == "Inverse" && !gameWon)
         {
+            StartCoroutine(PostInversionCollected(currentScene.name));
             if (!Inverse_Flag) 
             {
                 Physics.gravity = new Vector3(0, 7, 0);
@@ -602,6 +609,4 @@ public class ballController : MonoBehaviour
             }
         }
     }
-	
-	
 }
