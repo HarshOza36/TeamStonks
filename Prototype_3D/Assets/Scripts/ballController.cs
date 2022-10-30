@@ -343,20 +343,20 @@ public class ballController : MonoBehaviour
 
                     
 
-                    if(Input.GetKeyDown(KeyCode.A)){
+                    if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)){
                         StartCoroutine(PostAPress(currentScene.name));
                     }
 
-                    if(Input.GetKeyDown(KeyCode.D)){
+                    if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)){
                         StartCoroutine(PostDPress(currentScene.name));
                         
                     }
 
-                    if (Input.GetButton("Horizontal"))
+                    if (Input.GetButton("Horizontal") || Input.GetKey(KeyCode.LeftArrow))
                     {
                         OrbitLeft(true);
                     }
-                    else if (Input.GetButton("Vertical"))
+                    else if (Input.GetButton("Vertical") || Input.GetKey(KeyCode.RightArrow))
                     {
                         OrbitLeft(false);
                     }
