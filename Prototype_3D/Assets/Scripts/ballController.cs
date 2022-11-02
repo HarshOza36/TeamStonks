@@ -55,7 +55,11 @@ public class ballController : MonoBehaviour
 
     private float ball_start_pos;
     private TMP_Text minus;
-    
+    public GameObject[] selectionPowerUpMenu;
+    public GameObject selectionPowerInverse;
+    [SerializeField] private GameObject prefabInv;
+    [SerializeField] private Vector3 prefabInvPos;
+    public GameObject clone;
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +72,14 @@ public class ballController : MonoBehaviour
         Star = GameObject.Find("RedStar");
         minus = GameObject.Find("minus").GetComponent<TMP_Text>();
         minus.text = "";
+        selectionPowerUpMenu =  GameObject.FindGameObjectsWithTag("SelectionPowerUp");
+        // selectionPowerInverse = GameObject.FindWithTag("spInverse");
+        // selectionPowerInverse.SetActive(false);
+        
+        
+        foreach (GameObject obj in selectionPowerUpMenu)  {
+            obj.SetActive(false);
+        }
         ball_start_pos = this.transform.position.y;
         // ddlJmp = doodleJump.GetComponent<doodleJump>();
         if (sceneName == "Level2" || sceneName == "Level4")
@@ -527,6 +539,33 @@ public class ballController : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator SelectionPowerUpCour(){
+        foreach (GameObject objj in selectionPowerUpMenu)  {
+                objj.SetActive(true);
+        }
+        while(true){
+            if (Input.GetKey(KeyCode.Alpha1))
+            {
+                Debug.Log("INVERSION");
+                clone = Instantiate(prefabInv, prefabInvPos, Quaternion.identity);
+                clone.name = "Inverse";
+                break;
+            }
+            else if (Input.GetKey(KeyCode.Alpha2))
+            {
+                Debug.Log("Doodle Jump");
+                doodleJumpA.SetActive(true);
+                break;
+            }
+            yield return null;
+        }
+        foreach (GameObject objj in selectionPowerUpMenu)  {
+                objj.SetActive(false);
+        }
+       
+        yield return null;
+    }
+
     void OnCollisionExit(Collision obj)
     {
         Scene currentScene = SceneManager.GetActiveScene();
@@ -553,6 +592,12 @@ public class ballController : MonoBehaviour
     private void OnTriggerEnter(Collider obj)
     {
         Scene currentScene = SceneManager.GetActiveScene();
+        if (obj.gameObject.name == "SelectionPower" && !gameWon)
+        {   Destroy(obj.gameObject);
+            StartCoroutine(SelectionPowerUpCour());
+            
+            
+        }
         if (obj.gameObject.name == "Power_Up" && !gameWon)
         {
             Debug.Log("In here");
