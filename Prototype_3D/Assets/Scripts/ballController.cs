@@ -82,7 +82,7 @@ public class ballController : MonoBehaviour
         }
         ball_start_pos = this.transform.position.y;
         // ddlJmp = doodleJump.GetComponent<doodleJump>();
-        if (sceneName == "Level2" || sceneName == "Level4")
+        if (sceneName == "Level2" || sceneName == "Level4" || sceneName == "Level6")
         {
             isTwoPuzzle = true;
         }else{	
