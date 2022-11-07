@@ -21,11 +21,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Old tutorial scenes/DoubleJumpTutorial.unity
     guid: 00f7685575e7be340957967de47855c9
   - enabled: 1
-    path: Assets/Scenes/InversionTutorial.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
     path: Assets/Scenes/JumpTutorial.unity
     guid: 55581fab0b47c8c4da77f6258b3158ce
+  - enabled: 1
+    path: Assets/Scenes/Level0.unity
+    guid: e2336323048421d4c844903fc0d9be19
+  - enabled: 1
+    path: Assets/Scenes/InversionTutorial.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/Level1 1.unity
     guid: 115167999967b8c47a32ee0c1a065370
