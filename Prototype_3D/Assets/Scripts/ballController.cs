@@ -32,6 +32,8 @@ public class ballController : MonoBehaviour
     private Vector3 vec;
     public bool Inverse_Flag = false;
     private pauseMenu pm;
+    private levelLocking levelLock;
+    private GameObject camera;
 
     //doodle jump
     public GameObject doodleJumpA;
@@ -73,6 +75,8 @@ public class ballController : MonoBehaviour
         minus = GameObject.Find("minus").GetComponent<TMP_Text>();
         minus.text = "";
         selectionPowerUpMenu =  GameObject.FindGameObjectsWithTag("SelectionPowerUp");
+        camera = GameObject.Find("Main Camera");
+        levelLock = camera.GetComponent<levelLocking>();
         // selectionPowerInverse = GameObject.FindWithTag("spInverse");
         // selectionPowerInverse.SetActive(false);
         
@@ -434,6 +438,37 @@ public class ballController : MonoBehaviour
         if (obj.gameObject.name == "RedStar" || obj.gameObject.name == "RedStarB")
         {
             gameWon = true;
+            int level = (int)Char.GetNumericValue(currentScene.name[currentScene.name.Length - 1]);
+            if (level == 0) 
+            {
+                Debug.Log(levelLocking.level2Bool);
+                levelLocking.level2Bool = true;
+            }
+            if (level == 1) 
+            {
+                Debug.Log(levelLocking.level2Bool);
+                levelLocking.level3Bool = true;
+            }
+            if (level == 2) 
+            {
+                Debug.Log(levelLocking.level2Bool);
+                levelLocking.level4Bool = true;
+            }
+            if (level == 3) 
+            {
+                Debug.Log(levelLocking.level2Bool);
+                levelLocking.level5Bool = true;
+            }
+            if (level == 4) 
+            {
+                Debug.Log(levelLocking.level2Bool);
+                levelLocking.level6Bool = true;
+            }
+            if (level == 6) 
+            {
+                Debug.Log(levelLocking.level2Bool);
+                levelLocking.level7Bool = true;
+            }
             /// StartCoroutine(PostEnd(currentScene.name));
             /// StartCoroutine(PostEndTime(currentScene.name + "_" + timeRemaining.timeRemaining.ToString()));
             // It is object B
