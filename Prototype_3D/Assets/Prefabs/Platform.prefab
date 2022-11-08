@@ -140,7 +140,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 0}
   timeRemaining: {fileID: 0}
-  ballContr: {fileID: 0}
   rotating_speed: 50
 --- !u!1001 &325236472300602062
 PrefabInstance:
@@ -243,7 +242,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 0}
   timeRemaining: {fileID: 0}
-  ballContr: {fileID: 0}
   rotating_speed: 50
 --- !u!1001 &1133824114638467246
 PrefabInstance:
@@ -341,7 +339,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 0}
   timeRemaining: {fileID: 0}
-  ballContr: {fileID: 0}
   rotating_speed: 50
 --- !u!4 &591834652574046021 stripped
 Transform:
@@ -449,7 +446,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 0}
   timeRemaining: {fileID: 0}
-  ballContr: {fileID: 0}
   rotating_speed: 50
 --- !u!1001 &3898859462325538966
 PrefabInstance:
@@ -552,7 +548,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 0}
   timeRemaining: {fileID: 0}
-  ballContr: {fileID: 0}
   rotating_speed: 50
 --- !u!1001 &3898859463591908405
 PrefabInstance:
@@ -655,7 +650,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 0}
   timeRemaining: {fileID: 0}
-  ballContr: {fileID: 0}
   rotating_speed: 50
 --- !u!1001 &4493123224375369773
 PrefabInstance:
@@ -753,7 +747,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 0}
   timeRemaining: {fileID: 0}
-  ballContr: {fileID: 0}
   rotating_speed: 50
 --- !u!4 &4165968988994455494 stripped
 Transform:
@@ -856,7 +849,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 0}
   timeRemaining: {fileID: 0}
-  ballContr: {fileID: 0}
   rotating_speed: 50
 --- !u!4 &8662507760460406886 stripped
 Transform:

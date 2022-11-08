@@ -32,6 +32,8 @@ public class ballController : MonoBehaviour
     private Vector3 vec;
     public bool Inverse_Flag = false;
     private pauseMenu pm;
+    private levelLocking levelLock;
+    private GameObject camera;
 
     //doodle jump
     public GameObject doodleJumpA;
@@ -55,7 +57,11 @@ public class ballController : MonoBehaviour
 
     private float ball_start_pos;
     private TMP_Text minus;
-    
+    public GameObject[] selectionPowerUpMenu;
+    public GameObject selectionPowerInverse;
+    [SerializeField] private GameObject prefabInv;
+    [SerializeField] private Vector3 prefabInvPos;
+    public GameObject clone;
 
     // Start is called before the first frame update
     void Start()
@@ -68,9 +74,19 @@ public class ballController : MonoBehaviour
         Star = GameObject.Find("RedStar");
         minus = GameObject.Find("minus").GetComponent<TMP_Text>();
         minus.text = "";
+        selectionPowerUpMenu =  GameObject.FindGameObjectsWithTag("SelectionPowerUp");
+        camera = GameObject.Find("Main Camera");
+        levelLock = camera.GetComponent<levelLocking>();
+        // selectionPowerInverse = GameObject.FindWithTag("spInverse");
+        // selectionPowerInverse.SetActive(false);
+        
+        
+        foreach (GameObject obj in selectionPowerUpMenu)  {
+            obj.SetActive(false);
+        }
         ball_start_pos = this.transform.position.y;
         // ddlJmp = doodleJump.GetComponent<doodleJump>();
-        if (sceneName == "Level2" || sceneName == "Level4")
+        if (sceneName == "Level2" || sceneName == "Level4" || sceneName == "Level6")
         {
             isTwoPuzzle = true;
         }else{	
@@ -422,6 +438,37 @@ public class ballController : MonoBehaviour
         if (obj.gameObject.name == "RedStar" || obj.gameObject.name == "RedStarB")
         {
             gameWon = true;
+            int level = (int)Char.GetNumericValue(currentScene.name[currentScene.name.Length - 1]);
+            if (level == 0) 
+            {
+                Debug.Log(levelLocking.level2Bool);
+                levelLocking.level2Bool = true;
+            }
+            if (level == 1) 
+            {
+                Debug.Log(levelLocking.level2Bool);
+                levelLocking.level3Bool = true;
+            }
+            if (level == 2) 
+            {
+                Debug.Log(levelLocking.level2Bool);
+                levelLocking.level4Bool = true;
+            }
+            if (level == 3) 
+            {
+                Debug.Log(levelLocking.level2Bool);
+                levelLocking.level5Bool = true;
+            }
+            if (level == 4) 
+            {
+                Debug.Log(levelLocking.level2Bool);
+                levelLocking.level6Bool = true;
+            }
+            if (level == 6) 
+            {
+                Debug.Log(levelLocking.level2Bool);
+                levelLocking.level7Bool = true;
+            }
             /// StartCoroutine(PostEnd(currentScene.name));
             /// StartCoroutine(PostEndTime(currentScene.name + "_" + timeRemaining.timeRemaining.ToString()));
             // It is object B
@@ -527,6 +574,33 @@ public class ballController : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator SelectionPowerUpCour(){
+        foreach (GameObject objj in selectionPowerUpMenu)  {
+                objj.SetActive(true);
+        }
+        while(true){
+            if (Input.GetKey(KeyCode.Alpha1))
+            {
+                Debug.Log("INVERSION");
+                clone = Instantiate(prefabInv, prefabInvPos, Quaternion.identity);
+                clone.name = "Inverse";
+                break;
+            }
+            else if (Input.GetKey(KeyCode.Alpha2))
+            {
+                Debug.Log("Doodle Jump");
+                doodleJumpA.SetActive(true);
+                break;
+            }
+            yield return null;
+        }
+        foreach (GameObject objj in selectionPowerUpMenu)  {
+                objj.SetActive(false);
+        }
+       
+        yield return null;
+    }
+
     void OnCollisionExit(Collision obj)
     {
         Scene currentScene = SceneManager.GetActiveScene();
@@ -553,6 +627,12 @@ public class ballController : MonoBehaviour
     private void OnTriggerEnter(Collider obj)
     {
         Scene currentScene = SceneManager.GetActiveScene();
+        if (obj.gameObject.name == "SelectionPower" && !gameWon)
+        {   Destroy(obj.gameObject);
+            StartCoroutine(SelectionPowerUpCour());
+            
+            
+        }
         if (obj.gameObject.name == "Power_Up" && !gameWon)
         {
             Debug.Log("In here");
