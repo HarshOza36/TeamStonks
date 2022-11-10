@@ -40,6 +40,8 @@ public class ballController : MonoBehaviour
     private doodleJump ddlJmpA;
     public GameObject doodleJumpB;
     private doodleJump ddlJmpB;
+    public GameObject doodleJumpC;
+    private doodleJump ddlJmpC;
 
 
     //private bool IsGround = true;
@@ -95,6 +97,7 @@ public class ballController : MonoBehaviour
         if(sceneName == "Level4"){
             ddlJmpA = doodleJumpA.GetComponent<doodleJump>();
             ddlJmpB = doodleJumpB.GetComponent<doodleJump>();
+            ddlJmpC = doodleJumpC.GetComponent<doodleJump>();
         }
 
         //Debug.Log(Physics.gravity);
@@ -510,7 +513,7 @@ public class ballController : MonoBehaviour
         }
         if(currentScene.name == "Level4"){
             //--------------------------------------------------------for doodle jump
-            if (ddlJmpA.hasDoodleJump || ddlJmpB.hasDoodleJump)
+            if (ddlJmpA.hasDoodleJump || ddlJmpB.hasDoodleJump || ddlJmpC.hasDoodleJump)
             {
                 Debug.Log("doodle collision on arc"+obj.collider.name);
                 if (rb.position.y < obj.collider.transform.position.y && obj.gameObject.tag != "CenterCylinder")
@@ -589,7 +592,7 @@ public class ballController : MonoBehaviour
             else if (Input.GetKey(KeyCode.Alpha2))
             {
                 Debug.Log("Doodle Jump");
-                doodleJumpA.SetActive(true);
+                doodleJumpC.SetActive(true);
                 break;
             }
             yield return null;
@@ -614,7 +617,7 @@ public class ballController : MonoBehaviour
                 transform.parent = null;
             }
 
-            if (ddlJmpA.hasDoodleJump || ddlJmpB.hasDoodleJump)
+            if (ddlJmpA.hasDoodleJump || ddlJmpB.hasDoodleJump || ddlJmpC.hasDoodleJump)
             {
                 Debug.Log("exit doodle collision on arc");
                 obj.collider.enabled = true;
