@@ -13,36 +13,36 @@ public class PopupInstructions : MonoBehaviour
         uiObject.SetActive(false);
     }
 
+    // Update is called once per frame
     void Update() 
     { 
-	if (Time.timeScale == 0 && Input.anyKey) { 
-		Time.timeScale = 1; 
-                Destroy(uiObject);
-        	Destroy(gameObject);
-	} 
+        if (Time.timeScale == 0) { 
+            Time.timeScale = 1; 
+            Destroy(uiObject);
+            Destroy(gameObject);
+        } 
     }
 
-    // Update is called once per frame
     void OnTriggerEnter (Collider player) {
-        
+        Debug.Log("OnTrigger from popup fired");
         if (player.gameObject.tag == "Player")
         {   
             if(pause != true){	   
             	uiObject.SetActive(true);
             	StartCoroutine("WaitForSec");
             }else{
-		PauseGame();	
-	    }
+		        PauseGame();
+	        }
         }
     }
 
     public void PauseGame(){
-	uiObject.SetActive(true);
-	Time.timeScale = 0;	
+	    uiObject.SetActive(true);
+	    Time.timeScale = 0;	
     }
 
     IEnumerator WaitForSec(){
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(8);
         Destroy(uiObject);
         Destroy(gameObject);
     }
