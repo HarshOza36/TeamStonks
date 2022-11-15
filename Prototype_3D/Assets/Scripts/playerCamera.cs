@@ -28,7 +28,7 @@ public class playerCamera : MonoBehaviour
     {
         if(ball.Inverse_Flag)
         {
-            offset = new Vector3(0.0f,-1.0f,-10.0f);
+            offset = new Vector3(0.0f,-1.0f,-18.0f);
         }
         else
         {
