@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TutorialScenes/JumpTutorial.unity
     guid: 3df6934439754f14c8699a7daf8d7116
   - enabled: 1
+    path: Assets/Scenes/TutorialScenes/PowerDownTutorial.unity
+    guid: 7a159bcddfbe81b418fbae691f856d34
+  - enabled: 1
     path: Assets/Scenes/Level0.unity
     guid: e2336323048421d4c844903fc0d9be19
   - enabled: 1
@@ -23,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: 115167999967b8c47a32ee0c1a065370
+  - enabled: 1
+    path: Assets/Scenes/TutorialScenes/PowerUpTutorial.unity
+    guid: 2e40f2d9fe38ca74b98f9d571f266035
   - enabled: 1
     path: Assets/Scenes/TwoPuzzleTutorial.unity
     guid: 0ffdb758f919d324da9fb4199889cffa
