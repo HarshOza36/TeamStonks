@@ -7,7 +7,8 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
-
+using System.Linq;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(Rigidbody))]
@@ -65,6 +66,10 @@ public class ballController : MonoBehaviour
     [SerializeField] private Vector3 prefabInvPos;
     public GameObject clone;
 
+    public Material matFace1;
+    public Material matFace3;
+    public Material matFace4;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -81,6 +86,8 @@ public class ballController : MonoBehaviour
         levelLock = camera.GetComponent<levelLocking>();
         // selectionPowerInverse = GameObject.FindWithTag("spInverse");
         // selectionPowerInverse.SetActive(false);
+
+
         
         
         foreach (GameObject obj in selectionPowerUpMenu)  {
@@ -115,6 +122,8 @@ public class ballController : MonoBehaviour
         last = transform.position[1];
 
         pm = GetComponent<pauseMenu>();
+
+
     }
 
     IEnumerator CountdownCoroutine()
@@ -295,18 +304,34 @@ public class ballController : MonoBehaviour
 
                     if (canDoubleJump || IsGrounded())
                     {   //If the ball is able to jump: red
+                        GameObject child = transform.GetChild(0).gameObject;
+                        GameObject grandChild = child.transform.GetChild(1).gameObject;
+                        SkinnedMeshRenderer renderer = grandChild.GetComponent<SkinnedMeshRenderer>();
+                        Material color = renderer.materials[0];
                         if (poison_time <= 0)
                         {
-                            GetComponent<Renderer>().material.color = Color.red;
+                            //GetComponent<Renderer>().material.color = Color.red;
+                            Material[] mats = new Material[] { color, matFace1 };
+                            renderer.materials = mats;
+                            Debug.Log("new:"+grandChild.GetComponent<SkinnedMeshRenderer>().materials[1].name);
                         }
                         else
                         {
-                            GetComponent<Renderer>().material.color = Color.black;
+                            //GetComponent<Renderer>().material.color = Color.black;
+                            Material[] mats = new Material[] { color, matFace3 };
+                            renderer.materials = mats;
+
                         }
                     }
                     else
                     {   //If the ball is not able to jump: white
-                        GetComponent<Renderer>().material.color = Color.white;
+                        //GetComponent<Renderer>().material.color = Color.white;
+                        GameObject child = transform.GetChild(0).gameObject;
+                        GameObject grandChild = child.transform.GetChild(1).gameObject;
+                        SkinnedMeshRenderer renderer = grandChild.GetComponent<SkinnedMeshRenderer>();
+                        Material color = renderer.materials[0];
+                        Material[] mats = new Material[] { color, matFace4 };
+                        renderer.materials = mats;
                     }
 
                     if (Input.GetKeyDown("space"))
