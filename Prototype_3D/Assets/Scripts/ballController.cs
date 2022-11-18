@@ -67,7 +67,6 @@ public class ballController : MonoBehaviour
     public GameObject clone;
 
     public Material matFace1;
-    public Material matFace3;
     public Material matFace4;
 
     // Start is called before the first frame update
@@ -267,7 +266,8 @@ public class ballController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!pm.gamePauseBool){
+        if (!pm.gamePauseBool)
+        {
             //rb.AddForce(-1*Physics.gravity, ForceMode.Force);
             Scene currentScene = SceneManager.GetActiveScene();
             if (gameStartBool)
@@ -305,20 +305,24 @@ public class ballController : MonoBehaviour
                     if (canDoubleJump || IsGrounded())
                     {   //If the ball is able to jump: red
                         GameObject child = transform.GetChild(0).gameObject;
-                        GameObject grandChild = child.transform.GetChild(1).gameObject;
-                        SkinnedMeshRenderer renderer = grandChild.GetComponent<SkinnedMeshRenderer>();
+                        GameObject face = child.transform.GetChild(1).gameObject;
+                        SkinnedMeshRenderer renderer = face.GetComponent<SkinnedMeshRenderer>();
                         Material color = renderer.materials[0];
+
                         if (poison_time <= 0)
                         {
                             //GetComponent<Renderer>().material.color = Color.red;
+                            GameObject top = child.transform.GetChild(2).gameObject;
                             Material[] mats = new Material[] { color, matFace1 };
                             renderer.materials = mats;
-                            Debug.Log("new:"+grandChild.GetComponent<SkinnedMeshRenderer>().materials[1].name);
+                            top.SetActive(true);
+
                         }
                         else
                         {
                             //GetComponent<Renderer>().material.color = Color.black;
-                            Material[] mats = new Material[] { color, matFace3 };
+                            
+                            Material[] mats = new Material[] { color, matFace4 };
                             renderer.materials = mats;
 
                         }
@@ -327,11 +331,9 @@ public class ballController : MonoBehaviour
                     {   //If the ball is not able to jump: white
                         //GetComponent<Renderer>().material.color = Color.white;
                         GameObject child = transform.GetChild(0).gameObject;
-                        GameObject grandChild = child.transform.GetChild(1).gameObject;
-                        SkinnedMeshRenderer renderer = grandChild.GetComponent<SkinnedMeshRenderer>();
-                        Material color = renderer.materials[0];
-                        Material[] mats = new Material[] { color, matFace4 };
-                        renderer.materials = mats;
+                        GameObject top = child.transform.GetChild(2).gameObject;
+                        top.SetActive(false);
+
                     }
 
                     if (Input.GetKeyDown("space"))
