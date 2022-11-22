@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6167011158539406038}
   - component: {fileID: 6167011158539406039}
   - component: {fileID: 6167011158539406040}
+  - component: {fileID: 2358501557524329004}
   m_Layer: 0
   m_Name: Inverse
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: df3e04927b33442d29682d42ab5489d3, type: 2}
+  - {fileID: 2100000, guid: 25bea574396bd394fbd1fd9d6cccbdd9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -115,3 +116,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &2358501557524329004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6167011158539406042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22d2a25d7b6d22c47a1ee9da6bcad1c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

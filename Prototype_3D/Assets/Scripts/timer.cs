@@ -11,7 +11,7 @@ public class timer : MonoBehaviour
     private GameObject frontObject;
     public static TMP_Text timeText;
     public float timeRemaining = 100;
-    public bool timerIsRunning = false;
+    public static bool timerIsRunning = false;
     public GameObject[] gameOver;
     public GameObject[] gameWon;
     public ballController ballContr;
@@ -33,7 +33,7 @@ public class timer : MonoBehaviour
         timeText = frontObject.GetComponent<TMP_Text>();
         timeFinishingAudio = frontObject.GetComponent<AudioSource>();
         // Debug.Log(timeText.text);
-        timeFinishingAudio.Play(0);
+        StartCoroutine(WaitCoroutine());
         // Debug.Log(frontObject.tag);
         //frontObject = GameObject.FindGameObjectWithTag("timer");
         timerIsRunning = true;
@@ -98,4 +98,10 @@ public class timer : MonoBehaviour
 
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+
+    IEnumerator WaitCoroutine(){
+        yield return new WaitForSeconds(ballContr.tutorialPopUpTime);
+        timeFinishingAudio.Play(0);
+    }
+    
 }

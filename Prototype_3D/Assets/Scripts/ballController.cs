@@ -7,7 +7,8 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
-
+using System.Linq;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(Rigidbody))]
@@ -35,6 +36,8 @@ public class ballController : MonoBehaviour
     private levelLocking levelLock;
     private GameObject camera;
 
+    public static GameObject Popup;
+
     //doodle jump
     public GameObject doodleJumpA;
     private doodleJump ddlJmpA;
@@ -42,6 +45,10 @@ public class ballController : MonoBehaviour
     private doodleJump ddlJmpB;
     public GameObject doodleJumpC;
     private doodleJump ddlJmpC;
+
+    public float tutorialPopUpTime = 0.0f;
+
+    
 
 
     //private bool IsGround = true;
@@ -65,9 +72,20 @@ public class ballController : MonoBehaviour
     [SerializeField] private Vector3 prefabInvPos;
     public GameObject clone;
 
+    public Material matFace1;
+    public Material matFace4;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
+        try {
+        GameObject.FindGameObjectWithTag("bgMusic").GetComponent<bgMusic>().PlayMusic();
+        }
+        catch(Exception e) {
+            Debug.Log(e);
+        }
         // Create a temporary reference to the current scene.
         Scene currentScene = SceneManager.GetActiveScene();
         Physics.gravity = new Vector3(0, -9.8f, 0);
@@ -81,7 +99,8 @@ public class ballController : MonoBehaviour
         levelLock = camera.GetComponent<levelLocking>();
         // selectionPowerInverse = GameObject.FindWithTag("spInverse");
         // selectionPowerInverse.SetActive(false);
-        
+
+        Popup = GameObject.Find("TutorialPopUp");
         
         foreach (GameObject obj in selectionPowerUpMenu)  {
             obj.SetActive(false);
@@ -103,7 +122,10 @@ public class ballController : MonoBehaviour
         //Debug.Log(Physics.gravity);
 
         gameStart = GameObject.Find("GameStart").GetComponent<TMP_Text>();
+        
+
         StartCoroutine(CountdownCoroutine());
+        
         
         /// StartCoroutine(Post(sceneName));
 
@@ -115,10 +137,18 @@ public class ballController : MonoBehaviour
         last = transform.position[1];
 
         pm = GetComponent<pauseMenu>();
+
+
     }
 
     IEnumerator CountdownCoroutine()
     {
+        if (Popup != null)
+        {
+            yield return new WaitForSeconds(tutorialPopUpTime);
+            Destroy(Popup);
+        }
+
         //Debug.Log("Game Start Countdown");
         gameStart.text = "3";
         yield return new WaitForSeconds(1.0f);
@@ -131,6 +161,7 @@ public class ballController : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         gameStart.text = "";
         gameStartBool = true;
+        Debug.Log("input value " + GameManager.IsInputEnabled());
         yield return null;
     }
 
@@ -258,7 +289,8 @@ public class ballController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!pm.gamePauseBool){
+        if (!pm.gamePauseBool)
+        {
             //rb.AddForce(-1*Physics.gravity, ForceMode.Force);
             Scene currentScene = SceneManager.GetActiveScene();
             if (gameStartBool)
@@ -295,18 +327,36 @@ public class ballController : MonoBehaviour
 
                     if (canDoubleJump || IsGrounded())
                     {   //If the ball is able to jump: red
+                        GameObject child = transform.GetChild(0).gameObject;
+                        GameObject face = child.transform.GetChild(1).gameObject;
+                        SkinnedMeshRenderer renderer = face.GetComponent<SkinnedMeshRenderer>();
+                        Material color = renderer.materials[0];
+
                         if (poison_time <= 0)
                         {
-                            GetComponent<Renderer>().material.color = Color.red;
+                            //GetComponent<Renderer>().material.color = Color.red;
+                            GameObject top = child.transform.GetChild(2).gameObject;
+                            Material[] mats = new Material[] { color, matFace1 };
+                            renderer.materials = mats;
+                            top.SetActive(true);
+
                         }
                         else
                         {
-                            GetComponent<Renderer>().material.color = Color.black;
+                            //GetComponent<Renderer>().material.color = Color.black;
+                            
+                            Material[] mats = new Material[] { color, matFace4 };
+                            renderer.materials = mats;
+
                         }
                     }
                     else
                     {   //If the ball is not able to jump: white
-                        GetComponent<Renderer>().material.color = Color.white;
+                        //GetComponent<Renderer>().material.color = Color.white;
+                        GameObject child = transform.GetChild(0).gameObject;
+                        GameObject top = child.transform.GetChild(2).gameObject;
+                        top.SetActive(false);
+
                     }
 
                     if (Input.GetKeyDown("space"))
@@ -362,20 +412,20 @@ public class ballController : MonoBehaviour
 
                     
 
-                    if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)){
+                    if(GameManager.IsInputEnabled() && (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))){
                         /// StartCoroutine(PostAPress(currentScene.name));
                     }
 
-                    if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)){
+                    if(GameManager.IsInputEnabled() && (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))){
                         /// StartCoroutine(PostDPress(currentScene.name));
                         
                     }
 
-                    if (Input.GetButton("Horizontal") || Input.GetKey(KeyCode.LeftArrow))
+                    if (GameManager.IsInputEnabled() && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
                     {
                         OrbitLeft(true);
                     }
-                    else if (Input.GetButton("Vertical") || Input.GetKey(KeyCode.RightArrow))
+                    else if (GameManager.IsInputEnabled() && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
                     {
                         OrbitLeft(false);
                     }
@@ -408,7 +458,7 @@ public class ballController : MonoBehaviour
     //Orbit movement
     void OrbitLeft(bool left)
     {
-        if (left == true)
+        if (left)
         {
             transform.RotateAround(Center_Cylinder.transform.position, Vector3.up, orbitSpeed);
         }
@@ -691,5 +741,14 @@ public class ballController : MonoBehaviour
                 Destroy(obj.gameObject);
             }
         }
+    }
+
+    public void disableGravity(){
+        rb.useGravity = false;
+    }
+
+    public void enableGravity()
+    {
+        rb.useGravity = true;
     }
 }
