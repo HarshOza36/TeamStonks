@@ -21,6 +21,8 @@ TagManager:
   - PauseGame
   - SelectionPowerUp
   - spInverse
+  - bgMusic
+  - transition
   layers:
   - Default
   - TransparentFX
