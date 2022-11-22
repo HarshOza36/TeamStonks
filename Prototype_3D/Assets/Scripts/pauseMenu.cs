@@ -12,6 +12,7 @@ public class pauseMenu : MonoBehaviour
     public GameObject[] gamePause;
     public AudioSource[] allAudioSource;
     public AudioSource audio;
+    private restart rs;
 
     IEnumerator PostPausePress(string scene)
     {
@@ -52,6 +53,8 @@ public class pauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rs = gameObject.GetComponent<restart>();
+        // fader = GameObject.FindGameObjectWithTag("transition").GetComponent<RectTransform>();
         allAudioSource = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
         gamePause = GameObject.FindGameObjectsWithTag("PauseGame");
         foreach (GameObject obj in gamePause)  {
@@ -100,16 +103,26 @@ public class pauseMenu : MonoBehaviour
     //quit btn
     public void MainMenu()
     {
-        StartCoroutine(PostQuitPress(SceneManager.GetActiveScene().name));
-        SetDeactive();
-        SceneManager.LoadScene("Menu");
+        
+        rs.fader.gameObject.SetActive(true);
+        LeanTween.alpha(rs.fader, 0, 0);
+        LeanTween.alpha(rs.fader, 1, 0.5f).setIgnoreTimeScale(true).setOnComplete(() =>{
+            StartCoroutine(PostQuitPress(SceneManager.GetActiveScene().name));
+            SceneManager.LoadScene("Menu");
+            SetDeactive();
+        });
     }
 
     //restart btn
     public void RestartGame()
     {
-        StartCoroutine(PostRestartPress(SceneManager.GetActiveScene().name));
-        SetDeactive();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
+        
+        rs.fader.gameObject.SetActive(true);
+        LeanTween.alpha(rs.fader, 0, 0);
+        LeanTween.alpha(rs.fader, 1, 0.5f).setIgnoreTimeScale(true).setOnComplete(() =>{
+            StartCoroutine(PostRestartPress(SceneManager.GetActiveScene().name));
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SetDeactive();
+        });
     }
 }
