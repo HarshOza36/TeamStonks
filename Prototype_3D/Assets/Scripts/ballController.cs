@@ -421,11 +421,11 @@ public class ballController : MonoBehaviour
                         
                     }
 
-                    if (GameManager.IsInputEnabled() && (Input.GetKeyDown(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
+                    if (GameManager.IsInputEnabled() && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
                     {
                         OrbitLeft(true);
                     }
-                    else if (GameManager.IsInputEnabled() && (Input.GetKeyDown(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
+                    else if (GameManager.IsInputEnabled() && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
                     {
                         OrbitLeft(false);
                     }
