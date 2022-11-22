@@ -72,6 +72,7 @@ public class ballController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject.FindGameObjectWithTag("bgMusic").GetComponent<bgMusic>().PlayMusic();
         // Create a temporary reference to the current scene.
         Scene currentScene = SceneManager.GetActiveScene();
         Physics.gravity = new Vector3(0, -9.8f, 0);
