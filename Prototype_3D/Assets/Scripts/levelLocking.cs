@@ -20,6 +20,7 @@ public class levelLocking : MonoBehaviour
     Button level6;
     Button level7;
     Button UnlockAll;
+    Button Tutorial;
 
     private void Start() {
         level1 = GameObject.Find("Level1Button").GetComponent<Button>();
@@ -29,6 +30,7 @@ public class levelLocking : MonoBehaviour
         level5 = GameObject.Find("Level5Button").GetComponent<Button>();
         level6 = GameObject.Find("Level6Button").GetComponent<Button>();
         level7 = GameObject.Find("Level7Button").GetComponent<Button>();
+        Tutorial = GameObject.Find("Tutorials").GetComponent<Button>();
         UnlockAll = GameObject.Find("UnlockAll").GetComponent<Button>();
 	UnlockAll.onClick.AddListener(TaskOnClick);	
 
@@ -75,10 +77,12 @@ public class levelLocking : MonoBehaviour
         if(level7Bool)
         {
             level7.interactable = true;
+	    Tutorial.interactable = true;
         }
         else
         {
             level7.interactable = false;
+	    Tutorial.interactable = false;
         }
         
     }
@@ -127,10 +131,12 @@ public class levelLocking : MonoBehaviour
         if(level7Bool)
         {
             level7.interactable = true;
+            Tutorial.interactable = true;
         }
         else
         {
             level7.interactable = false;
+	    Tutorial.interactable = false;
         }
     }
 	

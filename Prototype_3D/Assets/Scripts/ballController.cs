@@ -36,6 +36,8 @@ public class ballController : MonoBehaviour
     private levelLocking levelLock;
     private GameObject camera;
 
+    public static GameObject Popup;
+
     //doodle jump
     public GameObject doodleJumpA;
     private doodleJump ddlJmpA;
@@ -43,6 +45,10 @@ public class ballController : MonoBehaviour
     private doodleJump ddlJmpB;
     public GameObject doodleJumpC;
     private doodleJump ddlJmpC;
+
+    public float tutorialPopUpTime = 0.0f;
+
+    
 
 
     //private bool IsGround = true;
@@ -69,6 +75,8 @@ public class ballController : MonoBehaviour
     public Material matFace1;
     public Material matFace4;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -92,8 +100,7 @@ public class ballController : MonoBehaviour
         // selectionPowerInverse = GameObject.FindWithTag("spInverse");
         // selectionPowerInverse.SetActive(false);
 
-
-        
+        Popup = GameObject.Find("TutorialPopUp");
         
         foreach (GameObject obj in selectionPowerUpMenu)  {
             obj.SetActive(false);
@@ -115,7 +122,10 @@ public class ballController : MonoBehaviour
         //Debug.Log(Physics.gravity);
 
         gameStart = GameObject.Find("GameStart").GetComponent<TMP_Text>();
+        
+
         StartCoroutine(CountdownCoroutine());
+        
         
         /// StartCoroutine(Post(sceneName));
 
@@ -133,6 +143,12 @@ public class ballController : MonoBehaviour
 
     IEnumerator CountdownCoroutine()
     {
+        if (Popup != null)
+        {
+            yield return new WaitForSeconds(tutorialPopUpTime);
+            Destroy(Popup);
+        }
+
         //Debug.Log("Game Start Countdown");
         gameStart.text = "3";
         yield return new WaitForSeconds(1.0f);
@@ -145,6 +161,7 @@ public class ballController : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         gameStart.text = "";
         gameStartBool = true;
+        Debug.Log("input value " + GameManager.IsInputEnabled());
         yield return null;
     }
 
@@ -395,20 +412,20 @@ public class ballController : MonoBehaviour
 
                     
 
-                    if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)){
+                    if(GameManager.IsInputEnabled() && (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))){
                         /// StartCoroutine(PostAPress(currentScene.name));
                     }
 
-                    if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)){
+                    if(GameManager.IsInputEnabled() && (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))){
                         /// StartCoroutine(PostDPress(currentScene.name));
                         
                     }
 
-                    if (Input.GetButton("Horizontal") || Input.GetKey(KeyCode.LeftArrow))
+                    if (GameManager.IsInputEnabled() && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
                     {
                         OrbitLeft(true);
                     }
-                    else if (Input.GetButton("Vertical") || Input.GetKey(KeyCode.RightArrow))
+                    else if (GameManager.IsInputEnabled() && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
                     {
                         OrbitLeft(false);
                     }
@@ -441,7 +458,7 @@ public class ballController : MonoBehaviour
     //Orbit movement
     void OrbitLeft(bool left)
     {
-        if (left == true)
+        if (left)
         {
             transform.RotateAround(Center_Cylinder.transform.position, Vector3.up, orbitSpeed);
         }
@@ -724,5 +741,14 @@ public class ballController : MonoBehaviour
                 Destroy(obj.gameObject);
             }
         }
+    }
+
+    public void disableGravity(){
+        rb.useGravity = false;
+    }
+
+    public void enableGravity()
+    {
+        rb.useGravity = true;
     }
 }

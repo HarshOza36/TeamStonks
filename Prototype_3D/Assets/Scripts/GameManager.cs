@@ -7,15 +7,29 @@ public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public static GameManager manager;
-
-    void Awake() {
-        if (manager == null)
-            manager = this;
-        else if (manager != this)
+    private static bool input=true;
+    public static GameManager singleton;
+    void Awake()
+    {
+        if (singleton == null)
+            singleton = this;
+        else if (singleton != this)
             Destroy(gameObject);
+    }
 
-        SceneManager.LoadScene("Tutorial");
+    public static bool IsInputEnabled(){
+        return input;
+    }
+
+    public static void EnableInput(){
+        Debug.Log("Enabling Input");
+        input = true;
+    }
+
+    public static void DisableInput()
+    {
+        Debug.Log("Disabling Input");
+        input = false;
     }
 
     public void LoadScene(string sceneName) {
