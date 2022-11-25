@@ -359,7 +359,7 @@ public class ballController : MonoBehaviour
 
                     }
 
-                    if (Input.GetKeyDown("space"))
+                    if (Input.GetKeyDown("space") && GameManager.IsInputEnabled())
                     {
                         if (Inverse_Flag)
                         {
