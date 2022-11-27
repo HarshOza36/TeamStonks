@@ -9,25 +9,25 @@ public class PopupInstructions : MonoBehaviour
     public GameObject uiObject;
     public ballController ball;
     public float popUpSeconds=0.0f;
-    public bool coll;
+    // public bool coll;
     // public bool pause;
     void Start()
     {
-        coll = false;
+        // coll = false;
         uiObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update() 
     { 
-        if (Time.timeScale == 0) { 
-            Debug.Log("rti");
-            if(coll);
-            {   Debug.Log(uiObject);
-                Destroy(uiObject);
-                Destroy(gameObject);
-            }
-        } 
+        // if (Time.timeScale == 0) { 
+        //     Debug.Log("rti");
+        //     if(coll);
+        //     {   Debug.Log(uiObject);
+        //         Destroy(uiObject);
+        //         Destroy(gameObject);
+        //     }
+        // } 
     }
 
     void OnTriggerEnter (Collider player) {
@@ -35,9 +35,9 @@ public class PopupInstructions : MonoBehaviour
         if (player.gameObject.tag == "Player")
         {
             StartCoroutine("PauseGame");
-            coll = true;
-            uiObject.SetActive(true);
-            StartCoroutine("WaitForSec");
+            // coll = true;
+            // uiObject.SetActive(true);
+            // StartCoroutine("WaitForSec");
         }
 
         
@@ -47,21 +47,23 @@ public class PopupInstructions : MonoBehaviour
 
     IEnumerator PauseGame(){
         uiObject.SetActive(true);
-        //Time.timeScale = 0;
-        ball.disableGravity();
-        timer.timerIsRunning = false;
+        Time.timeScale = 0;
+        //ball.disableGravity();
+        //timer.timerIsRunning = false;
         GameManager.DisableInput();
-        yield return new WaitForSeconds(popUpSeconds);
-        //Time.timeScale = 1;
-        ball.enableGravity();
-        timer.timerIsRunning = true;
+        yield return new WaitForSecondsRealtime(popUpSeconds);
+        Time.timeScale = 1;
+        //ball.enableGravity();
+        //timer.timerIsRunning = true;
         GameManager.EnableInput();
-    }
-
-    IEnumerator WaitForSec(){
-        yield return new WaitForSeconds(8);
-        coll = false;
         Destroy(uiObject);
         Destroy(gameObject);
     }
+
+    // IEnumerator WaitForSec(){
+    //     yield return new WaitForSeconds(8);
+    //     coll = false;
+    //     Destroy(uiObject);
+    //     Destroy(gameObject);
+    // }
 }

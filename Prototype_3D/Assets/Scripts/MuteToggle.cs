@@ -28,19 +28,19 @@ public class MuteToggle : MonoBehaviour
             AudioListener.volume=1;
             Debug.Log(GameObject.Find("Background"));
             Debug.Log(GameObject.Find("Checkmark"));
-            //GameObject.Find("Background").SetActive(false);
-            //GameObject.Find("Checkmark").SetActive(true);
+            // GameObject.Find("Background").SetActive(false);
+            // GameObject.Find("Checkmark").SetActive(true);
         }
         else
         {
             Debug.Log(GameObject.Find("Background"));
             Debug.Log(GameObject.Find("Checkmark"));
             AudioListener.volume=0;
-            //GameObject.Find("Background").SetActive(true);
-            //GameObject.Find("Checkmark").SetActive(false);
+            // GameObject.Find("Background").SetActive(true);
+            // GameObject.Find("Checkmark").SetActive(false);
         }
         GameObject myEventSystem = GameObject.Find("EventSystem");
-        myEventSystem .GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
+        myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
         
     }
 }

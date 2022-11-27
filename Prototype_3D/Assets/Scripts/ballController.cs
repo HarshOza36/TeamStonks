@@ -628,29 +628,40 @@ public class ballController : MonoBehaviour
     }
 
     IEnumerator SelectionPowerUpCour(){
-        foreach (GameObject objj in selectionPowerUpMenu)  {
-                objj.SetActive(true);
-        }
+        // if(Time.timeScale == 0){
+        // foreach (GameObject objj in selectionPowerUpMenu)  {
+        //         objj.SetActive(true);
+        // }}
+        Debug.Log("hi3");
         while(true){
+            rb.isKinematic = true;
+            pm.gamePauseBool = true;
             if (Input.GetKey(KeyCode.Alpha1))
             {
                 Debug.Log("INVERSION");
                 clone = Instantiate(prefabInv, prefabInvPos, Quaternion.identity);
                 clone.name = "Inverse";
+                // Time.timeScale = 1;
+                rb.isKinematic = false;
+                pm.gamePauseBool = false;
                 break;
             }
             else if (Input.GetKey(KeyCode.Alpha2))
             {
                 Debug.Log("Doodle Jump");
                 doodleJumpC.SetActive(true);
+                rb.isKinematic = false;
+                pm.gamePauseBool = false;
+                // Time.timeScale = 1;
                 break;
             }
+            
             yield return null;
         }
         foreach (GameObject objj in selectionPowerUpMenu)  {
                 objj.SetActive(false);
         }
-       
+    //    Time.timeScale = 1;
         yield return null;
     }
 
@@ -681,10 +692,20 @@ public class ballController : MonoBehaviour
     {
         Scene currentScene = SceneManager.GetActiveScene();
         if (obj.gameObject.name == "SelectionPower" && !gameWon)
-        {   Destroy(obj.gameObject);
+        {  
+             Destroy(obj.gameObject);
+             foreach (GameObject objj in selectionPowerUpMenu)  {
+                objj.SetActive(true);
+            }
+            //  Time.timeScale = 0;
+             
+            rb.isKinematic = true;
+            pm.gamePauseBool = true;
+            Debug.Log("hi");
             StartCoroutine(SelectionPowerUpCour());
-            
-            
+            Debug.Log("hi2");
+            rb.isKinematic = false;
+            pm.gamePauseBool = true;
         }
         if (obj.gameObject.name == "Power_Up" && !gameWon)
         {
