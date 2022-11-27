@@ -40,10 +40,10 @@ public class levelLocking : MonoBehaviour
         
         if(UnlockAllBool){
             Tutorial.gameObject.SetActive(true);
-             UnlockAll.GetComponentInChildren<TMP_Text>().text = "Debug Off";
+             UnlockAll.GetComponentInChildren<TMP_Text>().text = "Lock All";
         }else{
             Tutorial.gameObject.SetActive(false);
-             UnlockAll.GetComponentInChildren<TMP_Text>().text = "Debug On";
+             UnlockAll.GetComponentInChildren<TMP_Text>().text = "Unlock All";
         }
 
 
@@ -164,7 +164,7 @@ public class levelLocking : MonoBehaviour
             level7Bool = true;
             Tutorial.gameObject.SetActive(true);
             UnlockAllBool = true;
-            UnlockAll.GetComponentInChildren<TMP_Text>().text = "Debug Off";
+            UnlockAll.GetComponentInChildren<TMP_Text>().text = "Lock All";
         }else{
             level2Bool = false;
             level3Bool = false;
@@ -174,7 +174,7 @@ public class levelLocking : MonoBehaviour
             level7Bool = false;
             Tutorial.gameObject.SetActive(false);
             UnlockAllBool = false;
-            UnlockAll.GetComponentInChildren<TMP_Text>().text = "Debug On";
+            UnlockAll.GetComponentInChildren<TMP_Text>().text = "Unlock All";
         }
 
     }
