@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class levelLocking : MonoBehaviour
 {
     public static bool level1Bool = true;
@@ -12,6 +12,7 @@ public class levelLocking : MonoBehaviour
     public static bool level5Bool = false;
     public static bool level6Bool = false;
     public static bool level7Bool = false;
+    public static bool UnlockAllBool = false;
     Button level1;
     Button level2;
     Button level3;
@@ -21,6 +22,7 @@ public class levelLocking : MonoBehaviour
     Button level7;
     Button UnlockAll;
     Button Tutorial;
+
 
     private void Start() {
         level1 = GameObject.Find("Level1Button").GetComponent<Button>();
@@ -32,7 +34,18 @@ public class levelLocking : MonoBehaviour
         level7 = GameObject.Find("Level7Button").GetComponent<Button>();
         Tutorial = GameObject.Find("Tutorials").GetComponent<Button>();
         UnlockAll = GameObject.Find("UnlockAll").GetComponent<Button>();
-	UnlockAll.onClick.AddListener(TaskOnClick);	
+        
+        Tutorial.gameObject.SetActive(false);
+	    UnlockAll.onClick.AddListener(TaskOnClick);	
+        
+        if(UnlockAllBool){
+            Tutorial.gameObject.SetActive(true);
+             UnlockAll.GetComponentInChildren<TMP_Text>().text = "Lock All";
+        }else{
+            Tutorial.gameObject.SetActive(false);
+             UnlockAll.GetComponentInChildren<TMP_Text>().text = "Unlock All";
+        }
+
 
         if(level2Bool)
         {
@@ -88,6 +101,7 @@ public class levelLocking : MonoBehaviour
     }
     
     private void Update() {	
+
         if(level2Bool)
         {
             level2.interactable = true;
@@ -136,17 +150,33 @@ public class levelLocking : MonoBehaviour
         else
         {
             level7.interactable = false;
-	    Tutorial.interactable = false;
+	        Tutorial.interactable = false;
         }
     }
 	
     void TaskOnClick(){	
-		level2Bool = true;
-		level3Bool = true;
-		level4Bool = true;
-		level5Bool = true;
-		level6Bool = true;
-		level7Bool = true;
+        if(!UnlockAllBool){
+            level2Bool = true;
+            level3Bool = true;
+            level4Bool = true;
+            level5Bool = true;
+            level6Bool = true;
+            level7Bool = true;
+            Tutorial.gameObject.SetActive(true);
+            UnlockAllBool = true;
+            UnlockAll.GetComponentInChildren<TMP_Text>().text = "Lock All";
+        }else{
+            level2Bool = false;
+            level3Bool = false;
+            level4Bool = false;
+            level5Bool = false;
+            level6Bool = false;
+            level7Bool = false;
+            Tutorial.gameObject.SetActive(false);
+            UnlockAllBool = false;
+            UnlockAll.GetComponentInChildren<TMP_Text>().text = "Unlock All";
+        }
+
     }
 
 }
